@@ -1,0 +1,91 @@
+body {
+  background-color: #1a1a1a;
+  font-family: "Segoe UI", sans-serif;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.login-container {
+  background-color: #2a2a2a;
+  padding: 40px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.logo {
+  font-size: 24px;
+  color: #f5c542;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #3a3a3a;
+  color: #fff;
+}
+
+.login-form input:focus {
+  outline: none;
+  box-shadow: 0 0 5px #f5c542;
+}
+
+.checkbox-container {
+  text-align: left;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #f5c542;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+button:hover {
+  background-color: #e0b832;
+}
+
+.link {
+  display: block;
+  color: #ccc;
+  font-size: 13px;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.register-btn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #666;
+  margin-top: 15px;
+}
+
+.register-btn:hover {
+  background-color: #444;
+}
