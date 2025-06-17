@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ユーザー一覧（詳細表示）</title>
+  <!-- 外部CSS -->
+  <link rel="stylesheet" th:href="@{/users.css}" />
+  <!-- 外部JS -->
+  <script th:src="@{/js/settings.js}" defer></script>
+</head>
+<body>
+<h1>ユーザー一覧（全情報）</h1>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>名前</th>
+      <th>メールアドレス</th>
+      <th>パスワード</th>
+      <th>ロール</th>
+      <th>編集</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.userId}"></td>
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.role}"></td>
+      <td>
+        <form th:action="@{/settings/users/update}" method="post">
+          <input type="hidden" name="userId" th:value="${user.userId}" />
+          <select name="role">
+            <option th:value="'admin'" th:selected="${user.role == 'admin'}">admin</option>
+            <option th:value="'staff'" th:selected="${user.role == 'staff'}">staff</option>
+          </select>
+          <button type="button"
+                  th:attr="data-username=${user.name}"
+                  onclick="confirmRoleChange(this.form, this.getAttribute('data-username'))">
+            保存
+          </button>
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
