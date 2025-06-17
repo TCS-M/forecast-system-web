@@ -5,11 +5,23 @@
 </head>
 <body>
 <h2>販売実績入力フォーム</h2>
-<form th:action="@{/sales/save}" th:object="${salesRecord}" method="post">
-    <label>販売日: <input type="date" th:field="*{saleDate}" required /></label><br>
-    <label>商品名: <input type="text" th:field="*{productName}" required /></label><br>
-    <label>販売本数: <input type="number" th:field="*{quantity}" min="0" required /></label><br>
+
+<form th:action="@{/sales/saveAll}" method="post">
+    <table border="1">
+        <tr>
+            <th>商品名</th>
+            <th>販売本数</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.name}"></td>
+            <td>
+                <input type="hidden" name="productIds" th:value="${product.productId}" />
+                <input type="number" name="quantities" min="0" value="0" />
+            </td>
+        </tr>
+    </table>
     <button type="submit">登録</button>
 </form>
+
 </body>
 </html>
