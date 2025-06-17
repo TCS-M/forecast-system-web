@@ -17,4 +17,9 @@ public class AdminHomepageController {
         }
         return "admin_homepage";
     }
+    @GetMapping("/users_list")
+    public String showUsers() {
+        return "users_list";
+    }   
+
 }
