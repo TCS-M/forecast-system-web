@@ -89,3 +89,46 @@ button:hover {
 .register-btn:hover {
   background-color: #444;
 }
+
+.login-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.admin-link {
+  font-size: 12px;
+  color: #f5c542;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid #f5c542;
+  border-radius: 6px;
+  background-color: transparent;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.admin-link:hover {
+  background-color: #f5c542;
+  color: #000;
+  text-decoration: none;
+}
+
+.admin-link:visited {
+  color: #f5c542;
+}
+
+.switch-link {
+  margin-top: 15px;
+}
+
+.switch-link a {
+  font-size: 13px;
+  color: #f5c542;
+  text-decoration: none;
+}
+
+.switch-link a:hover {
+  text-decoration: underline;
+}
+
