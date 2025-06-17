@@ -1,0 +1,92 @@
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background-color: #fff8ef;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #ffe08a;
+  padding: 16px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 22px;
+  font-weight: bold;
+  color: #5c3d00;
+}
+.header-title {
+  flex: 1;
+  text-align: center;
+}
+
+.back-btn {
+  text-decoration: none;
+  color: #5c3d00;
+  font-size: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff5dc;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.sales-table th, .sales-table td {
+  border: 1px solid #d9c28f;
+  padding: 12px;
+  text-align: center;
+}
+
+.sales-table th {
+  background-color: #ffeab5;
+  color: #3c2f00;
+}
+
+.actions {
+  text-align: center;
+}
+
+.register-btn {
+  background-color: #ffb347;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.register-btn:hover {
+  background-color: #e89a1f;
+}
+.user-info {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.edit-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+}
+.edit-btn:hover {
+  background-color: #3e8e41;
+}

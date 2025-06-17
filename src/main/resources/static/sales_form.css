@@ -1,0 +1,100 @@
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  margin: 0;
+  background-color: #fdf6e3;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffe08a;
+  padding: 12px 24px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #5c3d00;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+}
+
+.header-title::before {
+  content: '🍺';
+  margin-right: 10px;
+}
+
+.logout-btn {
+  text-decoration: none;
+  color: #5c3d00;
+  font-size: 18px;
+}
+
+.container {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff5dc;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.welcome {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.desc {
+  font-size: 15px;
+  margin-bottom: 24px;
+  color: #666;
+}
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.sales-table th, .sales-table td {
+  border: 1px solid #d9c28f;
+  padding: 12px;
+  text-align: left;
+}
+
+.sales-table th {
+  background-color: #ffeab5;
+  color: #3c2f00;
+}
+
+input[type="number"] {
+  width: 80px;
+  padding: 6px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-actions {
+  text-align: center;
+}
+
+.submit-btn {
+  padding: 12px 36px;
+  font-size: 16px;
+  background-color: #ffb347;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.submit-btn:hover {
+  background-color: #e89a1f;
+}

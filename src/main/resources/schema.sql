@@ -22,9 +22,9 @@ CREATE TABLE users (
     role VARCHAR(10) CHECK (role IN ('admin', 'staff'))
 );
 
--- 売上テーブル
+-- 売上テーブル（ここが重要）
 CREATE TABLE sales (
-    sale_id INT PRIMARY KEY,
+    sale_id SERIAL PRIMARY KEY,  -- ✅ 自動採番に変更
     sale_date DATE,
     quantity INT,
     product_id INT,

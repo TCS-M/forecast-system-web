@@ -1,3 +1,4 @@
+//productsテーブルに対応する商品エンティティクラスです。
 package com.example.forecast.model;
 
 import jakarta.persistence.*;

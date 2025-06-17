@@ -1,3 +1,4 @@
+//販売実績に関するビジネスロジックを扱うサービスクラスです。
 package com.example.forecast.service;
 
 import com.example.forecast.model.SalesRecord;
