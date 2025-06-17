@@ -26,5 +26,6 @@ public class ForecastSystemWebMavenApplication implements CommandLineRunner {
         for (User u : users) {
             System.out.println(" - " + u.getEmail() + " / " + u.getPassword());
         }
+        
     }
 }

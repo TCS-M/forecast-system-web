@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>管理者ログイン | Hop & Craft</title>
+  <link rel="stylesheet" th:href="@{/login.css}">
+  <style>
+    .admin-badge {
+      background-color: #c0392b;
+      color: white;
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 5px;
+      margin-left: 8px;
+    }
+
+    .admin-note {
+      font-size: 13px;
+      color: #bbb;
+      margin-top: 8px;
+    }
+
+    .switch-link {
+      margin-top: 15px;
+    }
+
+    .switch-link a {
+      font-size: 13px;
+      color: #f5c542;
+      text-decoration: none;
+    }
+
+    .switch-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">🍺 Hop & Craft</div>
+
+    <h1>管理者ログイン</h1>
+
+    <form class="login-form" th:action="@{/admin_login}" method="post">
+      <input type="text" name="email" placeholder="管理者メールアドレス" required>
+      <input type="password" name="password" placeholder="パスワード" required>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="remember">
+        <label for="remember">ログイン状態を保持</label>
+      </div>
+
+      <button type="submit">ログイン</button>
+
+      <a href="#" class="link">パスワードをお忘れですか？</a>
+    </form>
+
+    <div class="admin-note">※ 管理者のみアクセス可能です</div>
+
+    <div class="switch-link">
+      <a href="/login">従業員の方はこちら</a>
+    </div>
+  </div>
+</body>
+</html>
+

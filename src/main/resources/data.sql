@@ -4,7 +4,7 @@ SELECT 1, 'testuser', 'test@example.com', 'testpass', 'staff'
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE user_id = 1);
 
 INSERT INTO users (user_id, name, email, password, role)
-SELECT 2, 'admin', 'admin@example.com', 'admin', 'staff'
+SELECT 2, 'admin', 'admin@example.com', 'admin', 'admin'
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE user_id = 2);
 
 -- ✅ 製品データの追加（幂等）
