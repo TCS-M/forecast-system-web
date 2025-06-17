@@ -1,0 +1,100 @@
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: linear-gradient(to bottom right, #fff8f0, #f2f7ff);
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #ffe28a;
+  padding: 20px 30px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+  position: relative;
+}
+
+.header-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #5a3e1b;
+}
+
+.logout-btn {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #d89c1b;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #b0780e;
+}
+
+.container {
+  max-width: 960px;
+  margin: 50px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.welcome {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.desc {
+  font-size: 16px;
+  margin-bottom: 40px;
+  color: #666;
+}
+
+.card-group {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.card {
+  background-color: #fef6e4;
+  border-radius: 16px;
+  padding: 30px;
+  width: 260px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card i {
+  font-size: 40px;
+  color: #d89c1b;
+  margin-bottom: 15px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 100%;
+  }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ユーザーホーム | Hop & Craft</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" th:href="@{/user_homepage.css}">
+</head>
+<body>
+
+  <div class="header">
+    <span class="header-title">🍺 Hop & Craft ユーザーホーム</span>
+    <a href="/login" class="logout-btn" title="ログアウト">
+      <i class="fas fa-sign-out-alt"></i>
+    </a>
+  </div>
+
+  <div class="container">
+    <div class="welcome">ようこそ、[[${username}]] さん！</div>
+    <div class="desc">以下の機能を選択してください：</div>
+
+    <div class="card-group">
+      <div class="card" onclick="location.href='forecast.html'">
+        <i class="fas fa-chart-line"></i>
+        <div class="card-title">需要予測</div>
+      </div>
+      <div class="card" onclick="location.href='sales_input.html'">
+        <i class="fas fa-pen-to-square"></i>
+        <div class="card-title">販売実績入力</div>
+      </div>
+      <div class="card" onclick="location.href='data_detail.html'">
+        <i class="fas fa-cloud-sun-rain"></i>
+        <div class="card-title">実績・天気データ</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
