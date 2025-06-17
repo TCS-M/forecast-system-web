@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>天気と販売実績一覧</title>
+    <link rel="stylesheet" th:href="@{/weather.css}">
+</head>
+<body>
+<header>
+    <h1>📊 天気と販売実績一覧</h1>
+</header>
+
+<main>
+    <table>
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>天気</th>
+                <th>気温（℃）</th>
+                <th>販売本数</th>
+                <th>詳細</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="weather : ${weatherList}" th:class="${weather.weather}">
+                <td th:text="${weather.date}"></td>
+                <td>
+                    <span class="weather-icon" th:if="${weather.weather == '晴れ'}">☀️</span>
+                    <span class="weather-icon" th:if="${weather.weather == '曇り'}">☁️</span>
+                    <span class="weather-icon" th:if="${weather.weather == '雨'}">🌧️</span>
+                    <span class="weather-icon" th:if="${weather.weather == '雪'}">❄️</span>
+                    <span class="weather-icon" th:if="${weather.weather == '雷'}">⚡</span>
+                    <span class="weather-icon" th:if="${weather.weather == '霧'}">🌫️</span>
+                    <span class="weather-icon" th:if="${weather.weather == '快晴'}">🌞</span>
+                    <span th:text="${weather.weather}"></span>
+                </td>
+                <td th:text="${weather.temperature}"></td>
+                <td th:text="${weather.salesVolume}"></td>
+                <td><a class="detail-btn" href="#" th:href="@{'/weather/detail/' + ${weather.id}}">詳細</a></td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

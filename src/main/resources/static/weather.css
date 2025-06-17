@@ -1,0 +1,144 @@
+/* ベース設定 */
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(to right, #f4f7f8, #dde9f4);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #004080;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+/* メインテーブルのデザイン */
+main {
+    margin: 40px auto;
+    width: 90%;
+    max-width: 960px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 16px;
+    text-align: center;
+}
+
+thead {
+    background-color: #007BFF;
+    color: white;
+    font-size: 1.1rem;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f8ff;
+}
+
+/* 天気別の色分け行 */
+.sunny {
+    background-color: #fff9e6;
+}
+
+.cloudy {
+    background-color: #e9ecef;
+}
+
+.rainy {
+    background-color: #e1f0ff;
+}
+
+/* アイコン */
+.icon {
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+/* レスポンシブ（モバイル対応） */
+@media screen and (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody tr {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: white;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 12px;
+        border: none;
+        font-size: 0.95rem;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #555;
+    }
+}
+
+
+/* ... 既存のスタイルはそのままにして、以下を追加/変更 ... */
+
+/* 各行ホバー時に目立たせる */
+tbody tr:hover {
+    background-color: #eef6ff;
+    transition: 0.3s;
+}
+
+/* 天気の絵文字 */
+.weather-icon {
+    font-size: 1.2em;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* 詳細ボタン */
+.detail-btn {
+    padding: 8px 14px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.detail-btn:hover {
+    background-color: #0056b3;
+}
+
+/* レスポンシブ対応を少し調整（オプション） */
+@media screen and (max-width: 768px) {
+    td[data-label="詳細"] {
+        justify-content: center;
+    }
+}
