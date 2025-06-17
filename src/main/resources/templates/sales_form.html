@@ -1,27 +1,50 @@
+<!-- 販売実績入力 -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>販売実績入力</title>
+  <meta charset="UTF-8">
+  <title>販売実績入力 | Hop & Craft</title>
+  <link rel="stylesheet" th:href="@{/sales_form.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 </head>
 <body>
-<h2>販売実績入力フォーム</h2>
 
-<form th:action="@{/sales/saveAll}" method="post">
-    <table border="1">
-        <tr>
+  <div class="header">
+    <span class="header-title">Hop & Craft - 販売実績入力</span>
+    <a href="/user_homepage" class="logout-btn" title="戻る">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+  </div>
+
+  <div class="container">
+    <div class="welcome">[[${username}]] さん、本日の販売実績を入力してください：</div>
+    <div class="desc">※ 本日の日付：[[${today}]]</div>
+
+    <form th:action="@{/sales/submit}" method="post">
+      <table class="sales-table">
+        <thead>
+          <tr>
             <th>商品名</th>
-            <th>販売本数</th>
-        </tr>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.name}"></td>
+            <th>販売数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="product : ${products}">
+            <td th:text="${product.name}">商品名</td>
             <td>
-                <input type="hidden" name="productIds" th:value="${product.productId}" />
-                <input type="number" name="quantities" min="0" value="0" />
+              <input type="hidden" name="productIds" th:value="${product.productId}" />
+              <input type="number" name="quantities" min="0" value="0" />
             </td>
-        </tr>
-    </table>
-    <button type="submit">登録</button>
-</form>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="form-actions">
+        <button type="submit" class="submit-btn">登録</button>
+      </div>
+    </form>
+  </div>
 
 </body>
 </html>

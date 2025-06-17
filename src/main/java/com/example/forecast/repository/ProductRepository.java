@@ -1,3 +1,4 @@
+// 製品テーブルにアクセスするためのリポジトリインタフェース
 package com.example.forecast.repository;
 
 import com.example.forecast.model.Product;
