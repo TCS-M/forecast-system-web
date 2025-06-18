@@ -10,7 +10,10 @@ CREATE TABLE products (
     product_id INT PRIMARY KEY,
     name VARCHAR(100),
     price INT,
-    jan_code VARCHAR(30)
+    jan_code VARCHAR(30),
+    production_date DATE,
+    expiration_date DATE,
+    stock_quantity INT CHECK (stock_quantity >= 0)  
 );
 
 -- ユーザーテーブル
