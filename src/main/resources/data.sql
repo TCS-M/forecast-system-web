@@ -40,3 +40,20 @@ WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_date = '2025-06-16' AND product
 INSERT INTO sales (sale_date, quantity, product_id, user_id)
 SELECT '2025-06-17', 15, 3, 2
 WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_date = '2025-06-17' AND product_id = 3);
+
+-- 予測データ（月曜・木曜のみ）
+INSERT INTO forecast (forecast_id, forecast_date, predicted_sale_quantity, predicted_order_quantity, product_id)
+SELECT 1, '2025-06-19', 50, 60, 1
+WHERE NOT EXISTS (SELECT 1 FROM forecast WHERE forecast_id = 1);
+
+INSERT INTO forecast (forecast_id, forecast_date, predicted_sale_quantity, predicted_order_quantity, product_id)
+SELECT 2, '2025-06-20', 40, 50, 2
+WHERE NOT EXISTS (SELECT 1 FROM forecast WHERE forecast_id = 2);
+
+INSERT INTO forecast (forecast_id, forecast_date, predicted_sale_quantity, predicted_order_quantity, product_id)
+SELECT 3, '2025-06-23', 70, 80, 1
+WHERE NOT EXISTS (SELECT 1 FROM forecast WHERE forecast_id = 3);
+
+INSERT INTO forecast (forecast_id, forecast_date, predicted_sale_quantity, predicted_order_quantity, product_id)
+SELECT 4, '2025-06-24', 30, 35, 3
+WHERE NOT EXISTS (SELECT 1 FROM forecast WHERE forecast_id = 4);

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>需要予測</title>
+    <link rel="stylesheet" th:href="@{/forecast.css}">
+</head>
+<body>
+<header>
+    <h1>需要予測</h1>
+</header>
+<main>
+    <table>
+        <thead>
+        <tr>
+            <th>日付</th>
+            <th>商品名</th>
+            <th>予測販売数</th>
+            <th>予測発注数</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="f : ${forecasts}">
+            <td th:text="${f.forecastDate}"></td>
+            <td th:text="${f.product.name}"></td>
+            <td th:text="${f.predictedSaleQuantity} + '本'"></td>
+            <td th:text="${f.predictedOrderQuantity} + '本'"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="back-button-container">
+        <a th:href="@{/admin_homepage}" class="back-button">戻る</a>
+    </div>
+</main>
+</body>
+</html>
