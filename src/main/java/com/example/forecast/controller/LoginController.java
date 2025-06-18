@@ -1,3 +1,4 @@
+//ログイン処理とセッション管理を担当するコントローラーです。
 package com.example.forecast.controller;
 
 import com.example.forecast.model.User;

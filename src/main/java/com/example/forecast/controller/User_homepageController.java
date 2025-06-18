@@ -1,5 +1,6 @@
+//ログイン後のユーザーホーム画面への遷移を管理するコントローラーです。
 package com.example.forecast.controller;
-
+import com.example.forecast.model.Product;
 import com.example.forecast.model.User;
 import com.example.forecast.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
@@ -47,4 +48,5 @@ public class User_homepageController {
         return "redirect:/settings/users";
     }
 }
+
 

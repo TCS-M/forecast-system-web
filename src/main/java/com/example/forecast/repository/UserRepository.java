@@ -1,3 +1,4 @@
+//ユーザー情報（usersテーブル）にアクセスするリポジトリです。
 package com.example.forecast.repository;
 
 import com.example.forecast.model.User;

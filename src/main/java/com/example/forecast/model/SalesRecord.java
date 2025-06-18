@@ -1,3 +1,4 @@
+// salesテーブルに対応する販売実績エンティティクラスです。
 package com.example.forecast.model;
 
 import jakarta.persistence.*;
@@ -10,7 +11,7 @@ public class SalesRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sale_id")
-    private Integer id;
+    private Integer id; // 主キーをidとして統一
 
     private LocalDate saleDate;
     private int quantity;
@@ -39,5 +40,6 @@ public class SalesRecord {
 
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
+    
 }
 

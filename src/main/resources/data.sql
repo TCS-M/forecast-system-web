@@ -7,7 +7,7 @@ INSERT INTO users (name, email, password, role)
 SELECT 'admin', 'admin@example.com', 'admin', 'admin'
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE user_id = 2);
 
--- ✅ 製品データの追加（幂等）
+-- ✅ 製品データの追加
 INSERT INTO products (product_id, name, price, jan_code)
 SELECT 1, 'ホワイトビール', 900, '4901234567894'
 WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 1);
@@ -26,4 +26,17 @@ WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 4);
 
 INSERT INTO products (product_id, name, price, jan_code)
 SELECT 5, '黒ビール', 1200, '4999999999996'
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 5);
 
+-- ✅ 販売実績データの追加（sale_id省略）
+INSERT INTO sales (sale_date, quantity, product_id, user_id)
+SELECT '2025-06-15', 12, 1, 1
+WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_date = '2025-06-15' AND product_id = 1);
+
+INSERT INTO sales (sale_date, quantity, product_id, user_id)
+SELECT '2025-06-16', 8, 2, 1
+WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_date = '2025-06-16' AND product_id = 2);
+
+INSERT INTO sales (sale_date, quantity, product_id, user_id)
+SELECT '2025-06-17', 15, 3, 2
+WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_date = '2025-06-17' AND product_id = 3);

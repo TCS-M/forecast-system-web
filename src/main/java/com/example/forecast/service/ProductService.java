@@ -1,3 +1,4 @@
+//商品に関するビジネスロジックを扱うサービスクラスです。
 package com.example.forecast.service;
 
 import com.example.forecast.model.Product;
