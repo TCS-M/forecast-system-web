@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
-    private int userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // 自動採番
+    private Integer userId;
 
     private String name;
 

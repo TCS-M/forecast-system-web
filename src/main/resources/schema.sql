@@ -15,7 +15,7 @@ CREATE TABLE products (
 
 -- ユーザーテーブル
 CREATE TABLE users (
-    user_id INT PRIMARY KEY,
+    user_id SERIAL PRIMARY KEY,
     name VARCHAR(100),
     email VARCHAR(100) UNIQUE,
     password VARCHAR(255),
