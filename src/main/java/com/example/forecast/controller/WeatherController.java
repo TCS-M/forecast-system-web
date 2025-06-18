@@ -42,9 +42,9 @@ public class WeatherController {
 
             WeatherDetailDTO detail = weatherService.getDetailByDate(date);
 
-            if (detail == null) {
-                logger.warn("⚠️ WeatherDetailDTO が null です");
-                throw new RuntimeException("WeatherDetailDTO is null");
+            if (detail == null || detail.isEmpty()) {
+                logger.warn("⚠️ WeatherDetailDTO が null または中身が空です：date={}", date);
+                throw new RuntimeException("指定された日付の天気または販売データが存在しません。");
             }
 
             logger.info("✅ DTO取得成功：天気={}, 製品数={}", detail.getWeather(), detail.getProductSales().size());
@@ -53,8 +53,8 @@ public class WeatherController {
             return "weather_detail"; // templates/weather_detail.html
 
         } catch (Exception e) {
-            logger.error("❌ 例外発生：{}", e.getMessage(), e);
-            throw e; // Springに例外を返してブラウザにエラー表示
+            logger.error("❌ 詳細ページの取得中にエラーが発生しました：{}", e.getMessage(), e);
+            throw e;
         }
     }
 }

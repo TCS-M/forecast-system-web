@@ -68,13 +68,29 @@ public class WeatherService {
             salesMap.put(name, qty != null ? qty.intValue() : 0);
         }
 
-        // 天気情報
-        String weatherSql = "SELECT weather_info FROM weather WHERE weather_date = :date";
+        // 天気情報の詳細取得
+        String weatherSql = """
+            SELECT weather_info, weather_water, weather_wind, weather_temperature
+            FROM weather
+            WHERE weather_date = :date
+        """;
         Query weatherQuery = entityManager.createNativeQuery(weatherSql);
         weatherQuery.setParameter("date", Date.valueOf(date));
-        List<String> weatherResults = weatherQuery.getResultList();
-        String weather = weatherResults.isEmpty() ? "不明" : weatherResults.get(0);
+        List<Object[]> weatherResults = weatherQuery.getResultList();
 
-        return new WeatherDetailDTO(date, weather, salesMap);
+        String weatherInfo = "不明";
+        Double water = null;
+        Double wind = null;
+        Double temp = null;
+
+        if (!weatherResults.isEmpty()) {
+            Object[] row = weatherResults.get(0);
+            weatherInfo = (String) row[0];
+            water = row[1] != null ? ((Number) row[1]).doubleValue() : null;
+            wind = row[2] != null ? ((Number) row[2]).doubleValue() : null;
+            temp = row[3] != null ? ((Number) row[3]).doubleValue() : null;
+        }
+
+        return new WeatherDetailDTO(date, weatherInfo, salesMap, water, wind, temp);
     }
 }
