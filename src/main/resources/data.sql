@@ -1,10 +1,10 @@
 -- ✅ テスト用ユーザーの追加（幂等）
-INSERT INTO users (user_id, name, email, password, role)
-SELECT 1, 'testuser', 'test@example.com', 'testpass', 'staff'
+INSERT INTO users (name, email, password, role)
+SELECT 'testuser', 'test@example.com', 'testpass', 'staff'
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE user_id = 1);
 
-INSERT INTO users (user_id, name, email, password, role)
-SELECT 2, 'admin', 'admin@example.com', 'admin', 'admin'
+INSERT INTO users (name, email, password, role)
+SELECT 'admin', 'admin@example.com', 'admin', 'admin'
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE user_id = 2);
 
 -- ✅ 製品データの追加（幂等）

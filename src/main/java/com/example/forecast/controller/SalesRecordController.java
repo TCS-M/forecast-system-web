@@ -30,12 +30,13 @@ public class SalesRecordController {
         return "sales_form";
     }
 
-    @GetMapping("/list")   
-     public String list(Model model) { 
-        List<SalesRecord> products = productService.findAll();        
-        model.addAttribute("products", products);        
-        return "sales_list";    
+    @GetMapping("/list")
+    public String list(Model model) {
+        List<SalesRecord> records = salesRecordService.findAll();
+        model.addAttribute("records", records);
+        return "sales_list";
     }
+
     
     @PostMapping("/saveAll")
     public String saveAll(@RequestParam("productIds") List<Integer> productIds,
