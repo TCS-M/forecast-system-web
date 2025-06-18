@@ -40,3 +40,20 @@ WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_date = '2025-06-16' AND product
 INSERT INTO sales (sale_date, quantity, product_id, user_id)
 SELECT '2025-06-17', 15, 3, 2
 WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_date = '2025-06-17' AND product_id = 3);
+
+INSERT INTO sales (sale_date, quantity, product_id, user_id)
+SELECT '2025-06-17', 12, 4, 2
+WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_date = '2025-06-17' AND product_id = 4);
+
+-- 天気データの追加（詳細ページがこれを前提に動いている）
+INSERT INTO weather (weather_date, weather_info)
+SELECT '2025-06-15', '晴れ'
+WHERE NOT EXISTS (SELECT 1 FROM weather WHERE weather_date = '2025-06-15');
+
+INSERT INTO weather (weather_date, weather_info)
+SELECT '2025-06-16', '曇り'
+WHERE NOT EXISTS (SELECT 1 FROM weather WHERE weather_date = '2025-06-16');
+
+INSERT INTO weather (weather_date, weather_info)
+SELECT '2025-06-17', '雨'
+WHERE NOT EXISTS (SELECT 1 FROM weather WHERE weather_date = '2025-06-17');

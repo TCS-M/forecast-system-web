@@ -11,16 +11,16 @@
     </style>
 </head>
 <body>
-    <h1 th:text="'📅 ' + ${detail.date} + ' の天気と売上詳細'"></h1>
-    <p th:text="'🌤️ 天気：' + ${detail.weather}"></p>
+    <h1 th:text="'📅 ' + ${detail.date} + ' の天気と売上詳細'">日付</h1>
+    <p th:text="'🌤️ 天気：' + (${detail.weather} ?: '不明')">天気情報</p>
 
     <div class="chart-container">
         <canvas id="salesChart"></canvas>
     </div>
 
     <script th:inline="javascript">
-        const labels = [[${#jsonify.convert(detail.productSales.keySet())}]];
-        const data = [[${#jsonify.convert(detail.productSales.values())}]];
+        const labels = [[${detail.productSales != null ? detail.productSales.keySet() : {}}]];
+        const data = [[${detail.productSales != null ? detail.productSales.values() : {}}]];
 
         const ctx = document.getElementById('salesChart').getContext('2d');
         new Chart(ctx, {
