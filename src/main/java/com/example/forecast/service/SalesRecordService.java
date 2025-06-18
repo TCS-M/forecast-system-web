@@ -23,7 +23,13 @@ public class SalesRecordService {
         return repository.save(record);
     }
 
+    // 原有：全件取得
     public List<SalesRecord> findAll() {
         return repository.findAll();
+    }
+
+    // ✅ 新增：ユーザー・商品も含めた全件取得
+    public List<SalesRecord> findAllWithUserAndProduct() {
+        return repository.findAllWithUserAndProduct();
     }
 }

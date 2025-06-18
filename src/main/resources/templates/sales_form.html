@@ -12,16 +12,22 @@
 
   <div class="header">
     <span class="header-title">Hop & Craft - 販売実績入力</span>
-    <a href="/user_homepage" class="logout-btn" title="戻る">
+    <a href="/sales_list" class="logout-btn" title="戻る">
       <i class="fas fa-arrow-left"></i>
     </a>
   </div>
 
   <div class="container">
-    <div class="welcome">[[${username}]] さん、本日の販売実績を入力してください：</div>
-    <div class="desc">※ 本日の日付：[[${today}]]</div>
+    <div class="welcome">[[${username}]] さん、販売実績を入力してください：</div>
 
     <form th:action="@{/sales/submit}" method="post">
+
+      <!-- ✅ 日付入力 -->
+      <div class="date-picker">
+        <label for="saleDate">販売日：</label>
+        <input type="date" id="saleDate" name="saleDate" th:value="${defaultDate}" required />
+      </div>
+
       <table class="sales-table">
         <thead>
           <tr>

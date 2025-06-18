@@ -1,16 +1,24 @@
 package com.example.forecast.controller;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.example.forecast.model.Forecast;
+import com.example.forecast.model.SalesRecord;
 import com.example.forecast.model.User;
 import com.example.forecast.repository.UserRepository;
+import com.example.forecast.service.ForecastService;
+import com.example.forecast.service.SalesRecordService;
 
 import jakarta.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -57,22 +65,45 @@ public class AdminHomepageController {
     }   
 
     @GetMapping("/settings/users/edit/{id}")
-public String showEditForm(@PathVariable("id") Integer id, Model model) {
-    Optional<User> userOpt = userRepository.findById(id);
-    if (userOpt.isPresent()) {
-        model.addAttribute("user", userOpt.get());
-        return "user_edit";
-    } else {
-        return "redirect:/settings/users"; // 該当ユーザーがいない場合の処理
+    public String showEditForm(@PathVariable("id") Integer id, Model model) {
+        Optional<User> userOpt = userRepository.findById(id);
+        if (userOpt.isPresent()) {
+            model.addAttribute("user", userOpt.get());
+            return "user_edit";
+        } else {
+            return "redirect:/settings/users"; // 該当ユーザーがいない場合の処理
+        }
     }
+    @Controller
+    @RequestMapping("/admin/sales")
+    public class AdminSalesController {
+
+        @Autowired
+        private SalesRecordService salesRecordService;
+
+        @GetMapping("/list")
+        public String showList(Model model) {
+            List<SalesRecord> records = salesRecordService.findAllWithUserAndProduct();
+            model.addAttribute("records", records);
+            return "admin_sales_list";
+        }
+    }
+@Autowired
+private ForecastService forecastService;
+
+@GetMapping("/admin_forecast")
+public String showAdminForecastList(Model model) {
+    List<Forecast> forecasts = forecastService.getOrderForecasts(); 
+    model.addAttribute("forecasts", forecasts);
+    return "admin_forecast_list";
 }
 
 @PostMapping("/settings/users/allupdate")
 public String updateUser(@RequestParam Integer userId,
-                         @RequestParam String name,
-                         @RequestParam String email,
-                         @RequestParam String role,
-                         @RequestParam(required = false) String password) {
+                        @RequestParam String name,
+                        @RequestParam String email,
+                        @RequestParam String role,
+                        @RequestParam(required = false) String password) {
 
     Optional<User> userOpt = userRepository.findById(userId);
     if (userOpt.isPresent()) {

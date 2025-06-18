@@ -1,0 +1,65 @@
+<!-- 管理者用 販売実績一覧 -->
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>販売実績一覧（管理者） | Hop & Craft</title>
+  <link rel="stylesheet" th:href="@{/sales_list.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <style>
+    .edit-btn {
+      color: #d89c1b;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    .edit-btn:hover {
+      color: #a87405;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <span class="header-title">🍺 販売実績一覧（管理者）</span>
+    <a href="/admin_homepage" class="back-btn" title="ホームに戻る">
+      <i class="fas fa-home"></i>
+    </a>
+  </div>
+
+  <div class="container">
+    <div class="user-info">
+      会社全体の販売実績一覧です。
+    </div>
+
+    <table class="sales-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>日付</th>
+          <th>商品名</th>
+          <th>本数</th>
+          <th>販売者</th>
+          <th>編集</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="record : ${records}">
+          <td th:text="${record.id}">1</td>
+          <td th:text="${record.saleDate}">2025-01-01</td>
+          <td th:text="${record.product.name}">商品</td>
+          <td th:text="${record.quantity}">12</td>
+          <td th:text="${record.user.name}">販売者</td>
+          <td>
+            <a th:href="@{/admin/sales/edit/{id}(id=${record.id})}" class="edit-btn" title="編集">
+              <i class="fas fa-pen"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</body>
+</html>
