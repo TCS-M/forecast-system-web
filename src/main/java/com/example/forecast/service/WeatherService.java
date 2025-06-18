@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.forecast.dto.WeatherDetailDTO;
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class WeatherService {
 
@@ -47,4 +51,36 @@ public class WeatherService {
 
         return dataList;
     }
+
+    
+    public WeatherDetailDTO getDetailByDate(String date) {
+    // 売上取得
+    String sql = """
+        SELECT p.name, COALESCE(SUM(s.quantity), 0)
+        FROM products p
+        LEFT JOIN sales s ON p.product_id = s.product_id AND s.sale_date = :date
+        GROUP BY p.name
+        ORDER BY p.name;
+    """;
+    Query query = entityManager.createNativeQuery(sql);
+    query.setParameter("date", java.sql.Date.valueOf(date));
+    List<Object[]> results = query.getResultList();
+
+    Map<String, Integer> salesMap = new HashMap<>();
+    for (Object[] row : results) {
+        String name = (String) row[0];
+        Number qty = (Number) row[1];
+        salesMap.put(name, qty != null ? qty.intValue() : 0);
+    }
+
+    // 天気取得（null対応）
+    String weatherSql = "SELECT weather_info FROM weather WHERE weather_date = :date";
+    Query weatherQuery = entityManager.createNativeQuery(weatherSql);
+    weatherQuery.setParameter("date", java.sql.Date.valueOf(date));
+    List<String> weatherResult = weatherQuery.getResultList();
+    String weather = weatherResult.isEmpty() ? "不明" : weatherResult.get(0);
+
+    return new WeatherDetailDTO(date, weather, salesMap);
+}
+
 }

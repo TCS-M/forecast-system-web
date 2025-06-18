@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>詳細データ</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: "Segoe UI", sans-serif; background-color: #f0f8ff; padding: 20px; }
+        h1 { color: #004080; }
+        .chart-container { width: 80%; margin: 30px auto; }
+    </style>
+</head>
+<body>
+    <h1 th:text="'📅 ' + ${detail.date} + ' の天気と売上詳細'"></h1>
+    <p th:text="'🌤️ 天気：' + ${detail.weather}"></p>
+
+    <div class="chart-container">
+        <canvas id="salesChart"></canvas>
+    </div>
+
+    <script th:inline="javascript">
+        const labels = [[${#jsonify.convert(detail.productSales.keySet())}]];
+        const data = [[${#jsonify.convert(detail.productSales.values())}]];
+
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '販売本数',
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

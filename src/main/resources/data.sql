@@ -55,3 +55,16 @@ INSERT INTO sales (sale_id, sale_date, quantity, product_id, user_id)
 SELECT 11, '2024-06-01', 5, 2, 1 WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_id = 11);
 INSERT INTO sales (sale_id, sale_date, quantity, product_id, user_id)
 SELECT 12, '2024-06-01', 8, 3, 1 WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_id = 12);
+
+-- ✅ 2024-06-03 の売上データ
+INSERT INTO sales (sale_id, sale_date, quantity, product_id, user_id)
+SELECT 30, '2024-06-03', 10, 1, 1 WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_id = 30);
+INSERT INTO sales (sale_id, sale_date, quantity, product_id, user_id)
+SELECT 31, '2024-06-03', 7, 2, 1 WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_id = 31);
+INSERT INTO sales (sale_id, sale_date, quantity, product_id, user_id)
+SELECT 32, '2024-06-03', 5, 3, 1 WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_id = 32);
+
+-- ✅ 天気データ（対応日追加）
+INSERT INTO weather (weather_date, weather_info)
+SELECT '2024-06-03', '雨'
+WHERE NOT EXISTS (SELECT 1 FROM weather WHERE weather_date = '2024-06-03');
