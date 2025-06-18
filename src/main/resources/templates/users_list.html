@@ -34,7 +34,7 @@
 
   <!-- ロール変更フォーム -->
   <td>
-    <form th:action="@{/settings/users/update}" method="post">
+    <form th:action="@{/settings/users/role-update}" method="post">
       <input type="hidden" name="userId" th:value="${user.userId}" />
       <select name="role">
         <option th:value="'admin'" th:selected="${user.role == 'admin'}">admin</option>
