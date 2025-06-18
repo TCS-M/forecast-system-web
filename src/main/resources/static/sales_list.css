@@ -79,14 +79,4 @@ body {
   margin-bottom: 20px;
   text-align: center;
 }
-.edit-btn {
-  background-color: #4caf50;
-  color: white;
-  padding: 6px 14px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 14px;
-}
-.edit-btn:hover {
-  background-color: #3e8e41;
-}
+
