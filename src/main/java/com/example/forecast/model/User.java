@@ -1,3 +1,4 @@
+//usersテーブルに対応するユーザーエンティティクラスです。
 package com.example.forecast.model;
 
 import jakarta.persistence.*;

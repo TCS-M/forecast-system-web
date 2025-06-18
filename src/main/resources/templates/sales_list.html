@@ -1,24 +1,54 @@
+<!-- 販売実績一覧 -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>販売実績一覧</title>
+  <meta charset="UTF-8">
+  <title>販売実績一覧 | Hop & Craft</title>
+  <link rel="stylesheet" th:href="@{/sales_list.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 </head>
 <body>
-<h2>販売実績一覧</h2>
-<table border="1">
+
+  <div class="header">
+    <span class="header-title">🍺 販売実績一覧</span>
+    <a href="/user_homepage" class="back-btn" title="ホームに戻る">
+      <i class="fas fa-home"></i>
+    </a>
+  </div>
+
+  <div class="container">
+    <div class="user-info">
+    [[${username}]] さんの販売実績一覧です。
+    </div>   
+    <table class="sales-table">
+    <thead>
     <tr>
         <th>ID</th>
         <th>日付</th>
         <th>商品名</th>
         <th>本数</th>
+        <th>編集</th> <!-- 新增 -->
     </tr>
+    </thead>
+    <tbody>
     <tr th:each="record : ${records}">
-        <td th:text="${record.id}"></td>
-        <td th:text="${record.saleDate}"></td>
-        <td th:text="${record.productName}"></td>
-        <td th:text="${record.quantity}"></td>
+        <td th:text="${record.id}">1</td>
+        <td th:text="${record.saleDate}">2025-06-17</td>
+        <td th:text="${record.product.name}">ホワイトビール</td>
+        <td th:text="${record.quantity}">12</td>
+        <td>
+        <a th:href="@{/sales_edit/{id}(id=${record.id})}" class="edit-btn">編集</a>
+        </td>
     </tr>
-</table>
-<a th:href="@{/sales/new}">新しい販売実績を登録</a>
+    </tbody>
+    </table>
+
+    <div class="actions">
+      <a href="/sales_form" class="register-btn">＋ 新しい販売実績を登録</a>
+    </div>
+  </div>
+
 </body>
 </html>
+

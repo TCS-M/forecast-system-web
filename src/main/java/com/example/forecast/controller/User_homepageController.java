@@ -1,5 +1,6 @@
+//ログイン後のユーザーホーム画面への遷移を管理するコントローラーです。
 package com.example.forecast.controller;
-
+import com.example.forecast.model.Product;
 import com.example.forecast.model.User;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -17,5 +18,7 @@ public class User_homepageController {
         }
         return "user_homepage";
     }
+
 }
+
 

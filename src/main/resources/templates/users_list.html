@@ -9,6 +9,9 @@
   <script th:src="@{/js/settings.js}" defer></script>
 </head>
 <body>
+<div class="top-right">
+  <a th:href="@{/admin_homepage}" class="back-button">← 戻る</a>
+</div>
 <h1>ユーザー一覧（全情報）</h1>
 <table>
   <thead>
@@ -16,7 +19,6 @@
       <th>ID</th>
       <th>名前</th>
       <th>メールアドレス</th>
-      <th>パスワード</th>
       <th>ロール</th>
       <th>編集</th>
     </tr>
