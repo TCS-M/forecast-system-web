@@ -45,7 +45,7 @@ public class LoginController {
                         @RequestParam("password") String password,
                         HttpSession session) {
 
-        Optional<User> userOpt = userRepository.findByEmail(email);
+        Optional<User> userOpt = userRepository.findByEmailAndPasswordAndIsDeletedFalse(email, password);
 
         if (userOpt.isPresent()) {
             User user = userOpt.get();
@@ -65,7 +65,7 @@ public class LoginController {
 
         System.out.println("★ 管理者ログイン試行中: " + email);
 
-        Optional<User> userOpt = userRepository.findByEmail(email);
+        Optional<User> userOpt = userRepository.findByEmailAndPasswordAndIsDeletedFalse(email, password);
 
         if (userOpt.isPresent()) {
             User user = userOpt.get();
