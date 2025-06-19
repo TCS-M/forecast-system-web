@@ -67,9 +67,10 @@ public class SalesRecordController {
     // フォームからの販売実績データを受け取り、保存
     @PostMapping("/sales/submit")
     public String submitSales(
-            @RequestParam("saleDate") String saleDateStr, // ✅ 接收日付
+            @RequestParam("saleDate") String saleDateStr,
             @RequestParam("productIds") List<Integer> productIds,
             @RequestParam("quantities") List<Integer> quantities,
+            Model model,
             HttpSession session) {
 
         // ログインユーザーの取得
@@ -78,16 +79,41 @@ public class SalesRecordController {
             throw new RuntimeException("ログインユーザーがセッションに存在しません");
         }
 
-        // ✅ String を LocalDate に変換
+        // 日付を LocalDate に変換
         LocalDate saleDate = LocalDate.parse(saleDateStr);
 
+        // ✅ 在庫不足があるかを事前にチェック
         for (int i = 0; i < productIds.size(); i++) {
+            int productId = productIds.get(i);
             int quantity = quantities.get(i);
             if (quantity > 0) {
+                int available = productService.getTotalAvailableStock(productId, saleDate);
+                if (quantity > available) {
+                    // ❌ 在庫が不足 → 入力画面へ戻す
+                    model.addAttribute("errorMessage", "商品ID " + productId + " の在庫が不足しています（在庫：" + available + "）");
+                    model.addAttribute("products", productRepository.findAll());
+                    model.addAttribute("inventoryMap", productService.calculateInventoryMap(saleDate));
+                    model.addAttribute("defaultDate", saleDate);
+                    model.addAttribute("quantities", quantities);  // ※必要ならフォームに再表示できるよう保持
+                    if (user != null) {
+                        model.addAttribute("username", user.getName());
+                    }
+                    return "sales_form";
+                }
+            }
+        }
+
+        // ✅ 在庫は足りている → 実際に在庫を減らして記録を保存
+        for (int i = 0; i < productIds.size(); i++) {
+            int productId = productIds.get(i);
+            int quantity = quantities.get(i);
+            if (quantity > 0) {
+                productService.deductStock(productId, quantity, saleDate);
+
                 SalesRecord record = new SalesRecord();
-                record.setSaleDate(saleDate); // ✅ ユーザーが指定した日付をセット
+                record.setSaleDate(saleDate);
                 record.setQuantity(quantity);
-                record.setProduct(productRepository.findById(productIds.get(i)).orElse(null));
+                record.setProduct(productRepository.findById(productId).orElse(null));
                 record.setUser(user);
                 salesRecordRepository.save(record);
             }
