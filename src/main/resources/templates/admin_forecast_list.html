@@ -15,6 +15,13 @@
     </a>
   </div>
 <main>
+
+    <form method="get" th:action="@{/admin/forecast}">
+    <label for="forecastDate">日付を選択：</label>
+    <input type="date" id="forecastDate" name="forecastDate"
+           th:value="${selectedDate}">
+    <button type="submit">検索</button>
+</form>
     <table>
         <thead>
         <tr>

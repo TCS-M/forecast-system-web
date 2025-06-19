@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import java.util.List;
 
+
 @Controller
 @RequestMapping("/user")
 public class User_ForecastController {
@@ -34,5 +35,4 @@ public class User_ForecastController {
         model.addAttribute("forecasts", forecasts);
         return "user_forecast_list";
     }
-
 }
