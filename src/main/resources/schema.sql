@@ -47,14 +47,19 @@ CREATE TABLE forecast (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
--- 天気情報テーブル-- 
-CREATE TABLE weather ( 
-    weather_date DATE PRIMARY KEY,             -- 天気日付 
-    weather_info VARCHAR(100),                 -- 天気 
-    weather_water DECIMAL(5,1),                -- 降水量 (例: 12.5 mm) 
-    weather_wind DECIMAL(4,1),                 -- 風速 (例: 3.2 m/s) 
-    weather_temperature DECIMAL(4,1)           -- 気温 (例: 25.3 ℃) 
-); 
+
+
+
+
+-- 天気情報テーブル（拡張済み）
+CREATE TABLE weather (
+    weather_date DATE PRIMARY KEY,
+    weather_info VARCHAR(100),         -- 天気（例：晴れ・曇りなど）
+    weather_water DECIMAL(5,2),        -- 降水量（mm）
+    weather_wind DECIMAL(5,2),         -- 風速（m/s）
+    weather_temperature DECIMAL(5,2)   -- 気温（℃）
+);
+
 --在庫数テーブル-- 
 CREATE TABLE inventory ( 
 

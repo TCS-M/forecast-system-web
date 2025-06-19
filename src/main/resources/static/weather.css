@@ -1,0 +1,158 @@
+/* 共通設定 */
+body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    color: #ffeb3b;
+}
+
+header {
+    background-color: #000;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(255, 255, 0, 0.2);
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #ffeb3b;
+}
+
+/* メイン構造 */
+main {
+    margin: 40px auto;
+    width: 90%;
+    max-width: 1000px;
+}
+
+/* 表デザイン */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #222;
+    color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.2);
+}
+
+th, td {
+    padding: 16px;
+    text-align: center;
+}
+
+thead {
+    background-color: #ffeb3b;
+    color: #000;
+    font-size: 1.1rem;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #1c1c1c;
+}
+
+tbody tr:hover {
+    background-color: #2a2a2a;
+    transition: 0.3s;
+}
+
+/* 詳細ボタン */
+.detail-btn {
+    padding: 8px 14px;
+    background-color: #ffeb3b;
+    color: #000;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.detail-btn:hover {
+    background-color: #fff700;
+}
+
+/* 天気詳細ボックス */
+.info-box {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(255, 255, 0, 0.3);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.info-box p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+/* グラフ領域 */
+.chart-container {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+    margin: 0 auto 40px;
+    width: 90%;
+}
+
+/* 戻るボタン */
+.back-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.back-button {
+    padding: 12px 24px;
+    background-color: #ffeb3b;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(255, 255, 0, 0.5);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: #fff700;
+    transform: translateY(-2px);
+}
+
+/* モバイル対応 */
+@media screen and (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody tr {
+        margin-bottom: 20px;
+        border: 1px solid #444;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #222;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 12px;
+        border: none;
+        font-size: 0.95rem;
+        color: #ffeb3b;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #ccc;
+    }
+}
