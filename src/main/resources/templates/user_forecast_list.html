@@ -16,7 +16,7 @@
 
 <main>
     
-<form method="get" th:action="@{/forecast}">
+<form method="get" th:action="@{/user/forecast}">
     <label for="forecastDate">日付を選択：</label>
     <input type="date" id="forecastDate" name="forecastDate"
            th:value="${selectedDate}">

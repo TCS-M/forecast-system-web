@@ -1,8 +1,12 @@
 // ログイン後のユーザーホーム画面への遷移を管理するコントローラーです。
 package com.example.forecast.controller;
 
+import com.example.forecast.model.Forecast;
 import com.example.forecast.model.User;
 import jakarta.servlet.http.HttpSession;
+
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +33,13 @@ public class User_homepageController {
         model.addAttribute("detail", new Object()); // 本来はWeatherDetailなどのクラスのインスタンス
 
         return "weather_detail";  // Thymeleafテンプレート "weather_detail.html" を返す
+    }
+
+    @GetMapping("/user_forecast")
+    public String showAdminForecastList(Model model) {
+        List<Forecast> forecasts = forecastService.getOrderForecasts(); 
+        model.addAttribute("forecasts", forecasts);
+        return "user_forecast_list";
     }
 }
 
