@@ -67,9 +67,6 @@ INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, we
 SELECT '2025-06-17', '雨', 12.3, 3.5, 22.1
 WHERE NOT EXISTS (SELECT 1 FROM weather WHERE weather_date = '2025-06-17');
 
-
-WHERE NOT EXISTS (SELECT 1 FROM sales WHERE sale_date = '2025-06-17' AND product_id = 3);
-
 -- 予測データ（月曜・木曜のみ）
 INSERT INTO forecast (forecast_id, forecast_date, predicted_sale_quantity, predicted_order_quantity, product_id)
 SELECT 1, '2025-06-19', 50, 60, 1
