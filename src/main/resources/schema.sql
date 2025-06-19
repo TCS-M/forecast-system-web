@@ -50,9 +50,6 @@ CREATE TABLE forecast (
 );
 
 
-
-
-
 -- 天気情報テーブル（拡張済み）
 CREATE TABLE weather (
     weather_date DATE PRIMARY KEY,
