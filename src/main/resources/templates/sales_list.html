@@ -28,18 +28,16 @@
         <th>日付</th>
         <th>商品名</th>
         <th>本数</th>
-        <th>編集</th> <!-- 新增 -->
+        <th>販売者</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="record : ${records}">
         <td th:text="${record.id}">1</td>
-        <td th:text="${record.saleDate}">2025-06-17</td>
-        <td th:text="${record.product.name}">ホワイトビール</td>
-        <td th:text="${record.quantity}">12</td>
-        <td>
-        <a th:href="@{/sales_edit/{id}(id=${record.id})}" class="edit-btn">編集</a>
-        </td>
+        <td th:text="${record.saleDate}">2025-01-01</td>
+        <td th:text="${record.product.name}">ああ</td>
+        <td th:text="${record.quantity}">666</td>
+        <td th:text="${record.user.name}">mm</td>
     </tr>
     </tbody>
     </table>

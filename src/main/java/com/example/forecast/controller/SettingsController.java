@@ -23,11 +23,11 @@ public class SettingsController {
 
 @GetMapping("/users")
 public String userList(Model model) {
-    List<User> users = userRepository.findAllByOrderByUserIdAsc(); // ← 変更
+    List<User> users = userRepository.findByIsDeletedFalseOrderByUserIdAsc(); // ← 変更
     model.addAttribute("users", users);
     return "users_list";
 }
-@PostMapping("/users/update")
+@PostMapping("/users/role-update")
 public String updateUserRoleConfirmed(
         @RequestParam int userId,
         @RequestParam String role

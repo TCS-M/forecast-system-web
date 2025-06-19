@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ユーザー編集</title>
+  <link rel="stylesheet" th:href="@{/user_edit.css}">
+  <script th:src="@{/js/user_edit.js}" defer></script>
+</head>
+<body>
+  <div class="top-right">
+    <a th:href="@{/settings/users}" class="back-button">← 戻る</a>
+  </div>
+
+  <h1>ユーザー情報の編集</h1>
+  <form th:action="@{/settings/users/allupdate}" method="post">
+  <input type="hidden" name="userId" th:value="${user.userId}" />
+
+  <label>名前:</label>
+  <input type="text" name="name" th:value="${user.name}" required/><br>
+
+  <label>メールアドレス:</label>
+  <input type="email" name="email" th:value="${user.email}" required/><br>
+
+  <label>パスワード:</label>
+  <input type="password" name="password" placeholder="変更する場合のみ入力" /><br>
+
+  <label>ロール:</label>
+  <select name="role">
+    <option value="admin" th:selected="${user.role == 'admin'}">admin</option>
+    <option value="staff" th:selected="${user.role == 'staff'}">staff</option>
+  </select><br>
+
+  <button type="submit">更新</button>
+
+</form>
+<form th:action="@{/settings/users/delete}" method="post" onsubmit="return confirm('本当にこのユーザーを削除しますか？');">
+  <input type="hidden" name="userId" th:value="${user.userId}" />
+  <button type="submit" class="delete-button">削除</button>
+</form>
+</body>
+</html>

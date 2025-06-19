@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
-    Optional<User> findByEmail(String email);
+    Optional<User> findByEmailAndPasswordAndIsDeletedFalse(String email, String password);
 
     // ★ 追加: userId の降順で並べて取得
-    List<User> findAllByOrderByUserIdAsc();
+    List<User> findByIsDeletedFalseOrderByUserIdAsc();
 }

@@ -1,13 +1,11 @@
 //販売実績の入力・一覧表示を制御するコントローラーです。
 package com.example.forecast.controller;
-
-import com.example.forecast.model.Product;
 import com.example.forecast.model.SalesRecord;
 import com.example.forecast.model.User;
 import com.example.forecast.repository.ProductRepository;
 import com.example.forecast.repository.SalesRecordRepository;
 import com.example.forecast.repository.UserRepository;
-
+import com.example.forecast.service.SalesRecordService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +37,10 @@ public class SalesRecordController {
         if (user != null) {
             model.addAttribute("username", user.getName());
         }
-        model.addAttribute("today", LocalDate.now());
+
+        LocalDate today = LocalDate.now();
+        model.addAttribute("today", today);             
+        model.addAttribute("defaultDate", today);       //default today
         model.addAttribute("products", productRepository.findAll());
         return "sales_form";
     }
@@ -47,23 +48,25 @@ public class SalesRecordController {
     // フォームからの販売実績データを受け取り、保存
     @PostMapping("/sales/submit")
     public String submitSales(
+            @RequestParam("saleDate") String saleDateStr, // ✅ 接收日付
             @RequestParam("productIds") List<Integer> productIds,
             @RequestParam("quantities") List<Integer> quantities,
             HttpSession session) {
 
-        // セッションからログインユーザー情報を取得
+        // ログインユーザーの取得
         User user = (User) session.getAttribute("loggedInUser");
         if (user == null) {
             throw new RuntimeException("ログインユーザーがセッションに存在しません");
         }
 
-        LocalDate today = LocalDate.now();
+        // ✅ String を LocalDate に変換
+        LocalDate saleDate = LocalDate.parse(saleDateStr);
 
         for (int i = 0; i < productIds.size(); i++) {
             int quantity = quantities.get(i);
             if (quantity > 0) {
                 SalesRecord record = new SalesRecord();
-                record.setSaleDate(today);
+                record.setSaleDate(saleDate); // ✅ ユーザーが指定した日付をセット
                 record.setQuantity(quantity);
                 record.setProduct(productRepository.findById(productIds.get(i)).orElse(null));
                 record.setUser(user);
@@ -74,10 +77,12 @@ public class SalesRecordController {
         return "redirect:/sales_list";
     }
 
+    @Autowired
+    private SalesRecordService salesRecordService;
     // 販売実績一覧画面を表示
     @GetMapping("/sales_list")
     public String showSalesList(Model model, HttpSession session) {
-        List<SalesRecord> records = salesRecordRepository.findAllWithProduct();
+        List<SalesRecord> records = salesRecordService.findAllWithUserAndProduct(); 
         model.addAttribute("records", records);
 
         User user = (User) session.getAttribute("loggedInUser");

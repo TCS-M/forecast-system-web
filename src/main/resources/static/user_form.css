@@ -1,0 +1,85 @@
+body {
+  background-color: #121212;
+  color: #f1f1f1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+h1 {
+  color: #ffcc00;
+  font-size: 24px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ffcc00;
+  display: inline-block;
+  padding-bottom: 5px;
+  text-align: center;
+  display: block; /* 中央揃えにするため inline-block を block に変更 */
+  margin-left: auto;
+  margin-right: auto;
+}
+form {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ffcc00;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  color: #ffffff;
+}
+
+th {
+  text-align: left;
+  padding: 10px;
+  color: #ffcc00;
+  width: 30%;
+}
+
+td {
+  padding: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 8px;
+  background-color: #2b2b2b;
+  color: #ffffff;
+  border: 1px solid #ffcc00;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #ffcc00;
+  color: #000000;
+  border: none;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e6b800;
+}
+
+a.back-button {
+  display: inline-block;
+  margin-left: 10px;
+  background-color: #444;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a.back-button:hover {
+  background-color: #666;
+}
