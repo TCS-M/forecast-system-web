@@ -42,8 +42,8 @@
     <h1>管理者ログイン</h1>
 
     <form class="login-form" th:action="@{/admin_login}" method="post">
-      <input type="text" name="email" placeholder="管理者メールアドレス" required>
-      <input type="password" name="password" placeholder="パスワード" required>
+    <input type="text" name="identifier" placeholder="ユーザー名またはメールアドレス" required>
+    <input type="password" name="password" placeholder="パスワード" required>
 
       <div class="checkbox-container">
         <input type="checkbox" id="remember">
@@ -51,11 +51,10 @@
       </div>
 
       <button type="submit">ログイン</button>
-
-      <a href="#" class="link">パスワードをお忘れですか？</a>
     </form>
 
     <div class="admin-note">※ 管理者のみアクセス可能です</div>
+    <p th:if="${loginError}" th:text="${loginError}" style="color: red;"></p>
 
     <div class="switch-link">
       <a href="/login">従業員の方はこちら</a>

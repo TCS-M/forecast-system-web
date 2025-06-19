@@ -1,4 +1,3 @@
-//ユーザー情報（usersテーブル）にアクセスするリポジトリです。
 package com.example.forecast.repository;
 
 import com.example.forecast.model.User;
@@ -8,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
-    Optional<User> findByEmailAndPasswordAndIsDeletedFalse(String email, String password);
+    Optional<User> findByEmailAndIsDeletedFalse(String email);
 
-    // ★ 追加: userId の降順で並べて取得
+    Optional<User> findByNameAndIsDeletedFalse(String name);
+
     List<User> findByIsDeletedFalseOrderByUserIdAsc();
 }
