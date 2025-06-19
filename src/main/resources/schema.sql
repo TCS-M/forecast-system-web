@@ -1,9 +1,11 @@
 -- 既存のテーブルがあれば削除する（依存関係も含む）
+DROP TABLE IF EXISTS inventory CASCADE;
 DROP TABLE IF EXISTS forecast CASCADE;
 DROP TABLE IF EXISTS sales CASCADE;
 DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS weather CASCADE;
+
 
 -- 製品テーブル
 CREATE TABLE products (
