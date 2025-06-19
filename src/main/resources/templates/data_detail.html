@@ -10,6 +10,16 @@
         <h1>🌤️ 天気と販売実績</h1>
     </header>
     <main>
+        <!-- カレンダー選択フォーム -->
+        <div style="margin-bottom: 30px; text-align: center;">
+            <form action="/weather/detail" method="get">
+                <label for="calendar">📅 日付を選択して詳細を見る：</label>
+                <input type="date" id="calendar" name="date" required>
+                <button type="submit" class="detail-btn">表示</button>
+            </form>
+        </div>
+
+
         <table>
             <thead>
                 <tr>
