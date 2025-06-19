@@ -33,7 +33,7 @@ INSERT INTO products (product_id, name, price, jan_code, production_date, expira
 SELECT 6, 'IPA', 1100, '4922222222221', CURRENT_DATE, CURRENT_DATE + INTERVAL '15 days', 70
 WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 6);
 
-/*
+
 INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
 VALUES ('2025-01-01', '晴れ', 0.0, 1.0, 5.0)
 ON CONFLICT (weather_date) DO NOTHING;
@@ -73,7 +73,7 @@ ON CONFLICT (weather_date) DO NOTHING;
 INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
 VALUES ('2025-01-10', '曇り', 1.2, 2.0, 4.0)
 ON CONFLICT (weather_date) DO NOTHING;
-*/
+
 
 -- ✅ 販売実績データの追加（sale_idはSERIAL）
 INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (3, 6, '2024-04-01', 1);

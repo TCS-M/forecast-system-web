@@ -133,3 +133,9 @@ input[type="number"] {
   border: 1px solid #ccc;
   border-radius: 6px;
 }
+
+.stock-cell {
+  text-align: right;
+  color: #2c3e50;
+  font-weight: bold;
+}
