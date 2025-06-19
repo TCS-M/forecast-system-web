@@ -5,18 +5,26 @@ body {
   padding: 0;
 }
 
-header {
- background-color: #ffe28a;
+.header {
+  background-color: #ffe28a;
   padding: 20px 30px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  text-align: center;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 22px;
+  font-weight: bold;
+  color: #5c3d00;
 }
-
 .header-title {
   font-size: 26px;
-  font-weight: bold;
-  color: #5a3e1b;
+  flex: 1;
+  text-align: center;
+}
+.back-btn {
+  text-decoration: none;
+  color: #5c3d00;
+  font-size: 20px;
 }
 
 /* ==== メインカードグループ ==== */
@@ -95,27 +103,6 @@ th {
   background-color: #fef6e4;
   color: #5a3e1b;
   font-weight: bold;
-}
-
-/* ==== 戻るボタン ==== */
-.back-button-container {
-  text-align: center;
-  margin: 30px 0;
-}
-
-.back-button {
-  display: inline-block;
-  background-color: #ffb347;
-  color: #333;
-  text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.back-button:hover {
-  background-color: #ffb347;
 }
 
 /* ==== レスポンシブ対応 ==== */
