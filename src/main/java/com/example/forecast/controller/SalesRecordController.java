@@ -1,11 +1,15 @@
-//販売実績の入力・一覧表示を制御するコントローラーです。
+// 販売実績の入力・一覧表示を制御するコントローラーです。
 package com.example.forecast.controller;
+
 import com.example.forecast.model.SalesRecord;
 import com.example.forecast.model.User;
+import com.example.forecast.model.Product;
 import com.example.forecast.repository.ProductRepository;
 import com.example.forecast.repository.SalesRecordRepository;
 import com.example.forecast.repository.UserRepository;
+import com.example.forecast.service.ProductService;
 import com.example.forecast.service.SalesRecordService;
+
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +34,14 @@ public class SalesRecordController {
     @Autowired
     private UserRepository userRepository;
 
+    // 在庫情報取得用のサービス
+    @Autowired
+    private ProductService productService;
+
+    // 販売実績一覧取得サービス
+    @Autowired
+    private SalesRecordService salesRecordService;
+
     // 販売実績入力フォームを表示
     @GetMapping("/sales_form")
     public String showForm(Model model, HttpSession session) {
@@ -40,8 +52,15 @@ public class SalesRecordController {
 
         LocalDate today = LocalDate.now();
         model.addAttribute("today", today);             
-        model.addAttribute("defaultDate", today);       //default today
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("defaultDate", today);       
+
+        // 商品一覧取得
+        List<Product> products = productRepository.findAll();
+        model.addAttribute("products", products);
+
+        // ✅ 在庫情報（15日間の合計）を取得し、テンプレートに渡す
+        model.addAttribute("inventoryMap", productService.calculateInventoryMap(today));
+
         return "sales_form";
     }
 
@@ -77,8 +96,6 @@ public class SalesRecordController {
         return "redirect:/sales_list";
     }
 
-    @Autowired
-    private SalesRecordService salesRecordService;
     // 販売実績一覧画面を表示
     @GetMapping("/sales_list")
     public String showSalesList(Model model, HttpSession session) {

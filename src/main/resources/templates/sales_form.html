@@ -22,29 +22,32 @@
 
     <form th:action="@{/sales/submit}" method="post">
 
-      <!-- ✅ 日付入力 -->
-      <div class="date-picker">
-        <label for="saleDate">販売日：</label>
-        <input type="date" id="saleDate" name="saleDate" th:value="${defaultDate}" required />
-      </div>
+    <!-- ✅ 日付の入力 -->
+    <div class="date-picker">
+      <label for="saleDate">販売日：</label>
+      <input type="date" id="saleDate" name="saleDate" th:value="${defaultDate}" required />
+    </div>
 
-      <table class="sales-table">
-        <thead>
-          <tr>
-            <th>商品名</th>
-            <th>販売数</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="product : ${products}">
-            <td th:text="${product.name}">商品名</td>
-            <td>
-              <input type="hidden" name="productIds" th:value="${product.productId}" />
-              <input type="number" name="quantities" min="0" value="0" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <table class="sales-table">
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>販売数</th>
+          <th>在庫数</th> <!-- ✅ 在庫欄を追加 -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="product : ${products}">
+          <td th:text="${product.name}">商品名</td>
+          <td>
+            <input type="hidden" name="productIds" th:value="${product.productId}" />
+            <input type="number" name="quantities" min="0" value="0" />
+          </td>
+          <td th:text="${inventoryMap[product.productId]}">0</td> <!-- ✅ 在庫数を表示 -->
+        </tr>
+      </tbody>
+    </table>
+
 
       <div class="form-actions">
         <button type="submit" class="submit-btn">登録</button>
