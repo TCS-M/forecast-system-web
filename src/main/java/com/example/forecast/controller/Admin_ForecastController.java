@@ -14,13 +14,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-@RequestMapping("/forecast")
-public class ForecastController {
+@RequestMapping("/admin")
+public class Admin_ForecastController {
 
     @Autowired
     private ForecastService forecastService;
 
-    @GetMapping
+    @GetMapping("/forecast")
     public String showForecast(@RequestParam(value = "forecastDate", required = false)
                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate forecastDate,
                             Model model) {
@@ -32,7 +32,7 @@ public class ForecastController {
             forecasts = forecastService.getOrderForecasts();
         }
         model.addAttribute("forecasts", forecasts);
-        return "user_forecast_list";
+        return "admin_forecast_list";
     }
 
 }
