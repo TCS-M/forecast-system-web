@@ -3,10 +3,13 @@ package com.example.forecast.controller;
 
 import com.example.forecast.model.Forecast;
 import com.example.forecast.model.User;
+import com.example.forecast.service.ForecastService;
+
 import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +38,12 @@ public class User_homepageController {
         return "weather_detail";  // Thymeleafテンプレート "weather_detail.html" を返す
     }
 
+    @Autowired
+private ForecastService forecastService;
+
+
     @GetMapping("/user_forecast")
+    
     public String showAdminForecastList(Model model) {
         List<Forecast> forecasts = forecastService.getOrderForecasts(); 
         model.addAttribute("forecasts", forecasts);
