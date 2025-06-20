@@ -40,14 +40,26 @@ CREATE TABLE sales (
 );
 
 -- 予測テーブル
+-- 現在の Forecast クラスに対応した forecast テーブルを再作成する
+DROP TABLE IF EXISTS forecast CASCADE;
+
 CREATE TABLE forecast (
-    forecast_id INT PRIMARY KEY,
+    forecast_id SERIAL PRIMARY KEY,
     forecast_date DATE,
-    predicted_sale_quantity INT,
-    predicted_order_quantity INT,
-    product_id INT,
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    predicted_sale_quantity INTEGER,
+    predicted_order_quantity INTEGER,
+    product_id INTEGER,
+    black_beer DOUBLE PRECISION,
+    white_beer DOUBLE PRECISION,
+    ipa DOUBLE PRECISION,
+    lager DOUBLE PRECISION,
+    fruit_beer DOUBLE PRECISION,
+    pale_ale DOUBLE PRECISION,
+    weekday VARCHAR(8),
+    weather_temp DOUBLE PRECISION, 
+    weather_humidity DOUBLE PRECISION 
 );
+
 
 
 -- 天気情報テーブル（拡張済み）

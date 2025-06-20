@@ -1,37 +1,32 @@
 package com.example.forecast.controller;
 
-import com.example.forecast.dto.ForecastDto;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.forecast.service.ForecastService;
+import com.example.forecast.model.Forecast;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 public class User_ForecastController {
 
-    private final String API_URL = "https://forecast-beer.azurewebsites.net/forecast";
+    private final ForecastService forecastService;
 
+    // @Autowired 推奨（今のままでもOKですが明示すると可読性UP）
+    public User_ForecastController(ForecastService forecastService) {
+        this.forecastService = forecastService;
+    }
+
+    // ユーザー向け予測一覧
     @GetMapping("/forecast")
     public String showForecast(Model model) throws Exception {
-        RestTemplate restTemplate = new RestTemplate();
-        String json = restTemplate.getForObject(API_URL, String.class);
-
-        // "predictions" 配列だけを抽出
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode rootNode = mapper.readTree(json);
-        JsonNode predictionsNode = rootNode.path("predictions");
-
-        ForecastDto[] forecastArray = mapper.treeToValue(predictionsNode, ForecastDto[].class);
-        List<ForecastDto> forecasts = Arrays.asList(forecastArray);
-
+        // ここでDB→なければAPI取得・保存
+        List<Forecast> forecasts = forecastService.getForecasts();
         model.addAttribute("forecasts", forecasts);
-        return "user_forecast_list";
+        return "user_forecast_list"; // ←このHTMLに渡す
     }
 }

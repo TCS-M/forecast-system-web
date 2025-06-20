@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>需要予測</title>
     <link rel="stylesheet" th:href="@{/forecast.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 <div class="header">
     <span class="header-title">🍺 需要予測</span>
     <a href="/user_homepage" class="back-btn" title="ホームに戻る">
-        <i class="fas fa-home"></i>
+        <i class="fas fa-home"></i> 
     </a>
 </div>
 
@@ -29,17 +30,17 @@
         </tr>
         </thead>
         <tbody>
+        <!-- ここで1行ずつループ -->
         <tr th:each="f : ${forecasts}">
-            <td th:text="${f.date}"></td>
+            <td th:text="${f.forecastDate}"></td>
             <td th:text="${f.weekday}"></td>
-           <td>
-  <span th:if="${f.weather != null}">
-    <span th:text="${T(java.lang.String).format('%.0f℃', f.weather.temp)}"></span><br/>
-    <span th:text="${'湿度 ' + T(java.lang.String).format('%.0f', f.weather.humidity) + '%'}"></span>
-  </span>
-  <span th:if="${f.weather == null}">-</span>
-</td>
-
+            <td>
+                <span th:if="${f.weatherTemp != null}">
+                    <span th:text="${T(java.lang.String).format('%.1f℃', f.weatherTemp)}"></span><br/>
+                    <span th:text="'湿度 ' + T(java.lang.String).format('%.0f', f.weatherHumidity) + '%'"></span>
+                </span>
+                <span th:if="${f.weatherTemp == null}">-</span>
+            </td>
             <td th:text="${#numbers.formatDecimal(f.whiteBeer, 1, 1)}"></td>
             <td th:text="${#numbers.formatDecimal(f.ipa, 1, 1)}"></td>
             <td th:text="${#numbers.formatDecimal(f.blackBeer, 1, 1)}"></td>
