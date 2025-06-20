@@ -19,6 +19,10 @@
             </form>
         </div>
 
+        <div class="back-container">
+            <a href="/admin_homepage" class="back-button">ホームに戻る</a>
+        </div>
+
 
         <table>
             <thead>
@@ -35,16 +39,14 @@
                     <td th:text="${record.weatherInfo}"></td>
                     <td th:text="${record.totalSales}"></td>
                     <td>
-                        <a th:href="@{'/weather/detail?date=' + ${#dates.format(record.weatherDate, 'yyyy-MM-dd')}}" class="detail-btn">
+                        <a th:href="@{'/weather/detail?date=' + ${#dates.format(record.weatherDate, 'yyyy-MM-dd')} + '&source=admin'}" class="detail-btn">
                             詳細
                         </a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <div class="back-container">
-            <a href="/user_homepage" class="back-button">ホームに戻る</a>
-        </div>
+        
     </main>
 </body>
 </html>
