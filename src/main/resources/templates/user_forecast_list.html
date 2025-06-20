@@ -4,48 +4,53 @@
     <meta charset="UTF-8">
     <title>需要予測</title>
     <link rel="stylesheet" th:href="@{/forecast.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
 <body>
 <div class="header">
     <span class="header-title">🍺 需要予測</span>
     <a href="/user_homepage" class="back-btn" title="ホームに戻る">
-    <i class="fas fa-home"></i>
+        <i class="fas fa-home"></i>
     </a>
-  </div>
+</div>
 
 <main>
-    
-<form method="get" th:action="@{/user/forecast}">
-    <label for="forecastDate">日付を選択：</label>
-    <input type="date" id="forecastDate" name="forecastDate"
-           th:value="${selectedDate}">
-    <button type="submit">検索</button>
-</form>
-
-
-<table>
-    <thead>
+    <table>
+        <thead>
         <tr>
             <th>日付</th>
-            <th>商品名</th>
-            <th>販売数</th>
-            <th>発注数</th>
+            <th>曜日</th>
+            <th>天気</th>
+            <th>ホワイトビール</th>
+            <th>IPA</th>
+            <th>黒ビール</th>
+            <th>ラガー</th>
+            <th>フルーツビール</th>
+            <th>ペールエール</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr th:each="forecast : ${forecasts}">
-            <td th:text="${forecast.forecastDate}"></td>
-            <td th:text="${forecast.product.name}"></td>
-            <td th:text="${forecast.predictedSaleQuantity}"></td>
-            <td th:text="${forecast.predictedOrderQuantity}"></td>
+        </thead>
+        <tbody>
+        <tr th:each="f : ${forecasts}">
+            <td th:text="${f.date}"></td>
+            <td th:text="${f.weekday}"></td>
+           <td>
+  <span th:if="${f.weather != null}">
+    <span th:text="${T(java.lang.String).format('%.0f℃', f.weather.temp)}"></span><br/>
+    <span th:text="${'湿度 ' + T(java.lang.String).format('%.0f', f.weather.humidity) + '%'}"></span>
+  </span>
+  <span th:if="${f.weather == null}">-</span>
+</td>
+
+            <td th:text="${#numbers.formatDecimal(f.whiteBeer, 1, 1)}"></td>
+            <td th:text="${#numbers.formatDecimal(f.ipa, 1, 1)}"></td>
+            <td th:text="${#numbers.formatDecimal(f.blackBeer, 1, 1)}"></td>
+            <td th:text="${#numbers.formatDecimal(f.lager, 1, 1)}"></td>
+            <td th:text="${#numbers.formatDecimal(f.fruitBeer, 1, 1)}"></td>
+            <td th:text="${#numbers.formatDecimal(f.paleAle, 1, 1)}"></td>
         </tr>
-    </tbody>
-</table>
-
-
-
-    
+        </tbody>
+    </table>
 </main>
 </body>
 </html>
