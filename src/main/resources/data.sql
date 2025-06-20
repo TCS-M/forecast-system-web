@@ -33,46 +33,11 @@ INSERT INTO products (product_id, name, price, jan_code, production_date, expira
 SELECT 6, 'IPA', 1100, '4922222222221', CURRENT_DATE, CURRENT_DATE + INTERVAL '15 days', 70
 WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 6);
 
+INSERT INTO products (product_id, name, price, jan_code, production_date, expiration_date, stock_quantity)
+SELECT 7, 'IPA', 1100, '4922222222221', DATE '2025-06-08', DATE '2025-06-08' + INTERVAL '15 days', 60
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 7);
 
-INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
-VALUES ('2025-01-01', '晴れ', 0.0, 1.0, 5.0)
-ON CONFLICT (weather_date) DO NOTHING;
 
-INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
-VALUES ('2025-01-02', '曇り', 1.2, 2.0, 4.0)
-ON CONFLICT (weather_date) DO NOTHING;
-
-INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
-VALUES ('2025-01-03', '雨', 8.5, 3.5, 3.0)
-ON CONFLICT (weather_date) DO NOTHING;
-
-INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
-VALUES ('2025-01-04', '雪', 4.5, 2.2, -2.0)
-ON CONFLICT (weather_date) DO NOTHING;
-
-INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
-VALUES ('2025-01-05', '晴れ', 0.0, 1.0, 5.0)
-ON CONFLICT (weather_date) DO NOTHING;
-
-INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
-VALUES ('2025-01-06', '曇り', 1.2, 2.0, 4.0)
-ON CONFLICT (weather_date) DO NOTHING;
-
-INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
-VALUES ('2025-01-07', '雨', 8.5, 3.5, 3.0)
-ON CONFLICT (weather_date) DO NOTHING;
-
-INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
-VALUES ('2025-01-08', '雪', 4.5, 2.2, -2.0)
-ON CONFLICT (weather_date) DO NOTHING;
-
-INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
-VALUES ('2025-01-09', '晴れ', 0.0, 1.0, 5.0)
-ON CONFLICT (weather_date) DO NOTHING;
-
-INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature)
-VALUES ('2025-01-10', '曇り', 1.2, 2.0, 4.0)
-ON CONFLICT (weather_date) DO NOTHING;
 
 
 -- ✅ 販売実績データの追加（sale_idはSERIAL）
@@ -8180,3 +8145,322 @@ ON CONFLICT (forecast_id) DO NOTHING;
 INSERT INTO forecast (forecast_id, forecast_date, predicted_sale_quantity, predicted_order_quantity, product_id)
 VALUES (1565, '2025-03-31', 3, 13, 5)
 ON CONFLICT (forecast_id) DO NOTHING;
+
+
+
+
+
+
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-01', '快晴', 3.0, 2.8, 14.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-02', '曇', 0.0, 3.0, 14.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-03', '雨時々曇', 11.5, 1.6, 13.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-04', '曇後一時雨', 4.0, 2.0, 15.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-05', '曇時々雨', 0.5, 2.8, 11.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-06', '曇時々雨', 0.0, 1.8, 12.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-08', '曇時々雨', 0.0, 2.0, 18.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-09', '曇一時晴', 55.5, 4.4, 15.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-10', '晴一時薄曇', 0.0, 3.2, 11.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-11', '曇', 0.0, 2.5, 14.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-12', '晴', 2.5, 2.3, 15.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-13', '薄曇後晴', 0.0, 2.3, 16.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-15', '薄曇時々晴', 0.0, 2.8, 19.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-16', '晴後曇一時雨', 0.0, 5.3, 19.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-17', '曇時々晴', 0.0, 3.0, 20.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-18', '雨後曇', 1.5, 2.7, 17.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-19', '晴', 0.0, 5.6, 18.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-20', '曇', 0.0, 2.5, 19.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-22', '曇後一時晴', 7.0, 2.2, 15.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-23', '曇後一時雨', 0.0, 2.1, 16.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-24', '雨後曇', 20.5, 2.1, 15.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-25', '晴後一時薄曇', 0.5, 2.2, 19.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-26', '曇後一時雨', 0.0, 2.4, 20.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-27', '曇後晴', 0.0, 1.9, 19.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-29', '曇後時々雨', 0.0, 3.7, 21.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-04-30', '曇', 2.5, 2.4, 20.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-01', '雨', 26.5, 3.0, 16.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-02', '晴', 3.0, 2.9, 15.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-03', '快晴', 0.0, 2.6, 17.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-04', '快晴', 0.0, 2.4, 20.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-06', '曇後時々雨', 0.0, 5.7, 20.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-07', '曇後一時晴', 5.0, 4.1, 20.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-08', '雨', 8.0, 2.8, 17.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-09', '晴', 1.5, 2.5, 13.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-10', '晴', 0.0, 3.5, 17.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-11', '晴後一時薄曇', 0.0, 5.4, 20.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-13', '雨後曇', 58.5, 3.8, 19.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-14', '晴後薄曇', 0.0, 2.6, 16.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-15', '雨一時曇', 1.5, 2.7, 19.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-16', '快晴', 10.0, 4.0, 18.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-17', '快晴', 0.0, 2.8, 20.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-18', '薄曇', 0.0, 2.5, 21.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-20', '薄曇', 34.0, 1.9, 17.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-21', '曇時々雨', 0.0, 2.8, 22.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-22', '薄曇', 0.0, 3.5, 20.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-23', '薄曇', 0.0, 3.0, 21.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-24', '曇一時晴', 0.0, 2.5, 23.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-25', '曇時々晴', 0.0, 3.3, 21.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-27', '曇後一時晴', 0.0, 4.3, 22.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-28', '雨時々曇', 19.0, 5.2, 24.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-29', '晴', 0.5, 3.7, 22.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-30', '曇時々雨', 0.0, 3.0, 22.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-05-31', '曇時々雨', 34.0, 2.1, 19.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-01', '薄曇一時晴後雨', 0.0, 2.6, 20.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-03', '雨後晴、雷を伴う', 25.5, 2.2, 18.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-04', '曇時々晴', 0.0, 2.5, 19.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-05', '晴後一時曇', 0.0, 2.7, 21.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-06', '薄曇後一時晴', 0.0, 3.0, 22.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-07', '晴後一時薄曇', 0.0, 2.7, 22.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-08', '薄曇時々晴', 0.0, 2.7, 22.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-10', '曇後一時晴', 17.0, 2.4, 20.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-11', '晴時々薄曇', 0.0, 3.2, 24.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-12', '晴後曇', 0.0, 3.1, 24.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-13', '晴', 0.0, 2.0, 22.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-14', '晴後一時薄曇', 0.0, 2.7, 25.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-15', '雨時々曇', 0.5, 2.8, 24.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-17', '雨時々曇', 0.0, 2.1, 26.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-18', '曇時々晴一時雨', 98.0, 2.0, 19.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-19', '晴後一時薄曇', 0.0, 2.7, 23.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-20', '晴時々薄曇', 0.0, 3.2, 24.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-21', '晴一時曇', 44.0, 2.8, 20.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-22', '雨時々曇', 0.0, 3.3, 23.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-24', '曇後一時晴', 0.0, 2.1, 26.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-25', '曇', 0.0, 2.0, 27.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-26', '曇', 0.0, 2.6, 26.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-27', '曇時々雨一時晴', 0.0, 3.2, 25.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-28', '雨時々曇', 82.5, 1.9, 22.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-06-29', '晴後曇', 0.0, 2.0, 23.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-01', '曇一時雨', 12.5, 4.8, 26.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-02', '曇後一時雨', 0.0, 2.3, 27.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-03', '晴時々薄曇', 0.0, 2.6, 27.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-04', '快晴', 0.0, 2.7, 29.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-05', '晴時々曇', 0.0, 2.7, 30.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-06', '曇時々晴一時雨、雷を伴う', 36.0, 2.1, 28.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-08', '晴時々薄曇', 0.0, 2.3, 30.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-09', '晴時々曇一時雨', 0.0, 2.8, 30.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-10', '曇一時雨', 0.0, 3.7, 29.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-11', '曇後一時雨', 0.5, 4.0, 27.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-12', '雨後曇', 13.5, 1.8, 24.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-13', '雨時々曇', 0.0, 2.7, 26.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-15', '曇後一時雨', 0.5, 2.4, 24.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-16', '雨時々曇', 11.5, 1.8, 23.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-17', '曇', 1.0, 1.7, 25.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-18', '曇', 0.0, 2.3, 28.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-19', '曇後晴', 0.0, 3.0, 30.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-20', '大雨時々曇、雷を伴う', 45.0, 2.6, 30.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-22', '曇一時雨後晴、雷を伴う', 9.5, 2.6, 30.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-23', '晴後一時薄曇', 0.0, 2.9, 29.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-24', '薄曇', 0.0, 2.2, 30.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-25', '薄曇時々晴後一時雨、雷を伴う', 0.5, 2.4, 30.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-26', '曇一時雨', 0.0, 2.4, 30.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-27', '薄曇時々晴一時雨', 0.5, 1.9, 30.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-29', '晴', 0.0, 3.1, 32.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-30', '曇', 0.5, 2.3, 30.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-07-31', '曇一時大雨後時々晴、雷を伴う', 42.5, 2.7, 29.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-01', '曇時々晴', 0.0, 2.4, 28.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-02', '曇時々晴', 0.0, 2.6, 28.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-03', '晴後一時曇', 0.0, 2.6, 29.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-05', '曇一時晴', 0.0, 2.6, 30.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-06', '曇、雷を伴う', 0.0, 2.3, 29.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-07', '大雨時々曇、雷を伴う', 76.5, 2.6, 28.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-08', '晴', 0.0, 2.2, 28.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-09', '晴一時曇', 0.0, 2.7, 30.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-10', '晴時々曇', 0.0, 2.7, 30.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-12', '晴', 0.0, 3.9, 31.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-13', '晴一時曇', 0.0, 3.6, 30.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-14', '晴時々曇', 0.0, 2.7, 30.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-15', '曇後雨', 0.0, 2.7, 30.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-16', '雨後曇', 90.0, 4.2, 26.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-17', '晴後曇', 0.0, 2.7, 30.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-19', '雨時々曇、雷を伴う', 22.0, 2.4, 29.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-20', '曇一時晴', 0.5, 2.4, 28.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-21', '曇一時雨、雷を伴う', 21.0, 2.8, 28.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-22', '曇', 16.0, 3.1, 27.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-23', '曇時々晴', 0.0, 4.0, 28.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-24', '曇一時雨後一時晴、雷を伴う', 1.0, 3.2, 29.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-26', '晴時々薄曇一時雨、雷を伴う', 0.0, 4.4, 29.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-27', '曇', 30.0, 4.7, 27.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-28', '晴後一時薄曇', 0.0, 3.5, 28.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-29', '大雨', 23.0, 2.7, 27.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-30', '雨時々曇', 84.0, 3.2, 26.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-08-31', '雨後一時薄曇、雷を伴う', 15.5, 3.6, 27.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-02', '晴時々曇', 0.0, 4.9, 29.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-03', '曇', 9.5, 2.8, 24.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-04', '晴', 0.0, 2.9, 25.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-05', '晴一時曇', 0.0, 2.5, 26.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-06', '晴後一時曇', 0.0, 2.2, 28.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-07', '晴', 0.0, 2.5, 28.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-09', '晴時々曇一時雨', 2.5, 2.6, 28.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-10', '晴一時曇', 0.0, 2.8, 28.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-11', '晴後一時曇', 0.0, 3.0, 29.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-12', '晴', 0.0, 3.1, 29.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-13', '晴', 0.0, 3.8, 29.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-14', '晴後一時曇', 0.0, 4.4, 29.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-16', '曇', 2.0, 2.6, 25.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-17', '晴時々曇', 0.0, 2.5, 27.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-18', '曇時々雨一時晴、雷を伴う', 2.5, 2.2, 28.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-19', '曇後一時晴', 0.0, 1.7, 27.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-20', '晴時々薄曇', 0.0, 2.2, 29.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-21', '曇時々雨', 0.0, 3.3, 28.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-23', '晴', 8.0, 3.5, 22.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-24', '晴後一時曇', 0.0, 3.1, 20.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-25', '雨時々曇', 4.5, 2.9, 20.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-26', '曇後一時雨', 0.5, 2.5, 24.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-27', '曇時々雨', 8.0, 2.1, 23.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-28', '曇', 0.0, 2.1, 24.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-09-30', '曇時々晴', 0.0, 2.1, 22.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-01', '晴一時曇', 0.5, 2.6, 23.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-02', '曇時々雨一時晴', 0.0, 2.9, 26.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-03', '曇時々雨', 11.0, 2.7, 23.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-04', '曇後一時雨', 2.0, 3.5, 25.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-05', '雨後曇', 9.5, 2.5, 21.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-07', '雨時々曇一時晴', 0.0, 2.9, 25.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-08', '大雨', 33.5, 3.0, 18.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-09', '晴時々曇', 53.5, 2.9, 16.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-10', '晴時々薄曇', 0.0, 2.6, 17.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-11', '晴一時薄曇', 0.0, 1.9, 19.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-12', '快晴', 0.0, 1.9, 20.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-14', '晴時々曇', 0.0, 2.3, 20.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-15', '晴後一時薄曇', 0.0, 2.2, 22.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-16', '曇', 0.0, 1.5, 22.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-17', '薄曇', 0.0, 2.3, 22.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-18', '雨時々曇', 2.0, 1.8, 21.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-19', '曇時々雨', 1.5, 2.7, 24.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-21', '晴時々曇', 0.0, 2.7, 16.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-22', '曇', 0.0, 1.9, 19.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-23', '曇', 6.5, 2.3, 21.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-24', '曇後一時雨', 0.0, 2.2, 22.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-25', '曇', 0.5, 2.4, 20.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-26', '曇後一時晴', 0.0, 1.7, 19.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-28', '曇後時々雨', 8.0, 1.9, 18.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-29', '大雨', 24.5, 2.9, 15.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-30', '晴時々薄曇', 17.5, 3.2, 16.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-10-31', '薄曇時々晴', 0.0, 2.0, 16.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-01', '雨一時曇', 0.5, 1.4, 17.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-02', '雨後曇', 33.5, 1.9, 16.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-04', '快晴', 0.0, 2.4, 17.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-05', '曇後一時雨', 0.0, 2.3, 16.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-06', '晴一時曇', 0.5, 2.1, 14.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-07', '晴一時曇', 0.0, 3.8, 13.4 ) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-08', '快晴', 0.0, 2.1, 11.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-09', '曇', 0.0, 2.2, 12.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-11', '快晴', 0.5, 1.6, 16.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-12', '晴時々曇', 0.0, 1.5, 16.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-13', '曇時々晴', 0.0, 2.3, 16.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-14', '曇後一時雨', 0.0, 1.8, 15.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-15', '曇後一時晴', 7.5, 1.8, 15.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-16', '曇時々雨', 0.0, 2.3, 16.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-18', '曇時々晴', 0.0, 3.3, 13.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-19', '曇時々晴', 0.0, 3.2, 9.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-20', '雨', 5.5, 2.5, 7.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-21', '快晴', 6.5, 1.8, 10.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-22', '晴一時曇', 0.0, 1.6, 11.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-23', '曇時々晴', 0.0, 3.5, 12.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-25', '晴', 0.0, 2.0, 9.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-26', '雨時々曇', 8.5, 2.1, 10.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-27', '快晴', 18.0, 2.4, 14.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-28', '快晴', 0.0, 2.9, 13.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-29', '快晴', 0.0, 2.5, 11.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-11-30', '快晴', 0.0, 2.0, 10.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-02', '晴', 0.0, 1.9, 11.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-03', '晴後一時曇', 0.0, 1.8, 11.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-04', '曇時々晴', 0.0, 2.0, 12.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-05', '晴', 0.0, 1.7, 11.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-06', '晴', 0.0, 2.4, 11.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-07', '晴時々薄曇', 0.0, 2.1, 8.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-09', '晴後一時曇', 0.0, 2.8, 7.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-10', '晴後曇', 0.0, 1.9, 8.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-11', '晴', 0.0, 2.5, 8.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-12', '晴', 0.0, 3.0, 7.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-13', '曇時々晴', 0.0, 1.7, 5.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-14', '快晴', 0.0, 3.5, 7.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-16', '快晴', 0.0, 1.6, 7.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-17', '快晴', 0.0, 1.9, 8.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-18', '晴後曇時々雨、あられを伴う', 0.0, 2.4, 7.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-19', '快晴', 0.5, 2.8, 5.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-20', '曇後晴', 0.0, 1.7, 6.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-21', '快晴', 0.0, 3.4, 9.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-23', '快晴', 0.0, 2.9, 6.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-24', '快晴', 0.0, 2.8, 6.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-25', '薄曇一時晴', 0.0, 2.5, 7.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-26', '晴', 0.0, 1.7, 8.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-27', '晴', 0.0, 2.2, 7.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-28', '快晴', 0.0, 1.7, 5.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-30', '薄曇', 0.0, 2.1, 6.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2024-12-31', '快晴', 0.0, 2.2, 8.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-01', '快晴', 0.0, 2.8, 7.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-02', '晴後一時曇', 0.0, 1.7, 7.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-03', '曇時々晴', 0.0, 2.1, 5.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-04', '晴一時曇', 0.0, 2.1, 5.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-06', '雨時々晴一時曇', 25.0, 1.8, 4.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-07', '快晴', 0.0, 2.3, 8.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-08', '晴後一時薄曇', 0.0, 2.3, 6.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-09', '快晴', 0.0, 3.1, 6.7) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-10', '快晴', 0.0, 3.3, 4.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-11', '晴後薄曇', 0.0, 2.2, 5.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-13', '快晴', 0.0, 3.1, 6.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-14', '晴', 0.0, 1.5, 6.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-15', '快晴', 0.0, 2.9, 7.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-16', '快晴', 0.0, 2.2, 4.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-17', '晴', 0.0, 3.8, 4.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-18', '晴後曇', 0.0, 2.1, 4.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-20', '曇一時雨', 0.5, 1.7, 9.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-21', '晴時々曇', 0.0, 2.1, 9.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-22', '晴時々曇', 0.0, 2.1, 8.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-23', '快晴', 0.0, 1.8, 8.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-24', '曇時々雨', 0.5, 2.1, 9.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-25', '快晴', 0.0, 2.3, 6.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-27', '晴後曇一時雨', 0.0, 2.1, 6.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-28', '晴一時曇', 0.0, 1.9, 8.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-29', '快晴', 0.0, 2.9, 7.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-30', '快晴', 0.0, 1.9, 6.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-01-31', '晴', 0.0, 2.6, 7.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-01', '曇後雨', 0.0, 1.8, 7.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-03', '曇時々晴', 0.0, 1.9, 6.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-04', '快晴', 0.0, 2.8, 6.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-05', '快晴', 0.0, 3.2, 4.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-06', '晴後一時薄曇', 0.0, 2.5, 4.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-07', '快晴', 0.0, 2.9, 4.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-08', '快晴', 0.0, 4.5, 4.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-10', '快晴', 0.0, 2.2, 5.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-11', '快晴', 0.0, 3.4, 5.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-12', '晴時々曇', 0.0, 2.8, 7.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-13', '晴後曇', 0.0, 4.3, 7.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-14', '晴', 0.0, 2.6, 7.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-15', '曇一時晴', 0.0, 2.7, 9.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-17', '快晴', 0.0, 3.2, 9.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-18', '晴一時曇', 0.0, 3.8, 5.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-19', '快晴', 0.0, 3.9, 3.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-20', '晴', 0.0, 2.8, 4.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-21', '薄曇後晴', 0.0, 3.1, 5.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-22', '快晴', 0.0, 3.0, 4.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-24', '快晴', 0.0, 3.4, 4.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-25', '晴時々曇', 0.0, 3.1, 7.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-26', '快晴', 0.0, 2.6, 10.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-27', '晴後薄曇', 0.0, 2.8, 10.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-02-28', '晴一時曇', 0.0, 1.8, 11.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-01', '晴一時薄曇', 0.0, 2.9, 13.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-03', '曇一時みぞれ', 30.0, 3.6, 5.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-04', '雪後雨一時みぞれ', 10.0, 2.6, 2.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-05', '曇一時霧雨', 16.5, 3.1, 5.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-06', '曇後一時晴', 0.0, 3.7, 9.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-07', '晴後一時曇', 0.0, 4.6, 6.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-08', '曇時々雨一時雪、みぞれを伴う', 9.5, 1.9, 3.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-10', '曇', 0.0, 2.8, 9.1) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-11', '雨時々曇', 0.5, 2.0, 10.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-12', '曇時々雨後一時晴', 15.5, 1.5, 11.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-13', '晴時々曇', 0.0, 2.2, 14.5) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-14', '晴後一時曇', 0.0, 3.3, 12.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-15', '雨時々曇', 0.0, 2.2, 8.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-17', '晴後曇一時雨', 0.0, 3.1, 10.0) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-18', '雨一時晴、雷を伴う', 0.0, 3.4, 8.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-19', '晴後一時曇', 26.5, 3.9, 5.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-20', '晴一時曇', 0.0, 2.3, 8.3) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-21', '快晴', 0.0, 2.6, 11.2) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-22', '快晴', 0.0, 2.3, 15.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-24', '曇後晴', 0.0, 2.3, 14.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-25', '晴', 0.0, 3.2, 17.8) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-26', '薄曇時々晴', 0.0, 3.8, 20.4) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-27', '曇', 0.0, 3.8, 17.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-28', '雨時々曇一時晴', 2.5, 4.2, 19.9) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-29', '曇時々雨', 12.5, 3.1, 7.6) ON CONFLICT (weather_date) DO NOTHING;
+INSERT INTO weather (weather_date, weather_info, weather_water, weather_wind, weather_temperature) VALUES ('2025-03-31', '雨一時曇', 0.0, 3.0, 7.0) ON CONFLICT (weather_date) DO NOTHING;

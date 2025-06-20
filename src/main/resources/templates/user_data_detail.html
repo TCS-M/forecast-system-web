@@ -13,10 +13,15 @@
         <!-- カレンダー選択フォーム -->
         <div style="margin-bottom: 30px; text-align: center;">
             <form action="/weather/detail" method="get">
+                <input type="hidden" name="source" value="user">
                 <label for="calendar">📅 日付を選択して詳細を見る：</label>
                 <input type="date" id="calendar" name="date" required>
                 <button type="submit" class="detail-btn">表示</button>
             </form>
+        </div>
+
+        <div class="back-container">
+            <a href="/user_homepage" class="back-button">ホームに戻る</a>
         </div>
 
 
@@ -35,16 +40,20 @@
                     <td th:text="${record.weatherInfo}"></td>
                     <td th:text="${record.totalSales}"></td>
                     <td>
-                        <a th:href="@{'/weather/detail?date=' + ${#dates.format(record.weatherDate, 'yyyy-MM-dd')}}" class="detail-btn">
+                        <a th:href="@{'/weather/detail?date=' + ${#dates.format(record.weatherDate, 'yyyy-MM-dd')} + '&source=user'}" class="detail-btn">
                             詳細
                         </a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <div class="back-container">
-            <a href="/user_homepage" class="back-button">ホームに戻る</a>
-        </div>
+        
     </main>
+    <script th:if="${errorMessage != null}" th:inline="javascript">
+        /*<![CDATA[*/
+        alert([[${errorMessage}]]);
+        /*]]>*/
+    </script>
+
 </body>
 </html>

@@ -1,0 +1,73 @@
+<!-- 発注入力画面 -->
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>発注入力 | Hop & Craft</title>
+  <!-- 既存スタイルを流用 -->
+  <link rel="stylesheet" th:href="@{/order_form.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <div class="header">
+    <span class="header-title">Hop & Craft - 発注入力</span>
+    <a href="/user_homepage" class="logout-btn" title="戻る">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+  </div>
+
+  <!-- メインコンテンツ -->
+  <div class="container">
+    <div class="welcome">[[${username}]] さん、発注情報を入力してください：</div>
+
+    <!-- 発注フォーム -->
+    <form th:action="@{/user/order/submit}" method="post">
+      <!-- エラーメッセージ -->
+      <div th:if="${errorMessage}" style="color: red; font-weight: bold; margin-bottom: 16px;">
+        [[${errorMessage}]]
+      </div>
+
+      <!-- 発注日 -->
+      <div class="date-picker">
+        <label for="orderDate">発注日：</label>
+        <input type="date" id="orderDate" name="orderDate" th:value="${defaultDate}" required />
+      </div>
+
+      <!-- 商品一覧テーブル -->
+      <table class="sales-table">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>発注数</th>
+            <th>JANコード</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="product : ${productList}">
+            <td th:text="${product.name}">商品名</td>
+            <td>
+              <input type="hidden" name="productIds" th:value="${product.productId}" />
+              <input type="number" name="quantities" min="0" value="0" />
+            </td>
+            <td th:text="${product.janCode}">JAN</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 送信ボタン -->
+      <div class="form-actions">
+        <button type="submit" class="submit-btn">発注</button>
+      </div>
+    </form>
+  </div>
+<script th:if="${successMessage != null}" th:inline="javascript">
+  /*<![CDATA[*/
+  var msg = [[${successMessage}]];
+  alert(msg);
+  /*]]>*/
+</script>
+</body>
+</html>

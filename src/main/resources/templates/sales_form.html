@@ -3,7 +3,7 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>販売実績入力 | Hop & Craft</title>
+  <title>🍺販売実績入力 | Hop & Craft</title>
   <link rel="stylesheet" th:href="@{/sales_form.css}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
@@ -46,7 +46,7 @@
             <input type="hidden" name="productIds" th:value="${product.productId}" />
             <input type="number" name="quantities" min="0" value="0" />
           </td>
-          <td th:text="${inventoryMap[product.productId]}">0</td> <!-- ✅ 在庫数を表示 -->
+          <td class="stock-cell" th:text="${inventoryMap[product.name]}">0</td>
         </tr>
       </tbody>
     </table>
@@ -59,4 +59,5 @@
   </div>
 
 </body>
+<script src="/js/inventory-update.js"></script>
 </html>

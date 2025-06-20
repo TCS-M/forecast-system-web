@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>天気と販売実績</title>
+    <link rel="stylesheet" th:href="@{/weather.css}">
+</head>
+<body>
+    <header>
+        <h1>🌤️ 天気と販売実績</h1>
+    </header>
+    <main>
+        <!-- カレンダー選択フォーム -->
+        <div style="margin-bottom: 30px; text-align: center;">
+            <form action="/weather/detail" method="get">
+                <input type="hidden" name="source" value="admin">
+                <label for="calendar">📅 日付を選択して詳細を見る：</label>
+                <input type="date" id="calendar" name="date" required>
+                <button type="submit" class="detail-btn">表示</button>
+            </form>
+        </div>
+
+        <div class="back-container">
+            <a href="/admin_homepage" class="back-button">ホームに戻る</a>
+        </div>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>日付</th>
+                    <th>天気</th>
+                    <th>販売総本数</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="record : ${weatherList}">
+                    <td th:text="${#dates.format(record.weatherDate, 'yyyy-MM-dd')}"></td>
+                    <td th:text="${record.weatherInfo}"></td>
+                    <td th:text="${record.totalSales}"></td>
+                    <td>
+                        <a th:href="@{'/weather/detail?date=' + ${#dates.format(record.weatherDate, 'yyyy-MM-dd')} + '&source=admin'}" class="detail-btn">
+                            詳細
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </main>
+    <script th:if="${errorMessage != null}" th:inline="javascript">
+        /*<![CDATA[*/
+        alert([[${errorMessage}]]);
+        /*]]>*/
+    </script>
+
+</body>
+</html>

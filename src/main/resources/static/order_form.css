@@ -1,11 +1,13 @@
+/* 全体レイアウト */
 body {
   font-family: 'Noto Sans JP', sans-serif;
   margin: 0;
-  background-color:  linear-gradient(to bottom right, #fff8f0, #f2f7ff);
+  background: linear-gradient(to bottom right, #fff8f0, #f2f7ff);
   color: #333;
   padding: 0;
 }
 
+/* ヘッダーエリア */
 .header {
   position: relative;
   display: flex;
@@ -18,6 +20,7 @@ body {
   font-weight: bold;
   color: #5c3d00;
 }
+
 .header-title {
   position: absolute;
   left: 50%;
@@ -44,6 +47,7 @@ body {
   background-color: #b0780e;
 }
 
+/* メインコンテナ */
 .container {
   max-width: 960px;
   margin: 50px auto;
@@ -59,12 +63,7 @@ body {
   margin-bottom: 8px;
 }
 
-.desc {
-  font-size: 15px;
-  margin-bottom: 24px;
-  color: #666;
-}
-
+/* テーブル設定 */
 .sales-table {
   width: 100%;
   border-collapse: collapse;
@@ -91,25 +90,7 @@ input[type="number"] {
   border-radius: 6px;
 }
 
-.form-actions {
-  text-align: center;
-}
-
-.submit-btn {
-  padding: 12px 36px;
-  font-size: 16px;
-  background-color: #ffb347;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.submit-btn:hover {
-  background-color: #e89a1f;
-}
-
+/* 日付ピッカー */
 .date-picker {
   margin-bottom: 20px;
   font-size: 16px;
@@ -130,8 +111,22 @@ input[type="number"] {
   border-radius: 6px;
 }
 
-.stock-cell {
-  text-align: right;
-  color: #2c3e50;
+/* 送信ボタン */
+.form-actions {
+  text-align: center;
+}
+
+.submit-btn {
+  padding: 12px 36px;
+  font-size: 16px;
+  background-color: #ffb347;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
   font-weight: bold;
+}
+
+.submit-btn:hover {
+  background-color: #e89a1f;
 }
