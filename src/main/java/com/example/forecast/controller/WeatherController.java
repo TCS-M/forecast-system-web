@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class WeatherController {
         List<WeatherData> weatherList = weatherService.getWeatherWithSales();
         model.addAttribute("weatherList", weatherList);
         model.addAttribute("source", "user");  // 遷移元識別用
-        return "user_data_detail"; // templates/user_data_detail.html
+        return "user_data_detail";
     }
 
     // 🔹管理者用の一覧ページ
@@ -41,34 +42,34 @@ public class WeatherController {
         List<WeatherData> weatherList = weatherService.getWeatherWithSales();
         model.addAttribute("weatherList", weatherList);
         model.addAttribute("source", "admin");  // 遷移元識別用
-        return "admin_data_detail"; // templates/admin_data_detail.html
+        return "admin_data_detail";
     }
 
-    // 🔸詳細ページ（共通） ※source付きで遷移すること
+    // 🔸詳細ページ（共通）
     @GetMapping("/detail")
     public String showDetail(@RequestParam("date") String date,
                              @RequestParam("source") String source,
-                             Model model) {
+                             Model model,
+                             RedirectAttributes redirectAttributes) {
         try {
             logger.info("📌 詳細ページ遷移処理開始：date={}, source={}", date, source);
 
             WeatherDetailDTO detail = weatherService.getDetailByDate(date);
 
             if (detail == null || detail.isEmpty()) {
-                logger.warn("⚠️ WeatherDetailDTO が null または中身が空です：date={}", date);
-                throw new RuntimeException("指定された日付の天気または販売データが存在しません。");
+                logger.warn("⚠️ 該当データなし：date={}", date);
+                redirectAttributes.addFlashAttribute("errorMessage", "指定された日付のデータは存在しません。");
+                return "redirect:/weather/" + source + "-list";
             }
 
-            logger.info("✅ DTO取得成功：天気={}, 製品数={}", detail.getWeather(), detail.getProductSales().size());
-
             model.addAttribute("detail", detail);
-            model.addAttribute("source", source); // 戻るボタンに使用
-            return "weather_detail"; // templates/weather_detail.html
+            model.addAttribute("source", source);
+            return "weather_detail";
 
         } catch (Exception e) {
-            logger.error("❌ 詳細ページの取得中にエラーが発生しました：{}", e.getMessage(), e);
-            throw e;
+            logger.error("❌ エラー発生：{}", e.getMessage(), e);
+            redirectAttributes.addFlashAttribute("errorMessage", "エラーが発生しました。");
+            return "redirect:/weather/" + source + "-list";
         }
     }
 }
-

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class WeatherService {
@@ -35,7 +34,7 @@ public class WeatherService {
         }
 
         list.sort(Comparator.comparing(WeatherData::getWeatherDate).reversed());
-        
+
         return list;
     }
 
@@ -52,12 +51,17 @@ public class WeatherService {
         LocalDate targetDate = LocalDate.parse(dateStr);
         Date sqlDate = Date.valueOf(targetDate);
 
-        // 天気データ取得
-        Object[] weatherRow = (Object[]) entityManager.createNativeQuery(
+        // 天気データ取得（該当しない場合は null を返す）
+        List<Object[]> weatherRows = entityManager.createNativeQuery(
             "SELECT weather_info, weather_water, weather_wind, weather_temperature " +
             "FROM weather WHERE weather_date = :date"
-        ).setParameter("date", sqlDate).getSingleResult();
+        ).setParameter("date", sqlDate).getResultList();
 
+        if (weatherRows.isEmpty()) {
+            return null;
+        }
+
+        Object[] weatherRow = weatherRows.get(0);
         String weather = (String) weatherRow[0];
         Double water = weatherRow[1] != null ? ((Number) weatherRow[1]).doubleValue() : null;
         Double wind = weatherRow[2] != null ? ((Number) weatherRow[2]).doubleValue() : null;
@@ -99,5 +103,3 @@ public class WeatherService {
         return new WeatherDetailDTO(dateStr, weather, productSales, water, wind, temp, productStock);
     }
 }
-
-
