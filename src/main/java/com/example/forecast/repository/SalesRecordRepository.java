@@ -15,4 +15,8 @@ public interface SalesRecordRepository extends JpaRepository<SalesRecord, Long> 
     //すべての販売実績一覧
     @Query("SELECT s FROM SalesRecord s JOIN FETCH s.user JOIN FETCH s.product ORDER BY s.saleDate DESC")
     List<SalesRecord> findAllWithUserAndProduct();
+    @Query("SELECT s FROM SalesRecord s JOIN FETCH s.user JOIN FETCH s.product WHERE s.saleDate = :saleDate ORDER BY s.saleDate DESC")
+List<SalesRecord> findBySaleDateWithUserAndProduct(@org.springframework.data.repository.query.Param("saleDate") java.time.LocalDate saleDate);
+
+    
 }

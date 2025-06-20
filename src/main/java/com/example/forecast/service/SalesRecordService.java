@@ -32,4 +32,8 @@ public class SalesRecordService {
     public List<SalesRecord> findAllWithUserAndProduct() {
         return repository.findAllWithUserAndProduct();
     }
+    //新增：カレンダーでフィルハーモニー
+    public List<SalesRecord> findBySaleDateWithUserAndProduct(java.time.LocalDate date) {
+    return repository.findBySaleDateWithUserAndProduct(date);
+}
 }
