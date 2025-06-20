@@ -31,7 +31,13 @@
     <div class="user-info">
       会社全体の販売実績一覧です。
     </div>
-
+    <!-- ✅ 日付フィルター -->
+    <form method="get" th:action="@{/admin_sales_list}" class="date-picker" style="margin-bottom: 20px;">
+      <label for="filterDate">日付で絞り込み：</label>
+      <input type="date" id="filterDate" name="filterDate"
+        th:value="${filterDate != null} ? ${filterDate} : ${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" />
+      <button type="submit" class="submit-btn" style="margin-left: 10px;">検索</button>
+    </form>
     <table class="sales-table">
       <thead>
         <tr>
@@ -58,8 +64,12 @@
         </tr>
       </tbody>
     </table>
-
   </div>
-
+<script th:inline="javascript">
+  let filterDate = /*[[${filterDate}]]*/ null;
+  if (filterDate == null) {
+    document.querySelector('.date-picker').submit();
+  }
+</script>
 </body>
 </html>
