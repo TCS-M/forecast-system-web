@@ -3,14 +3,16 @@ package com.example.forecast.service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.forecast.model.Product;
 import com.example.forecast.repository.ProductRepository;
-
+import java.util.stream.Collectors;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -127,7 +129,15 @@ public class ProductService {
         return repository.findAll(Sort.by("name"));
     }
 
-    public void createProductionOrders(LocalDate orderDate, List<Integer> productIds, List<Integer> quantities) {
+    // 商品に関するビジネスロジックを扱うサービスクラス
+    @Transactional
+    public List<Product> createProductionOrders(LocalDate orderDate, List<Integer> productIds, List<Integer> quantities) {
+        List<Product> inserted = new ArrayList<>();
+        int maxId = repository.findAll().stream()
+                .mapToInt(Product::getProductId)
+                .max()
+                .orElse(0); // 既存の最大IDを取得（存在しない場合は0）
+
         for (int i = 0; i < productIds.size(); i++) {
             int qty = quantities.get(i);
             if (qty <= 0) continue;
@@ -135,14 +145,33 @@ public class ProductService {
             Product base = repository.findById(productIds.get(i)).orElseThrow();
 
             Product newProduct = new Product();
+            newProduct.setProductId(++maxId); // product_idを手動採番（+1）
             newProduct.setName(base.getName());
             newProduct.setPrice(base.getPrice());
             newProduct.setJanCode(base.getJanCode());
-            newProduct.setProductionDate(orderDate);
-            newProduct.setExpirationDate(orderDate.plusDays(15));
-            newProduct.setStockQuantity(qty);
+            newProduct.setProductionDate(orderDate); // 指定された発注日
+            newProduct.setExpirationDate(orderDate.plusDays(15)); // 賞味期限 = 発注日 +15日
+            newProduct.setStockQuantity(qty); // 入力された数量
 
             repository.save(newProduct);
+            inserted.add(newProduct); // 登録内容をリストに追加
         }
+
+        return inserted;
     }
+    // 商品名ごとに最小の productId を持つ製品のみを返す
+public List<Product> getUniqueProductsByName() {
+    List<Product> all = repository.findAll();
+
+    return all.stream()
+        .collect(Collectors.groupingBy(
+            Product::getName,
+            Collectors.minBy(Comparator.comparingInt(Product::getProductId))
+        ))
+        .values().stream()
+        .filter(Optional::isPresent)
+        .map(Optional::get)
+        .sorted(Comparator.comparing(Product::getName))
+        .toList();
+}
 }

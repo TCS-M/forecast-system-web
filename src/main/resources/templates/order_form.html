@@ -14,7 +14,7 @@
   <!-- ヘッダー -->
   <div class="header">
     <span class="header-title">Hop & Craft - 発注入力</span>
-    <a href="/user_home" class="logout-btn" title="戻る">
+    <a href="/user_homepage" class="logout-btn" title="戻る">
       <i class="fas fa-arrow-left"></i>
     </a>
   </div>
@@ -63,6 +63,11 @@
       </div>
     </form>
   </div>
-
+<script th:if="${successMessage != null}" th:inline="javascript">
+  /*<![CDATA[*/
+  var msg = [[${successMessage}]];
+  alert(msg);
+  /*]]>*/
+</script>
 </body>
 </html>
