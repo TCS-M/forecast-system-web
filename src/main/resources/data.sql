@@ -33,6 +33,10 @@ INSERT INTO products (product_id, name, price, jan_code, production_date, expira
 SELECT 6, 'IPA', 1100, '4922222222221', CURRENT_DATE, CURRENT_DATE + INTERVAL '15 days', 70
 WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 6);
 
+INSERT INTO products (product_id, name, price, jan_code, production_date, expiration_date, stock_quantity)
+SELECT 7, 'IPA', 1100, '4922222222221', DATE '2025-06-08', DATE '2025-06-08' + INTERVAL '15 days', 60
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 7);
+
 
 
 

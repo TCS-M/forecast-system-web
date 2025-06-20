@@ -12,12 +12,14 @@ import com.example.forecast.service.SalesRecordService;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class SalesRecordController {
@@ -55,16 +57,26 @@ public class SalesRecordController {
         model.addAttribute("defaultDate", today);       
 
         // 商品一覧取得
-        List<Product> products = productRepository.findAll();
-        model.addAttribute("products", products);
+        List<Product> allProducts = productRepository.findAll();
+
+        // 同名商品は1件だけ代表として使う（最初の1件を残す）
+        Map<String, Product> productMap = new java.util.LinkedHashMap<>();
+        for (Product p : allProducts) {
+            productMap.putIfAbsent(p.getName(), p);
+        }
+
+        List<Product> uniqueProducts = new java.util.ArrayList<>(productMap.values());
+        model.addAttribute("products", uniqueProducts);
+
 
         // ✅ 在庫情報（15日間の合計）を取得し、テンプレートに渡す
-        model.addAttribute("inventoryMap", productService.calculateInventoryMap(today));
+        model.addAttribute("inventoryMap", productService.calculateInventoryByNameMap(today));
 
         return "sales_form";
     }
 
     // フォームからの販売実績データを受け取り、保存
+
     @PostMapping("/sales/submit")
     public String submitSales(
             @RequestParam("saleDate") String saleDateStr,
@@ -83,49 +95,78 @@ public class SalesRecordController {
         LocalDate saleDate = LocalDate.parse(saleDateStr);
 
         // ✅ 在庫不足があるかを事前にチェック
-        for (int i = 0; i < productIds.size(); i++) {
-            int productId = productIds.get(i);
-            int quantity = quantities.get(i);
-            if (quantity > 0) {
-                int available = productService.getTotalAvailableStock(productId, saleDate);
-                if (quantity > available) {
-                    // ❌ 在庫が不足 → 入力画面へ戻す
-                    model.addAttribute("errorMessage", "商品ID " + productId + " の在庫が不足しています（在庫：" + available + "）");
-                    model.addAttribute("products", productRepository.findAll());
-                    model.addAttribute("inventoryMap", productService.calculateInventoryMap(saleDate));
-                    model.addAttribute("defaultDate", saleDate);
-                    model.addAttribute("quantities", quantities);  // ※必要ならフォームに再表示できるよう保持
-                    if (user != null) {
+            for (int i = 0; i < productIds.size(); i++) {
+                int productId = productIds.get(i);
+                int quantity = quantities.get(i);
+                if (quantity > 0) {
+                    String productName = productRepository.findById(productId)
+                            .map(Product::getName)
+                            .orElseThrow(() -> new RuntimeException("商品ID " + productId + " が見つかりません"));
+
+                    int available = productService.getTotalAvailableStockByName(productName, saleDate);
+                    if (quantity > available) {
+                        // ❌ 在庫が不足 → 入力画面へ戻す
+                        model.addAttribute("errorMessage", "商品ID " + productId + " の在庫が不足しています（在庫：" + available + "）");
+
+                        // 同名商品1件ずつ取得（画面用）
+                        List<Product> allProducts = productRepository.findAll();
+                        Map<String, Product> productMap = new java.util.LinkedHashMap<>();
+                        for (Product p : allProducts) {
+                            productMap.putIfAbsent(p.getName(), p);
+                        }
+                        List<Product> uniqueProducts = new java.util.ArrayList<>(productMap.values());
+                        model.addAttribute("products", uniqueProducts);
+
+                        model.addAttribute("inventoryMap", productService.calculateInventoryByNameMap(saleDate));
+                        model.addAttribute("defaultDate", saleDate);
+                        model.addAttribute("quantities", quantities);
                         model.addAttribute("username", user.getName());
+                        return "sales_form";
                     }
-                    return "sales_form";
                 }
             }
-        }
 
-        // ✅ 在庫は足りている → 実際に在庫を減らして記録を保存
-        for (int i = 0; i < productIds.size(); i++) {
-            int productId = productIds.get(i);
-            int quantity = quantities.get(i);
-            if (quantity > 0) {
-                productService.deductStock(productId, quantity, saleDate);
+            // ✅ 在庫は足りている → 実際に在庫を減らして記録を保存
+            for (int i = 0; i < productIds.size(); i++) {
+                int productId = productIds.get(i);
+                int quantity = quantities.get(i);
+                if (quantity > 0) {
+                    String productName = productRepository.findById(productId)
+                            .map(Product::getName)
+                            .orElseThrow(() -> new RuntimeException("商品ID " + productId + " が見つかりません"));
 
-                SalesRecord record = new SalesRecord();
-                record.setSaleDate(saleDate);
-                record.setQuantity(quantity);
-                record.setProduct(productRepository.findById(productId).orElse(null));
-                record.setUser(user);
-                salesRecordRepository.save(record);
+                    productService.deductStockByName(productName, quantity, saleDate);
+
+                    SalesRecord record = new SalesRecord();
+                    record.setSaleDate(saleDate);
+                    record.setQuantity(quantity);
+                    record.setProduct(productRepository.findById(productId).orElse(null));
+                    record.setUser(user);
+                    salesRecordRepository.save(record);
+                }
             }
-        }
 
-        return "redirect:/sales_list";
-    }
+            return "redirect:/sales_list";
+        }
 
     // 販売実績一覧画面を表示
     @GetMapping("/sales_list")
-    public String showSalesList(Model model, HttpSession session) {
-        List<SalesRecord> records = salesRecordService.findAllWithUserAndProduct(); 
+    public String showSalesList(@RequestParam(value = "filterDate", required = false) String filterDateStr,
+                                Model model,
+                                HttpSession session) {
+
+        List<SalesRecord> records;
+        LocalDate filterDate;
+
+        if (filterDateStr != null && !filterDateStr.isEmpty()) {
+            filterDate = LocalDate.parse(filterDateStr);
+        } else {
+            filterDate = LocalDate.now();  // ✅ デフォルトで今日の日付
+        }
+
+        records = salesRecordService.findBySaleDateWithUserAndProduct(filterDate);
+        model.addAttribute("filterDate", filterDate.toString());  // ✅ フォームに渡す用
+
         model.addAttribute("records", records);
 
         User user = (User) session.getAttribute("loggedInUser");
@@ -135,4 +176,12 @@ public class SalesRecordController {
 
         return "sales_list";
     }
+    //在庫数表示リアルタイム更新
+    @GetMapping("/api/inventory")
+    @ResponseBody
+    public Map<String, Integer> getInventory(
+            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return productService.calculateInventoryByNameMap(date);
+    }
+
 }

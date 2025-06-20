@@ -21,6 +21,12 @@
     <div class="user-info">
     [[${username}]] さんの販売実績一覧です。
     </div>   
+    <!-- ✅ 日付フィルター -->
+    <form method="get" th:action="@{/sales_list}" class="date-picker" style="margin-bottom: 20px;">
+      <label for="filterDate">日付で絞り込み：</label>
+      <input type="date" id="filterDate" name="filterDate" th:value="${filterDate}" />
+      <button type="submit" class="submit-btn" style="margin-left: 10px;">検索</button>
+    </form>
     <table class="sales-table">
     <thead>
     <tr>
