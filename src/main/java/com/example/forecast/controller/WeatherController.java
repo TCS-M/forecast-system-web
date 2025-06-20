@@ -26,19 +26,31 @@ public class WeatherController {
         this.weatherService = weatherService;
     }
 
-    // 一覧ページ（/weather/list）
-    @GetMapping("/list")
-    public String showWeather(Model model) {
+    // 🔹ユーザー用の一覧ページ
+    @GetMapping("/user-list")
+    public String showUserWeather(Model model) {
         List<WeatherData> weatherList = weatherService.getWeatherWithSales();
         model.addAttribute("weatherList", weatherList);
-        return "data_detail"; // templates/data_detail.html
+        model.addAttribute("source", "user");  // 遷移元識別用
+        return "user_data_detail"; // templates/user_data_detail.html
     }
 
-    // 詳細ページ（/weather/detail?date=yyyy-MM-dd）
+    // 🔹管理者用の一覧ページ
+    @GetMapping("/admin-list")
+    public String showAdminWeather(Model model) {
+        List<WeatherData> weatherList = weatherService.getWeatherWithSales();
+        model.addAttribute("weatherList", weatherList);
+        model.addAttribute("source", "admin");  // 遷移元識別用
+        return "admin_data_detail"; // templates/admin_data_detail.html
+    }
+
+    // 🔸詳細ページ（共通） ※source付きで遷移すること
     @GetMapping("/detail")
-    public String showDetail(@RequestParam("date") String date, Model model) {
+    public String showDetail(@RequestParam("date") String date,
+                             @RequestParam("source") String source,
+                             Model model) {
         try {
-            logger.info("📌 詳細ページ遷移処理開始：date={}", date);
+            logger.info("📌 詳細ページ遷移処理開始：date={}, source={}", date, source);
 
             WeatherDetailDTO detail = weatherService.getDetailByDate(date);
 
@@ -50,6 +62,7 @@ public class WeatherController {
             logger.info("✅ DTO取得成功：天気={}, 製品数={}", detail.getWeather(), detail.getProductSales().size());
 
             model.addAttribute("detail", detail);
+            model.addAttribute("source", source); // 戻るボタンに使用
             return "weather_detail"; // templates/weather_detail.html
 
         } catch (Exception e) {
@@ -58,3 +71,4 @@ public class WeatherController {
         }
     }
 }
+

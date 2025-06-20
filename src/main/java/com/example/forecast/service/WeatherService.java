@@ -33,6 +33,9 @@ public class WeatherService {
             Integer totalSales = getTotalSalesByDate(data.getWeatherDate());
             data.setTotalSales(totalSales);
         }
+
+        list.sort(Comparator.comparing(WeatherData::getWeatherDate).reversed());
+        
         return list;
     }
 

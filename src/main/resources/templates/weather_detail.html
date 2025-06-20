@@ -46,7 +46,11 @@
 
     <!-- 戻るボタン -->
     <div class="back-container">
-        <a href="list" class="back-button">戻る</a>
+         <!-- 管理者の場合 -->
+        <a th:if="${source == 'admin'}" th:href="@{/weather/admin-list}" class="back-button">戻る</a>
+
+        <!-- ユーザーの場合 -->
+        <a th:if="${source == 'user'}" th:href="@{/weather/user-list}" class="back-button">戻る</a>
     </div>
 </main>
 
