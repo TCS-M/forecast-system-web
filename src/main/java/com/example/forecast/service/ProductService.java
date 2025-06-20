@@ -3,8 +3,9 @@ package com.example.forecast.service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.forecast.model.Product;
 import com.example.forecast.repository.ProductRepository;
-import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -121,5 +122,27 @@ public class ProductService {
 
         return remaining == 0;
     }
+    // 商品サービスクラスに発注処理を追加
+    public List<Product> getAllProductsSortedByName() {
+        return repository.findAll(Sort.by("name"));
+    }
 
+    public void createProductionOrders(LocalDate orderDate, List<Integer> productIds, List<Integer> quantities) {
+        for (int i = 0; i < productIds.size(); i++) {
+            int qty = quantities.get(i);
+            if (qty <= 0) continue;
+
+            Product base = repository.findById(productIds.get(i)).orElseThrow();
+
+            Product newProduct = new Product();
+            newProduct.setName(base.getName());
+            newProduct.setPrice(base.getPrice());
+            newProduct.setJanCode(base.getJanCode());
+            newProduct.setProductionDate(orderDate);
+            newProduct.setExpirationDate(orderDate.plusDays(15));
+            newProduct.setStockQuantity(qty);
+
+            repository.save(newProduct);
+        }
+    }
 }
