@@ -1,0 +1,66 @@
+<!-- ビール銘柄管理画面 -->
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>銘柄管理 | Hop & Craft</title>
+  <link rel="stylesheet" th:href="@{/brand_manage.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <script src="/js/brand_manage.js"></script>
+</head>
+<body>
+<div id="successMessageHolder"
+     th:if="${successMessage}"
+     th:attr="data-message=${successMessage}"
+     style="display:none;"></div>
+  <!-- ヘッダー -->
+  <div class="header">
+    <span class="header-title">Hop & Craft - 銘柄管理</span>
+    <a href="/user_homepage" class="logout-btn" title="戻る">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+  </div>
+
+  <!-- メインエリア -->
+  <div class="container">
+    <div class="welcome">[[${username}]] さん、ビール銘柄の管理を行ってください：</div>
+
+    <!-- 既存銘柄リスト -->
+    <table class="sales-table">
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>価格 (円)</th>
+          <th>JANコード</th>
+          <th>編集</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="product : ${uniqueProductList}">
+          <form th:action="@{/brand/update}" method="post">
+            <input type="hidden" name="productId" th:value="${product.productId}" />
+            <td th:text="${product.name}">商品名</td>
+            <td><input type="number" name="price" th:value="${product.price}" required /></td>
+            <td th:text="${product.janCode}">JAN</td>
+            <td><button type="submit" class="submit-btn">更新</button></td>
+          </form>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 新規追加 -->
+    <div class="date-picker">
+    <form th:action="@{/brand/add}" method="post" class="new-brand-form">
+    <input type="text" name="name" placeholder="銘柄名" required />
+    <input type="number" name="price" placeholder="価格（円）" min="0" required />
+    <input type="text" name="janCode" placeholder="JANコード" required />
+    <!-- ✅ 新增：初期在庫数 -->
+    <input type="number" name="stockQuantity" placeholder="初期在庫数" min="0" required />
+    <button type="submit">追加</button>
+    </form>
+    </div>
+  </div>
+
+</body>
+</html>
