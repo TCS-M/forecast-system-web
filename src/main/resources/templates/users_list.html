@@ -7,15 +7,17 @@
   <link rel="stylesheet" th:href="@{/users.css}" />
   <!-- 外部JS -->
   <script th:src="@{/js/settings.js}" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <body>
-<div class="top-right">
+<div class="header">
+  <span class="header-title">ユーザー一覧</span>
   <a th:href="@{/user/new}" class="create-button">＋ 新規ユーザー登録</a>
-  <a th:href="@{/admin_homepage}" class="back-button">← 戻る</a>
+  <a th:href="@{/admin_homepage}" class="back-btn" title="ホームに戻る"><i class="fas fa-home"></i></a>
 </div>
-<h1>ユーザー一覧（全情報）</h1>
+
 <table>
   <thead>
    <tr>
