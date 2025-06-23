@@ -11,10 +11,11 @@ import com.example.forecast.repository.WeatherDataRepository;
 import com.example.forecast.service.ProductService;
 import com.example.forecast.service.SalesRecordService;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,9 +44,17 @@ public class SalesRecordController {
     @Autowired
     private SalesRecordService salesRecordService;
 
+    // --- ユーザー取得共通メソッド ---
+    private User getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String emailOrName = auth.getName();
+        return userRepository.findByEmailAndIsDeletedFalse(emailOrName)
+            .orElseGet(() -> userRepository.findByNameAndIsDeletedFalse(emailOrName).orElse(null));
+    }
+
     @GetMapping("/sales_form")
-    public String showForm(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("loggedInUser");
+    public String showForm(Model model) {
+        User user = getCurrentUser();
         if (user != null) {
             model.addAttribute("username", user.getName());
         }
@@ -75,11 +84,10 @@ public class SalesRecordController {
             @RequestParam("water") Double water,
             @RequestParam("wind") Double wind,
             @RequestParam("temperature") Double temperature,
-            Model model,
-            HttpSession session) {
+            Model model) {
 
-        User user = (User) session.getAttribute("loggedInUser");
-        if (user == null) throw new RuntimeException("ログインユーザーがセッションに存在しません");
+        User user = getCurrentUser();
+        if (user == null) throw new RuntimeException("ログインユーザーが見つかりません");
 
         LocalDate saleDate = LocalDate.parse(saleDateStr);
 
@@ -147,7 +155,7 @@ public class SalesRecordController {
 
     @GetMapping("/sales_list")
     public String showSalesList(@RequestParam(value = "filterDate", required = false) String filterDateStr,
-                                Model model, HttpSession session) {
+                                Model model) {
         List<SalesRecord> records;
         LocalDate filterDate = (filterDateStr != null && !filterDateStr.isEmpty())
                 ? LocalDate.parse(filterDateStr)
@@ -157,7 +165,7 @@ public class SalesRecordController {
         model.addAttribute("filterDate", filterDate.toString());
         model.addAttribute("records", records);
 
-        User user = (User) session.getAttribute("loggedInUser");
+        User user = getCurrentUser();
         if (user != null) {
             model.addAttribute("username", user.getName());
         }
@@ -171,7 +179,8 @@ public class SalesRecordController {
             @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return productService.calculateInventoryByNameMap(date);
     }
-//==================実績編集=======================
+
+    //==================実績編集=======================
     @PostMapping("/admin/sales/update")
     @ResponseBody
     public ResponseEntity<String> updateSaleRecord(@RequestParam("saleId") int saleId,
@@ -187,5 +196,4 @@ public class SalesRecordController {
         salesRecordService.restoreStockAndDelete(saleId);
         return ResponseEntity.ok("削除完了");
     }
-
 }
