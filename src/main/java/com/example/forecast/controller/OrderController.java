@@ -38,8 +38,13 @@ public class OrderController {
         List<Product> list = productService.getUniqueProductsByName();
         model.addAttribute("productList", list);
         model.addAttribute("defaultDate", LocalDate.now());
+
+        // ✅ 加入在库信息（用今天的日期）
+        model.addAttribute("inventoryMap", productService.calculateInventoryByNameMap(LocalDate.now()));
+
         return "order_form";
     }
+
     @ResponseBody
     public String debugUniqueProducts() {
         List<Product> list = productService.getUniqueProductsByName();
