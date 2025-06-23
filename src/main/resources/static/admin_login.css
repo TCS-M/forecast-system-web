@@ -12,3 +12,33 @@
     color: #bbb;
     margin-top: 8px;
 }
+
+/* 通常スタイル（PC・タブレット） */
+.admin-badge {
+    background-color: #c0392b;
+    color: white;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 5px;
+    margin-left: 8px;
+}
+
+.admin-note {
+    font-size: 13px;
+    color: #bbb;
+    margin-top: 8px;
+}
+
+/* スマホ画面対応（幅768px以下） */
+@media screen and (max-width: 768px) {
+  .admin-badge {
+    font-size: 11px;
+    padding: 2px 6px;
+    margin-left: 4px;
+  }
+
+  .admin-note {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+}

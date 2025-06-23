@@ -1,85 +1,101 @@
 body {
-  background-color: #121212;
-  color: #f1f1f1;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 20px;
+  font-family: 'Noto Sans JP', sans-serif;
+  background: linear-gradient(to bottom right, #fff8f0, #f2f7ff);
+  margin: 0;
+  padding: 50px 20px;
+  text-align: center;
 }
 
 h1 {
-  color: #d89c1b;
-  font-size: 24px;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #d89c1b;
-  display: inline-block;
-  padding-bottom: 5px;
-  text-align: center;
-  display: block; /* 中央揃えにするため inline-block を block に変更 */
-  margin-left: auto;
-  margin-right: auto;
+  color: #5a3e1b;
+  margin-bottom: 30px;
 }
+
+.top-right {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.back-button {
+  text-decoration: none;
+  background-color: #d89c1b;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #b0780e;
+}
+
 form {
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #d89c1b;
+  display: inline-block;
+  background-color: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   max-width: 500px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 table {
   width: 100%;
-  color: #ffffff;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0 15px;
 }
 
 th {
   text-align: left;
-  padding: 10px;
-  color: #d89c1b;
+  font-weight: normal;
+  color: #333;
   width: 30%;
+  padding-right: 10px;
 }
 
-td {
-  padding: 10px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-select {
+td input,
+td select {
   width: 100%;
-  padding: 8px;
-  background-color: #2b2b2b;
-  color: #ffffff;
-  border: 1px solid #d89c1b;
-  border-radius: 4px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
 }
 
-button {
+button[type="submit"] {
+  margin-top: 20px;
   background-color: #d89c1b;
-  color: #000000;
+  color: white;
+  padding: 12px 20px;
   border: none;
-  padding: 8px 16px;
-  font-weight: bold;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #e6b800;
+button[type="submit"]:hover {
+  background-color: #b0780e;
 }
 
-a.back-button {
-  display: inline-block;
-  margin-left: 10px;
-  background-color: #444;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-}
+@media (max-width: 600px) {
+  form {
+    padding: 30px 20px;
+  }
 
-a.back-button:hover {
-  background-color: #666;
+  table {
+    font-size: 14px;
+  }
+
+  th, td {
+    display: block;
+    width: 100%;
+  }
+
+  td {
+    margin-bottom: 15px;
+  }
 }

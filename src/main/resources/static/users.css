@@ -1,7 +1,7 @@
 /* 全体の背景・フォント */
 body {
-  background-color: #121212;
-  color: #f1f1f1;
+  background: linear-gradient(to bottom right, #fff8f0, #f2f7ff);
+  color: #333;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;
 }
@@ -12,10 +12,9 @@ h1 {
   font-size: 24px;
   margin-bottom: 20px;
   border-bottom: 2px solid #d89c1b;
-  display: inline-block;
+  display: block;
   padding-bottom: 5px;
   text-align: center;
-  display: block; /* 中央揃えにするため inline-block を block に変更 */
   margin-left: auto;
   margin-right: auto;
 }
@@ -24,33 +23,37 @@ h1 {
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #1e1e1e;
-  color: #ffffff;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 th, td {
-  border: 1px solid #d89c1b;
+  border: 1px solid #ffe28a;
   padding: 10px;
   text-align: left;
 }
 
 th {
-  background-color: #d89c1b;
-  color: #000000;
+  background-color: #ffe28a;
+  color: #5a3e1b;
 }
 
 /* セレクトボックス */
 select {
-  padding: 5px;
+  padding: 6px;
   border: 1px solid #d89c1b;
-  background-color: #1e1e1e;
-  color: #ffffff;
+  background-color: #fff8e1;
+  color: #333;
+  border-radius: 4px;
 }
 
 /* 通常のボタン（保存） */
 button {
   background-color: #d89c1b;
-  color: #000000;
+  color: #fff;
   border: none;
   padding: 6px 12px;
   cursor: pointer;
@@ -59,7 +62,7 @@ button {
 }
 
 button:hover {
-  background-color: #d89c1b;
+  background-color: #b0780e;
 }
 
 /* 右上ボタンの固定位置 */
@@ -70,35 +73,14 @@ button:hover {
 }
 
 /* ボタンリンク共通 */
-a.back-button{
+a.back-button,
+a.edit-button,
+a.create-button {
   display: inline-block;
   padding: 6px 12px;
   border: none;
   background-color: #d89c1b;
-  color: #000;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-left: 10px;
-  transition: background-color 0.3s ease;
-}
-a.edit-button {
-  display: inline-block;
-  padding: 6px 12px;
-  border: none;
-  background-color: #d89c1b;
-  color: #000;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-left: 10px;
-  transition: background-color 0.3s ease;
-}
-a.create-button{
-    display: inline-block;
-  padding: 6px 12px;
-  border: none;
-  background-color: #d89c1b;
+  color: #fff;
   text-decoration: none;
   font-weight: bold;
   border-radius: 5px;
@@ -106,16 +88,9 @@ a.create-button{
   transition: background-color 0.3s ease;
 }
 
-a.edit-button:hover {
-  background-color: #666;
-}
-
-/* 新規ユーザー登録ボタン（同系色で統一） */
-a.create-button:hover {
-  background-color: #e6b800;
-}
-
-/* 戻るボタン hover */
+/* ボタンhoverカラー */
+a.edit-button:hover,
+a.create-button:hover,
 a.back-button:hover {
-  background-color: #e6b800;
+  background-color: #b0780e;
 }
