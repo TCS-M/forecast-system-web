@@ -160,18 +160,41 @@ public class ProductService {
         return inserted;
     }
     // 商品名ごとに最小の productId を持つ製品のみを返す
-public List<Product> getUniqueProductsByName() {
-    List<Product> all = repository.findAll();
+    public List<Product> getUniqueProductsByName() {
+        List<Product> all = repository.findAll();
 
-    return all.stream()
-        .collect(Collectors.groupingBy(
-            Product::getName,
-            Collectors.minBy(Comparator.comparingInt(Product::getProductId))
-        ))
-        .values().stream()
-        .filter(Optional::isPresent)
-        .map(Optional::get)
-        .sorted(Comparator.comparing(Product::getName))
-        .toList();
-}
+        return all.stream()
+            .collect(Collectors.groupingBy(
+                Product::getName,
+                Collectors.minBy(Comparator.comparingInt(Product::getProductId))
+            ))
+            .values().stream()
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .sorted(Comparator.comparing(Product::getName))
+            .toList();
+    }
+// ====================================
+// 銘柄管理用の補助メソッド
+// ====================================
+    // 指定された商品名を持つすべての製品を取得（ロット含む）
+    public List<Product> findByName(String name) {
+        return repository.findAll().stream()
+                .filter(p -> name.equals(p.getName()))
+                .toList();
+    }
+
+    // 単一製品の保存（価格変更や追加に使用）
+    public void save(Product product) {
+        repository.save(product);
+    }
+
+    // product_id を採番（最大値 +1 を返す）
+    public int getNextProductId() {
+        return repository.findAll().stream()
+                .mapToInt(Product::getProductId)
+                .max()
+                .orElse(0) + 1;
+    }
+
 }
