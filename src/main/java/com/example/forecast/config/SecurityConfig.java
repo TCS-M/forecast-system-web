@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .requestMatchers(
                     "/user_data_detail", "/user_forecast_list", "/user_homepage"
                 ).hasRole("USER")
-                .requestMatchers("/", "/login", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/", "/login", "/login.css","/css/**", "/js/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
