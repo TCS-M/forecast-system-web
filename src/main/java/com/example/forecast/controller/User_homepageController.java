@@ -50,8 +50,6 @@ public class User_homepageController {
         return "weather_detail";
     }
 
-    @Autowired
-  private ForecastService forecastService;
 
     @GetMapping("/user_forecast")
     

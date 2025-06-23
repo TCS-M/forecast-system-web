@@ -20,6 +20,15 @@ public class WeatherData implements Serializable {
     @Column(name = "weather_info")
     private String weatherInfo;
 
+    @Column(name = "weather_temperature")
+    private Double temperature;
+
+    @Column(name = "weather_water")
+    private Double water;
+
+    @Column(name = "weather_wind")
+    private Double wind;
+
     @Transient // DBには存在しないが画面表示などで使いたい
     private Integer totalSales;
 
@@ -48,6 +57,30 @@ public class WeatherData implements Serializable {
         this.weatherInfo = weatherInfo;
     }
 
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
+    }
+
+    public Double getWater() {
+        return water;
+    }
+
+    public void setWater(Double water) {
+        this.water = water;
+    }
+
+    public Double getWind() {
+        return wind;
+    }
+
+    public void setWind(Double wind) {
+        this.wind = wind;
+    }
+
     public Integer getTotalSales() {
         return totalSales;
     }
@@ -56,3 +89,4 @@ public class WeatherData implements Serializable {
         this.totalSales = totalSales;
     }
 }
+

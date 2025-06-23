@@ -2,6 +2,7 @@ package com.example.forecast.controller;
 
 import com.example.forecast.model.WeatherData;
 import com.example.forecast.service.WeatherService;
+import com.example.forecast.service.WeatherApiService;
 import com.example.forecast.dto.WeatherDetailDTO;
 
 import org.slf4j.Logger;
@@ -21,10 +22,12 @@ import java.util.List;
 public class WeatherController {
 
     private final WeatherService weatherService;
+    private final WeatherApiService weatherApiService; // ← 追加
     private final Logger logger = LoggerFactory.getLogger(WeatherController.class);
 
-    public WeatherController(WeatherService weatherService) {
+    public WeatherController(WeatherService weatherService, WeatherApiService weatherApiService) {
         this.weatherService = weatherService;
+        this.weatherApiService = weatherApiService; // ← 追加
     }
 
     // 🔹ユーザー用の一覧ページ
@@ -36,12 +39,15 @@ public class WeatherController {
         return "user_data_detail";
     }
 
-    // 🔹管理者用の一覧ページ
+    // 🔹管理者用の一覧ページ（APIから即時取得してDB反映）
     @GetMapping("/admin-list")
     public String showAdminWeather(Model model) {
+        logger.info("🔄 外部APIから最新の予測データを取得中...");
+        weatherApiService.fetchAndSaveForecastData(); // ← ここで取得＆保存
+
         List<WeatherData> weatherList = weatherService.getWeatherWithSales();
         model.addAttribute("weatherList", weatherList);
-        model.addAttribute("source", "admin");  // 遷移元識別用
+        model.addAttribute("source", "admin");
         return "admin_data_detail";
     }
 
@@ -73,3 +79,4 @@ public class WeatherController {
         }
     }
 }
+
