@@ -24,7 +24,7 @@
 
   <!-- メインエリア -->
   <div class="container">
-    <div class="welcome">[[${username}]] さん、ビール銘柄の管理を行ってください：</div>
+     <div class="welcome" th:text="'ようこそ、' + ${username} + ' さん！ビールの銘柄の管理を行ってください！'"></div>
 
     <!-- 既存銘柄リスト -->
     <table class="sales-table">
