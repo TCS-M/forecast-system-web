@@ -24,26 +24,18 @@ body {
   right: 30px;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 226, 138, 0.7);
-  color: #5a3e1b;
-  border: none;
-  outline: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 18px;
-  box-shadow: 0 2px 8px rgba(220,180,30,0.10);
-  cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s;
+  background-color: #d89c1b;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
   text-decoration: none;
-  display: inline-block;
+  font-size: 14px;
+  transition: background-color 0.3s;
 }
 
-.logout-btn:hover, .logout-btn:focus {
-  background: rgba(216, 156, 27, 0.9);
-  color: #fff;
+.logout-btn:hover {
+  background-color: #b0780e;
 }
-
-
 
 .container {
   max-width: 960px;
