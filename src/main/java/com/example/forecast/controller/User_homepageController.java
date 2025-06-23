@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class User_homepageController {
 
     private final ProductService productService;
-    private final ForecastService forecastService;
 
     // ✅ 构造函数：同时注入两个 service
     public User_homepageController(ProductService productService, ForecastService forecastService) {
@@ -51,7 +50,7 @@ public class User_homepageController {
     }
 
     @Autowired
-  private ForecastService forecastService;
+    private ForecastService forecastService;
 
     @GetMapping("/user_forecast")
     

@@ -6,10 +6,10 @@ body {
 }
 
 h1 {
-  color: #ffcc00;
+  color: #d89c1b;
   font-size: 24px;
   margin-bottom: 20px;
-  border-bottom: 2px solid #ffcc00;
+  border-bottom: 2px solid #d89c1b;
   display: inline-block;
   padding-bottom: 5px;
   text-align: center;
@@ -21,7 +21,7 @@ form {
   background-color: #1e1e1e;
   padding: 20px;
   border-radius: 8px;
-  border: 1px solid #ffcc00;
+  border: 1px solid #d89c1b;
   max-width: 500px;
   margin: 0 auto;
 }
@@ -34,7 +34,7 @@ table {
 th {
   text-align: left;
   padding: 10px;
-  color: #ffcc00;
+  color: #d89c1b;
   width: 30%;
 }
 
@@ -50,12 +50,12 @@ select {
   padding: 8px;
   background-color: #2b2b2b;
   color: #ffffff;
-  border: 1px solid #ffcc00;
+  border: 1px solid #d89c1b;
   border-radius: 4px;
 }
 
 button {
-  background-color: #ffcc00;
+  background-color: #d89c1b;
   color: #000000;
   border: none;
   padding: 8px 16px;
