@@ -74,6 +74,7 @@ body {
 .register-btn:hover {
   background-color: #e89a1f;
 }
+
 .user-info {
   font-size: 18px;
   color: #444;
@@ -104,7 +105,7 @@ body {
 .submit-btn {
   padding: 8px 20px;
   font-size: 15px;
-  background-color: #4CAF50;  /* 緑色 */
+  background-color: #4CAF50;
   border: none;
   border-radius: 8px;
   color: white;
@@ -114,14 +115,14 @@ body {
 }
 
 .submit-btn:hover {
-  background-color: #388E3C;
+  background-color: #e89a1f;
 }
 
 /* 削除ボタンのスタイル */
 .delete-btn {
   padding: 8px 20px;
   font-size: 15px;
-  background-color: #e57373;  /* 赤色 */
+  background-color: #e57373;
   border: none;
   border-radius: 8px;
   color: white;
@@ -133,4 +134,33 @@ body {
   background-color: #c62828;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    font-size: 18px;
+  }
+
+  .header-title {
+    font-size: 22px;
+    text-align: center;
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .back-btn {
+    font-size: 16px;
+    align-self: flex-start;
+  }
+
+  .container {
+    padding: 20px;
+    margin: 30px 10px;
+    border-radius: 12px;
+  }
+
+  .sales-table {
+    display: block
 
