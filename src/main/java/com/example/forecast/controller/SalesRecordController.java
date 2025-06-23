@@ -13,6 +13,7 @@ import com.example.forecast.service.SalesRecordService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -182,6 +183,22 @@ public class SalesRecordController {
     public Map<String, Integer> getInventory(
             @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return productService.calculateInventoryByNameMap(date);
+    }
+//==================実績編集=======================
+    @PostMapping("/admin/sales/update")
+    @ResponseBody
+    public ResponseEntity<String> updateSaleRecord(@RequestParam("saleId") int saleId,
+                                                @RequestParam("newDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newDate,
+                                                @RequestParam("newQuantity") int newQuantity) {
+        boolean success = salesRecordService.updateSaleRecord(saleId, newDate, newQuantity);
+        return success ? ResponseEntity.ok("更新完了") : ResponseEntity.badRequest().body("在庫が不足しています。");
+    }
+
+    @PostMapping("/admin/sales/delete")
+    @ResponseBody
+    public ResponseEntity<String> deleteSaleRecord(@RequestParam("saleId") int saleId) {
+        salesRecordService.restoreStockAndDelete(saleId);
+        return ResponseEntity.ok("削除完了");
     }
 
 }

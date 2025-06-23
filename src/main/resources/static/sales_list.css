@@ -74,6 +74,7 @@ body {
 .register-btn:hover {
   background-color: #e89a1f;
 }
+
 .user-info {
   font-size: 18px;
   color: #444;
@@ -100,21 +101,40 @@ body {
   border-radius: 6px;
 }
 
+/* 提出ボタンのスタイル */
 .submit-btn {
   padding: 8px 20px;
   font-size: 15px;
-  background-color: #ffb347;
+  background-color: #4CAF50;
   border: none;
   border-radius: 8px;
   color: white;
-  cursor: pointer;
   font-weight: bold;
+  cursor: pointer;
+  margin-right: 8px;
 }
 
 .submit-btn:hover {
   background-color: #e89a1f;
 }
 
+/* 削除ボタンのスタイル */
+.delete-btn {
+  padding: 8px 20px;
+  font-size: 15px;
+  background-color: #e57373;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c62828;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
@@ -142,50 +162,5 @@ body {
   }
 
   .sales-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    font-size: 14px;
-  }
+    display: block
 
-  .sales-table th,
-  .sales-table td {
-    padding: 10px;
-  }
-
-  .user-info {
-    font-size: 16px;
-    margin-bottom: 15px;
-  }
-
-  .date-picker {
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
-
-  .date-picker label {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 13px;
-  }
-
-  .date-picker input[type="date"] {
-    width: 100%;
-    font-size: 14px;
-  }
-
-  .submit-btn {
-    width: 100%;
-    font-size: 15px;
-    padding: 10px;
-    border-radius: 6px;
-  }
-
-  .register-btn {
-    width: 100%;
-    display: inline-block;
-    font-size: 15px;
-    padding: 10px;
-    text-align: center;
-  }
-}
