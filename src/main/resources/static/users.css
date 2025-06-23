@@ -1,96 +1,152 @@
-/* 全体の背景・フォント */
 body {
+  font-family: 'Noto Sans JP', sans-serif;
   background: linear-gradient(to bottom right, #fff8f0, #f2f7ff);
+  margin: 0;
+  padding: 0;
   color: #333;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 20px;
 }
 
-/* 見出し */
-h1 {
-  color: #d89c1b;
-  font-size: 24px;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #d89c1b;
-  display: block;
-  padding-bottom: 5px;
+/* ===== ヘッダー ===== */
+.header {
+  background-color: #ffe28a;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 22px;
+  font-weight: bold;
+  color: #5c3d00;
+}
+
+.header-title {
+  font-size: 26px;
+  flex: 1;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  color: #d89c1b;
 }
 
-/* テーブル */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #fff;
-  color: #333;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+.back-btn {
+  text-decoration: none;
+  color: #5c3d00;
+  font-size: 20px;
+  padding: 8px 14px;
+  background-color: transparent;
   border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #c28b1b;
+  color: white;
+}
+
+/* ===== 新規登録ボタン ===== */
+.create-button {
+  background-color: #10b981;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.create-button:hover {
+  background-color: #059669;
+}
+
+/* ===== テーブルデザイン ===== */
+table {
+  width: 90%;
+  margin: 30px auto;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   overflow: hidden;
 }
 
 th, td {
-  border: 1px solid #ffe28a;
-  padding: 10px;
-  text-align: left;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
 }
 
 th {
-  background-color: #ffe28a;
+  background-color: #fef6e4;
   color: #5a3e1b;
+  font-weight: bold;
 }
 
-/* セレクトボックス */
-select {
+/* ===== セレクト・ボタン ===== */
+td select,
+td button {
   padding: 6px;
-  border: 1px solid #d89c1b;
-  background-color: #fff8e1;
-  color: #333;
-  border-radius: 4px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
 }
 
-/* 通常のボタン（保存） */
-button {
+td button {
   background-color: #d89c1b;
-  color: #fff;
+  color: white;
   border: none;
   padding: 6px 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
-button:hover {
-  background-color: #b0780e;
+td button:hover {
+  background-color: #c28b1b;
 }
 
-/* 右上ボタンの固定位置 */
-.top-right {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-/* ボタンリンク共通 */
-a.back-button,
-a.edit-button,
-a.create-button {
+/* ===== 編集ボタン ===== */
+.edit-button {
   display: inline-block;
+  background-color: #3b82f6;
+  color: white;
   padding: 6px 12px;
-  border: none;
-  background-color: #d89c1b;
-  color: #fff;
   text-decoration: none;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-left: 10px;
-  transition: background-color 0.3s ease;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
 }
 
-/* ボタンhoverカラー */
-a.edit-button:hover,
-a.create-button:hover,
-a.back-button:hover {
-  background-color: #b0780e;
+.edit-button:hover {
+  background-color: #2563eb;
+}
+
+/* ===== レスポンシブ対応 ===== */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .header-title {
+    font-size: 22px;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  .back-btn,
+  .create-button {
+    font-size: 16px;
+    margin-top: 8px;
+  }
+
+  table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+
+  th, td {
+    font-size: 14px;
+    padding: 10px;
+  }
 }
