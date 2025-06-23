@@ -12,8 +12,9 @@
     <div class="logo">🍺 Hop & Craft</div>
     <h1>ログイン</h1>
 
+
     <form class="login-form" th:action="@{/login}" method="post">
-      <input type="text" name="identifier" placeholder="ユーザー名またはメールアドレス" required>
+      <input type="text" name="username" placeholder="ユーザー名またはメールアドレス" required>
       <input type="password" name="password" placeholder="パスワード" required>
 
       <div class="checkbox-container">
@@ -24,12 +25,12 @@
       <button type="submit">ログイン</button>
       
     </form>
-    
-    <p th:if="${loginError}" th:text="${loginError}" style="color: red;"></p>
+      
+ <div th:if="${param.error}" style="color: red;">ログインに失敗しました。</div>
 
-    <div class="switch-link">
+    <!-- <div class="switch-link">
       <a href="/admin_login">管理者の方はこちら</a>
-    </div>
+    </div> -->
   </div>
   
 </body>

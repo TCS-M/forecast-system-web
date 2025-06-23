@@ -40,7 +40,7 @@
       <input type="hidden" name="userId" th:value="${user.userId}" />
       <select name="role">
         <option th:value="'admin'" th:selected="${user.role == 'admin'}">admin</option>
-        <option th:value="'staff'" th:selected="${user.role == 'staff'}">staff</option>
+        <option th:value="'user'" th:selected="${user.role == 'user'}">user</option>
       </select>
       <button type="button"
               th:attr="data-username=${user.name}"
