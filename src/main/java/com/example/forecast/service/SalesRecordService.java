@@ -3,6 +3,7 @@ package com.example.forecast.service;
 import com.example.forecast.model.Product;
 import com.example.forecast.model.SalesRecord;
 import com.example.forecast.repository.SalesRecordRepository;
+import com.example.forecast.repository.WeatherDataRepository;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,14 @@ public class SalesRecordService {
 
     private final SalesRecordRepository repository;
     private final ProductService productService;
+    private final WeatherDataRepository weatherDataRepository;
 
     public SalesRecordService(SalesRecordRepository repository,
-                              ProductService productService) {
+                              ProductService productService,
+                              WeatherDataRepository weatherDataRepository) {
         this.repository = repository;
         this.productService = productService;
+        this.weatherDataRepository = weatherDataRepository;
     }
 
     public SalesRecord save(SalesRecord record) {
@@ -29,17 +33,14 @@ public class SalesRecordService {
         return repository.save(record);
     }
 
-    // 全件取得
     public List<SalesRecord> findAll() {
         return repository.findAll();
     }
 
-    // ユーザー・商品含め全件取得
     public List<SalesRecord> findAllWithUserAndProduct() {
         return repository.findAllWithUserAndProduct();
     }
 
-    // 指定日付の販売記録取得
     public List<SalesRecord> findBySaleDateWithUserAndProduct(LocalDate date) {
         return repository.findBySaleDateWithUserAndProduct(date);
     }
@@ -53,18 +54,20 @@ public class SalesRecordService {
         LocalDate oldDate = record.getSaleDate();
         int oldQty = record.getQuantity();
 
-        // ✅ ① 新在庫の確認（旧在庫はまだ戻さない）
+        // ✅ ① 新在庫の確認
         int available = productService.getTotalAvailableStockByName(name, newDate);
         if (newQty > available) return false;
 
-        // ✅ ② 旧在庫を復元
+        // ✅ ② 旧在庫を復元（新販売日の在庫と重ならないように期限設定）
         Product recovery = new Product();
         recovery.setProductId(productService.getNextProductId());
         recovery.setName(product.getName());
         recovery.setJanCode(product.getJanCode());
         recovery.setPrice(product.getPrice());
         recovery.setProductionDate(oldDate.minusDays(15));
-        recovery.setExpirationDate(oldDate);
+
+        // ⚠️ expirationDate を newDate.minusDays(1) にして、新しい販売日に被らないようにする
+        recovery.setExpirationDate(newDate.minusDays(1));
         recovery.setStockQuantity(oldQty);
         productService.save(recovery);
 
@@ -75,6 +78,8 @@ public class SalesRecordService {
         record.setSaleDate(newDate);
         record.setQuantity(newQty);
         repository.save(record);
+
+        updateTotalSales(newDate);
         return true;
     }
 
@@ -85,16 +90,30 @@ public class SalesRecordService {
         int qty = record.getQuantity();
         LocalDate oldDate = record.getSaleDate();
 
+        // ✅ 削除時の復元在庫も、将来日と重ならないように期限設定
         Product restored = new Product();
         restored.setProductId(productService.getNextProductId());
         restored.setName(product.getName());
         restored.setJanCode(product.getJanCode());
         restored.setPrice(product.getPrice());
         restored.setProductionDate(oldDate.minusDays(15));
-        restored.setExpirationDate(oldDate);
+        restored.setExpirationDate(oldDate.minusDays(1));  // ← 削除後の将来販売日と重ならないように
         restored.setStockQuantity(qty);
         productService.save(restored);
 
         repository.delete(record);
+
+        updateTotalSales(oldDate);
+    }
+
+    private void updateTotalSales(LocalDate date) {
+        List<SalesRecord> records = repository.findBySaleDateWithUserAndProduct(date);
+        int totalSales = records.stream().mapToInt(SalesRecord::getQuantity).sum();
+
+        weatherDataRepository.findById(java.sql.Date.valueOf(date)).ifPresent(w -> {
+            w.setTotalSales(totalSales);
+            weatherDataRepository.save(w);
+        });
     }
 }
+

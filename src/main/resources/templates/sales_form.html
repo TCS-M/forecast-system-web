@@ -1,4 +1,3 @@
-<!-- 販売実績入力 -->
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,57 +7,71 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </head>
 <body>
 
-  <div class="header">
-    <span class="header-title">Hop & Craft - 販売実績入力</span>
-    <a href="/sales_list" class="logout-btn" title="戻る">
-      <i class="fas fa-arrow-left"></i>
-    </a>
-  </div>
+<div class="header">
+  <span class="header-title">Hop & Craft - 販売実績入力</span>
+  <a href="/sales_list" class="logout-btn" title="戻る">
+    <i class="fas fa-arrow-left"></i>
+  </a>
+</div>
 
-  <div class="container">
-    <div class="welcome">[[${username}]] さん、販売実績を入力してください：</div>
+<div class="container">
+  <div class="welcome">[[${username}]] さん、販売実績を入力してください：</div>
 
-    <form th:action="@{/sales/submit}" method="post">
-    <!-- エラーメッセージ表示 -->
+  <form th:action="@{/sales/submit}" method="post">
     <div th:if="${errorMessage}" style="color: red; font-weight: bold; margin-bottom: 16px;">
       [[${errorMessage}]]
     </div>
-    <!-- ✅ 日付の入力 -->
+
+    <!-- 日付 -->
     <div class="date-picker">
       <label for="saleDate">販売日：</label>
       <input type="date" id="saleDate" name="saleDate" th:value="${defaultDate}" required />
     </div>
 
+    <!-- 天気情報 -->
+    <div class="weather-input">
+      <label for="weatherInfo">天気：</label>
+      <input type="text" id="weatherInfo" name="weatherInfo" required />
+
+      <label for="water">降水量（mm）：</label>
+      <input type="number" id="water" name="water" step="0.1" required />
+
+      <label for="wind">風速（m/s）：</label>
+      <input type="number" id="wind" name="wind" step="0.1" required />
+
+      <label for="temperature">気温（℃）：</label>
+      <input type="number" id="temperature" name="temperature" step="0.1" required />
+    </div>
+
+    <!-- 商品と数量 -->
     <table class="sales-table">
       <thead>
-        <tr>
-          <th>商品名</th>
-          <th>販売数</th>
-          <th>在庫数</th> <!-- ✅ 在庫欄を追加 -->
-        </tr>
+      <tr>
+        <th>商品名</th>
+        <th>販売数</th>
+        <th>在庫数</th>
+      </tr>
       </thead>
       <tbody>
-        <tr th:each="product : ${products}">
-          <td th:text="${product.name}">商品名</td>
-          <td>
-            <input type="hidden" name="productIds" th:value="${product.productId}" />
-            <input type="number" name="quantities" min="0" value="0" />
-          </td>
-          <td class="stock-cell" th:text="${inventoryMap[product.name]}">0</td>
-        </tr>
+      <tr th:each="product : ${products}">
+        <td th:text="${product.name}">商品名</td>
+        <td>
+          <input type="hidden" name="productIds" th:value="${product.productId}" />
+          <input type="number" name="quantities" min="0" value="0" />
+        </td>
+        <td class="stock-cell" th:text="${inventoryMap[product.name]}">0</td>
+      </tr>
       </tbody>
     </table>
 
-
-      <div class="form-actions">
-        <button type="submit" class="submit-btn">登録</button>
-      </div>
-    </form>
-  </div>
+    <div class="form-actions">
+      <button type="submit" class="submit-btn">登録</button>
+    </div>
+  </form>
+</div>
 
 </body>
 <script src="/js/inventory-update.js"></script>
