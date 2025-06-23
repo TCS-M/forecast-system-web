@@ -28,11 +28,10 @@ public class AdminHomepageController {
 
     @Autowired
     public AdminHomepageController(
-        UserRepository userRepository,
-        UserService userService,
-        ForecastService forecastService,
-        SalesRecordService salesRecordService
-    ) {
+            UserRepository userRepository,
+            UserService userService,
+            ForecastService forecastService,
+            SalesRecordService salesRecordService) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.forecastService = forecastService;
@@ -73,8 +72,7 @@ public class AdminHomepageController {
             @RequestParam String name,
             @RequestParam String email,
             @RequestParam String password,
-            @RequestParam String role
-    ) {
+            @RequestParam String role) {
         User user = new User();
         user.setName(name);
         user.setEmail(email);

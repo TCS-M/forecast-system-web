@@ -32,7 +32,8 @@ public class WeatherData implements Serializable {
     @Transient
     private Integer totalSales;
 
-    public WeatherData() {}
+    public WeatherData() {
+    }
 
     public WeatherData(Date weatherDate, String weatherInfo, Integer totalSales) {
         this.weatherDate = weatherDate;

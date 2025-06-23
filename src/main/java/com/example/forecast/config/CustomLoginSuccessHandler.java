@@ -12,9 +12,9 @@ import java.io.IOException;
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(
-        HttpServletRequest request,
-        HttpServletResponse response,
-        Authentication authentication) throws IOException, ServletException {
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Authentication authentication) throws IOException, ServletException {
 
         // ロールによって遷移先を分岐
         for (GrantedAuthority auth : authentication.getAuthorities()) {

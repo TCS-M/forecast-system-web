@@ -14,8 +14,8 @@ public class WeatherDetailDTO {
     private Map<String, Integer> productStock;
 
     public WeatherDetailDTO(String date, String weather, Map<String, Integer> productSales,
-                            Double water, Double wind, Double temperature,
-                            Map<String, Integer> productStock) {
+            Double water, Double wind, Double temperature,
+            Map<String, Integer> productStock) {
         this.date = date;
         this.weather = weather;
         this.productSales = productSales;
@@ -55,10 +55,8 @@ public class WeatherDetailDTO {
 
     public boolean isEmpty() {
         return (productSales == null || productSales.isEmpty()) &&
-               (productStock == null || productStock.isEmpty()) &&
-               (weather == null || weather.isBlank()) &&
-               water == null && wind == null && temperature == null;
+                (productStock == null || productStock.isEmpty()) &&
+                (weather == null || weather.isBlank()) &&
+                water == null && wind == null && temperature == null;
     }
 }
-
-

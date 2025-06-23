@@ -31,11 +31,10 @@ public class MyUserDetailsService implements UserDetailsService {
         // どちらにも該当しなければエラー
         User user = userOpt.orElseThrow(() -> new UsernameNotFoundException("Not found: " + identifier));
 
-            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase());
-            return new org.springframework.security.core.userdetails.User(
+        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase());
+        return new org.springframework.security.core.userdetails.User(
                 identifier,
                 user.getPassword(),
-                Collections.singleton(authority)
-            );
+                Collections.singleton(authority));
     }
 }

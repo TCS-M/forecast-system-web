@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>需要予測</title>
@@ -8,50 +9,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
+
 <body>
-<div class="header">
-    <span class="header-title">🍺 需要予測</span>
-    <a href="/admin_homepage" class="back-btn" title="ホームに戻る">
-        <i class="fas fa-home"></i>
-    </a>
-</div>
+    <div class="header">
+        <span class="header-title">🍺 需要予測</span>
+        <a href="/admin_homepage" class="back-btn" title="ホームに戻る">
+            <i class="fas fa-home"></i>
+        </a>
+    </div>
 
-<main>
-    <table>
-        <thead>
-        <tr>
-            <th>日付</th>
-            <th>曜日</th>
-            <th>天気</th>
-            <th>ホワイトビール</th>
-            <th>IPA</th>
-            <th>黒ビール</th>
-            <th>ラガー</th>
-            <th>フルーツビール</th>
-            <th>ペールエール</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="f : ${forecasts}">
-            <td th:text="${f.date}"></td>
-            <td th:text="${f.weekday}"></td>
-           <td>
-  <span th:if="${f.weather != null}">
-    <span th:text="${T(java.lang.String).format('%.0f℃', f.weather.temp)}"></span><br/>
-    <span th:text="${'湿度 ' + T(java.lang.String).format('%.0f', f.weather.humidity) + '%'}"></span>
-  </span>
-  <span th:if="${f.weather == null}">-</span>
-</td>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>日付</th>
+                    <th>曜日</th>
+                    <th>天気</th>
+                    <th>ホワイトビール</th>
+                    <th>IPA</th>
+                    <th>黒ビール</th>
+                    <th>ラガー</th>
+                    <th>フルーツビール</th>
+                    <th>ペールエール</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="f : ${forecasts}">
+                    <td th:text="${f.date}"></td>
+                    <td th:text="${f.weekday}"></td>
+                    <td>
+                        <span th:if="${f.weather != null}">
+                            <span th:text="${T(java.lang.String).format('%.0f℃', f.weather.temp)}"></span><br />
+                            <span
+                                th:text="${'湿度 ' + T(java.lang.String).format('%.0f', f.weather.humidity) + '%'}"></span>
+                        </span>
+                        <span th:if="${f.weather == null}">-</span>
+                    </td>
 
-            <td th:text="${#numbers.formatDecimal(f.whiteBeer, 1, 1)}"></td>
-            <td th:text="${#numbers.formatDecimal(f.ipa, 1, 1)}"></td>
-            <td th:text="${#numbers.formatDecimal(f.blackBeer, 1, 1)}"></td>
-            <td th:text="${#numbers.formatDecimal(f.lager, 1, 1)}"></td>
-            <td th:text="${#numbers.formatDecimal(f.fruitBeer, 1, 1)}"></td>
-            <td th:text="${#numbers.formatDecimal(f.paleAle, 1, 1)}"></td>
-        </tr>
-        </tbody>
-    </table>
-</main>
+                    <td th:text="${#numbers.formatDecimal(f.whiteBeer, 1, 1)}"></td>
+                    <td th:text="${#numbers.formatDecimal(f.ipa, 1, 1)}"></td>
+                    <td th:text="${#numbers.formatDecimal(f.blackBeer, 1, 1)}"></td>
+                    <td th:text="${#numbers.formatDecimal(f.lager, 1, 1)}"></td>
+                    <td th:text="${#numbers.formatDecimal(f.fruitBeer, 1, 1)}"></td>
+                    <td th:text="${#numbers.formatDecimal(f.paleAle, 1, 1)}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
 </body>
+
 </html>

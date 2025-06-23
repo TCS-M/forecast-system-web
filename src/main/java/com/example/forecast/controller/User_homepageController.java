@@ -26,7 +26,8 @@ public class User_homepageController {
 
     // コンストラクタでまとめて注入
     @Autowired
-    public User_homepageController(UserRepository userRepository, ProductService productService, ForecastService forecastService) {
+    public User_homepageController(UserRepository userRepository, ProductService productService,
+            ForecastService forecastService) {
         this.userRepository = userRepository;
         this.productService = productService;
         this.forecastService = forecastService;
