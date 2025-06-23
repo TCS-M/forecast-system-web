@@ -49,7 +49,7 @@ public class SalesRecordController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String emailOrName = auth.getName();
         return userRepository.findByEmailAndIsDeletedFalse(emailOrName)
-            .orElseGet(() -> userRepository.findByNameAndIsDeletedFalse(emailOrName).orElse(null));
+                .orElseGet(() -> userRepository.findByNameAndIsDeletedFalse(emailOrName).orElse(null));
     }
 
     @GetMapping("/sales_form")
@@ -87,7 +87,8 @@ public class SalesRecordController {
             Model model) {
 
         User user = getCurrentUser();
-        if (user == null) throw new RuntimeException("ログインユーザーが見つかりません");
+        if (user == null)
+            throw new RuntimeException("ログインユーザーが見つかりません");
 
         LocalDate saleDate = LocalDate.parse(saleDateStr);
 
@@ -155,7 +156,7 @@ public class SalesRecordController {
 
     @GetMapping("/sales_list")
     public String showSalesList(@RequestParam(value = "filterDate", required = false) String filterDateStr,
-                                Model model) {
+            Model model) {
         List<SalesRecord> records;
         LocalDate filterDate = (filterDateStr != null && !filterDateStr.isEmpty())
                 ? LocalDate.parse(filterDateStr)
@@ -180,12 +181,12 @@ public class SalesRecordController {
         return productService.calculateInventoryByNameMap(date);
     }
 
-    //==================実績編集=======================
+    // ==================実績編集=======================
     @PostMapping("/admin/sales/update")
     @ResponseBody
     public ResponseEntity<String> updateSaleRecord(@RequestParam("saleId") int saleId,
-                                                @RequestParam("newDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newDate,
-                                                @RequestParam("newQuantity") int newQuantity) {
+            @RequestParam("newDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate newDate,
+            @RequestParam("newQuantity") int newQuantity) {
         boolean success = salesRecordService.updateSaleRecord(saleId, newDate, newQuantity);
         return success ? ResponseEntity.ok("更新完了") : ResponseEntity.badRequest().body("在庫が不足しています。");
     }

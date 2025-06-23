@@ -1,6 +1,7 @@
 <!-- 発注入力画面 -->
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>発注入力 | Hop & Craft</title>
@@ -11,6 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
+
 <body>
 
   <!-- ヘッダー -->
@@ -68,11 +70,12 @@
       </div>
     </form>
   </div>
-<script th:if="${successMessage != null}" th:inline="javascript">
-  /*<![CDATA[*/
-  var msg = [[${successMessage}]];
-  alert(msg);
-  /*]]>*/
-</script>
+  <script th:if="${successMessage != null}" th:inline="javascript">
+    /*<![CDATA[*/
+    var msg = [[${ successMessage }]];
+    alert(msg);
+    /*]]>*/
+  </script>
 </body>
+
 </html>

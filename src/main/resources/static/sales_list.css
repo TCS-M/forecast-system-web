@@ -12,11 +12,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   font-size: 22px;
   font-weight: bold;
   color: #5c3d00;
 }
+
 .header-title {
   font-size: 26px;
   flex: 1;
@@ -35,7 +36,7 @@ body {
   padding: 30px;
   background: white;
   border-radius: 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .sales-table {
@@ -45,7 +46,8 @@ body {
   font-size: 16px;
 }
 
-.sales-table th, .sales-table td {
+.sales-table th,
+.sales-table td {
   border: 1px solid #d9c28f;
   padding: 12px;
   text-align: center;
@@ -209,4 +211,3 @@ body {
     text-align: center;
   }
 }
-

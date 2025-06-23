@@ -39,8 +39,8 @@ public class ProductService {
         for (Product product : products) {
             // 「sales_form」由来の在庫（＝保存元がその日登録されたもの）に限定
             if (product.getExpirationDate() != null &&
-                !product.getExpirationDate().isBefore(date) &&
-                product.getExpirationDate().equals(product.getProductionDate().plusDays(15))) {
+                    !product.getExpirationDate().isBefore(date) &&
+                    product.getExpirationDate().equals(product.getProductionDate().plusDays(15))) {
 
                 String name = product.getName();
                 int stock = product.getStockQuantity();
@@ -54,16 +54,17 @@ public class ProductService {
     @Transactional
     public boolean deductStockByName(String productName, int quantity, LocalDate saleDate) {
         List<Product> stockList = repository.findAll().stream()
-            .filter(p -> productName.equals(p.getName()))
-            .filter(p -> !p.getProductionDate().isAfter(saleDate))
-            .filter(p -> !p.getExpirationDate().isBefore(saleDate))
-            .sorted(Comparator.comparing(Product::getExpirationDate))
-            .toList();
+                .filter(p -> productName.equals(p.getName()))
+                .filter(p -> !p.getProductionDate().isAfter(saleDate))
+                .filter(p -> !p.getExpirationDate().isBefore(saleDate))
+                .sorted(Comparator.comparing(Product::getExpirationDate))
+                .toList();
 
         int remaining = quantity;
 
         for (Product p : stockList) {
-            if (remaining <= 0) break;
+            if (remaining <= 0)
+                break;
 
             int currentStock = p.getStockQuantity();
             int toDeduct = Math.min(currentStock, remaining);
@@ -77,11 +78,11 @@ public class ProductService {
 
     public int getTotalAvailableStockByName(String name, LocalDate saleDate) {
         return repository.findAll().stream()
-            .filter(p -> name.equals(p.getName()))
-            .filter(p -> !p.getProductionDate().isAfter(saleDate))
-            .filter(p -> !p.getExpirationDate().isBefore(saleDate))
-            .mapToInt(Product::getStockQuantity)
-            .sum();
+                .filter(p -> name.equals(p.getName()))
+                .filter(p -> !p.getProductionDate().isAfter(saleDate))
+                .filter(p -> !p.getExpirationDate().isBefore(saleDate))
+                .mapToInt(Product::getStockQuantity)
+                .sum();
     }
 
     public List<Product> getAllProductsSortedByName() {
@@ -89,16 +90,18 @@ public class ProductService {
     }
 
     @Transactional
-    public List<Product> createProductionOrders(LocalDate orderDate, List<Integer> productIds, List<Integer> quantities) {
+    public List<Product> createProductionOrders(LocalDate orderDate, List<Integer> productIds,
+            List<Integer> quantities) {
         List<Product> inserted = new ArrayList<>();
         int maxId = repository.findAll().stream()
-            .mapToInt(Product::getProductId)
-            .max()
-            .orElse(0);
+                .mapToInt(Product::getProductId)
+                .max()
+                .orElse(0);
 
         for (int i = 0; i < productIds.size(); i++) {
             int qty = quantities.get(i);
-            if (qty <= 0) continue;
+            if (qty <= 0)
+                continue;
 
             Product base = repository.findById(productIds.get(i)).orElseThrow();
 
@@ -122,21 +125,20 @@ public class ProductService {
         List<Product> all = repository.findAll();
 
         return all.stream()
-            .collect(Collectors.groupingBy(
-                Product::getName,
-                Collectors.minBy(Comparator.comparingInt(Product::getProductId))
-            ))
-            .values().stream()
-            .filter(Optional::isPresent)
-            .map(Optional::get)
-            .sorted(Comparator.comparing(Product::getName))
-            .toList();
+                .collect(Collectors.groupingBy(
+                        Product::getName,
+                        Collectors.minBy(Comparator.comparingInt(Product::getProductId))))
+                .values().stream()
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .sorted(Comparator.comparing(Product::getName))
+                .toList();
     }
 
     public List<Product> findByName(String name) {
         return repository.findAll().stream()
-            .filter(p -> name.equals(p.getName()))
-            .toList();
+                .filter(p -> name.equals(p.getName()))
+                .toList();
     }
 
     public void save(Product product) {
@@ -145,8 +147,8 @@ public class ProductService {
 
     public int getNextProductId() {
         return repository.findAll().stream()
-            .mapToInt(Product::getProductId)
-            .max()
-            .orElse(0) + 1;
+                .mapToInt(Product::getProductId)
+                .max()
+                .orElse(0) + 1;
     }
 }

@@ -26,7 +26,6 @@ public class OrderController {
     @Autowired
     private ProductService productService;
 
-
     // 発注データの処理
     @GetMapping("")
     public String showOrderForm(HttpSession session, Model model) {
@@ -52,12 +51,14 @@ public class OrderController {
                 .map(p -> p.getProductId() + " - " + p.getName())
                 .collect(Collectors.joining("<br>"));
     }
+
     // 発注機能のコントローラ
     @PostMapping("/submit")
-    public String submitOrder(@RequestParam("orderDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate orderDate,
-                            @RequestParam("productIds") List<Integer> productIds,
-                            @RequestParam("quantities") List<Integer> quantities,
-                            RedirectAttributes redirectAttributes) {
+    public String submitOrder(
+            @RequestParam("orderDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate orderDate,
+            @RequestParam("productIds") List<Integer> productIds,
+            @RequestParam("quantities") List<Integer> quantities,
+            RedirectAttributes redirectAttributes) {
 
         List<Product> inserted = productService.createProductionOrders(orderDate, productIds, quantities);
 
@@ -67,8 +68,8 @@ public class OrderController {
         }
 
         String message = inserted.stream()
-            .map(p -> String.format("%s（%d個）", p.getName(), p.getStockQuantity()))
-            .collect(Collectors.joining("、"));
+                .map(p -> String.format("%s（%d個）", p.getName(), p.getStockQuantity()))
+                .collect(Collectors.joining("、"));
 
         redirectAttributes.addFlashAttribute("successMessage", "以下の商品を発注しました：\n" + message);
 

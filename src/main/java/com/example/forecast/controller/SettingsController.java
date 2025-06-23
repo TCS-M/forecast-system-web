@@ -21,22 +21,22 @@ public class SettingsController {
         this.userRepository = userRepository;
     }
 
-@GetMapping("/users")
-public String userList(Model model) {
-    List<User> users = userRepository.findByIsDeletedFalseOrderByUserIdAsc(); // ← 変更
-    model.addAttribute("users", users);
-    return "users_list";
-}
-@PostMapping("/users/role-update")
-public String updateUserRoleConfirmed(
-        @RequestParam int userId,
-        @RequestParam String role
-) {
-    userRepository.findById(userId).ifPresent(user -> {
-        user.setRole(role);
-        userRepository.save(user);
-    });
-    return "redirect:/settings/users";
-}
+    @GetMapping("/users")
+    public String userList(Model model) {
+        List<User> users = userRepository.findByIsDeletedFalseOrderByUserIdAsc(); // ← 変更
+        model.addAttribute("users", users);
+        return "users_list";
+    }
+
+    @PostMapping("/users/role-update")
+    public String updateUserRoleConfirmed(
+            @RequestParam int userId,
+            @RequestParam String role) {
+        userRepository.findById(userId).ifPresent(user -> {
+            user.setRole(role);
+            userRepository.save(user);
+        });
+        return "redirect:/settings/users";
+    }
 
 }

@@ -77,15 +77,15 @@ public class WeatherService {
 
             List<Object[]> stockResult = entityManager.createNativeQuery(
                     "SELECT p.name, SUM(p.stock_quantity), COALESCE(SUM(s.quantity), 0) " +
-                    "FROM products p " +
-                    "LEFT JOIN sales s ON p.product_id = s.product_id AND s.sale_date BETWEEN :start AND :end " +
-                    "WHERE p.expiration_date >= :targetDate " +
-                    "GROUP BY p.name"
-            )
-            .setParameter("start", Date.valueOf(startDate))
-            .setParameter("end", Date.valueOf(endDate))
-            .setParameter("targetDate", Date.valueOf(targetDate))
-            .getResultList();
+                            "FROM products p " +
+                            "LEFT JOIN sales s ON p.product_id = s.product_id AND s.sale_date BETWEEN :start AND :end "
+                            +
+                            "WHERE p.expiration_date >= :targetDate " +
+                            "GROUP BY p.name")
+                    .setParameter("start", Date.valueOf(startDate))
+                    .setParameter("end", Date.valueOf(endDate))
+                    .setParameter("targetDate", Date.valueOf(targetDate))
+                    .getResultList();
 
             Map<String, Integer> productStock = new LinkedHashMap<>();
             for (Object[] row : stockResult) {
@@ -102,8 +102,7 @@ public class WeatherService {
                     water,
                     wind,
                     temperature,
-                    productStock
-            );
+                    productStock);
 
         } catch (Exception e) {
             e.printStackTrace();

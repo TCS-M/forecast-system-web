@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <title>管理者ホーム | Hop & Craft</title>
@@ -9,11 +10,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
+
 <body>
 
   <div class="header">
     <span class="header-title">🍺 Hop & Craft 管理者ホーム</span>
-        <a href="#" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+    <a href="#" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
       <i class="fas fa-sign-out-alt"></i>
     </a>
     <form id="logoutForm" th:action="@{/logout}" method="post" style="display:none;"></form>
@@ -48,5 +50,5 @@
   </div>
 
 </body>
-</html>
 
+</html>

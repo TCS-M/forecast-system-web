@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>ユーザー一覧（詳細表示）</title>
@@ -11,53 +12,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
+
 <body>
-<div class="header">
-  <span class="header-title">ユーザー一覧</span>
-  <a th:href="@{/user/new}" class="create-button">＋ 新規ユーザー登録</a>
-  <a th:href="@{/admin_homepage}" class="back-btn" title="ホームに戻る"><i class="fas fa-home"></i></a>
-</div>
+  <div class="header">
+    <span class="header-title">ユーザー一覧</span>
+    <a th:href="@{/user/new}" class="create-button">＋ 新規ユーザー登録</a>
+    <a th:href="@{/admin_homepage}" class="back-btn" title="ホームに戻る"><i class="fas fa-home"></i></a>
+  </div>
 
-<table>
-  <thead>
-   <tr>
-    <th>ID</th>
-    <th>名前</th>
-    <th>メールアドレス</th>
-    <th>ロール</th>
-    <th>ロール変更</th>
-    <th>編集</th>
-  </tr>
-  </thead>
-  <tbody>
-   <tr th:each="user : ${users}">
-  <td th:text="${user.userId}"></td>
-  <td th:text="${user.name}"></td>
-  <td th:text="${user.email}"></td>
-  <td th:text="${user.role}"></td>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>メールアドレス</th>
+        <th>ロール</th>
+        <th>ロール変更</th>
+        <th>編集</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="user : ${users}">
+        <td th:text="${user.userId}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.role}"></td>
 
-  <!-- ロール変更フォーム -->
-  <td>
-    <form th:action="@{/settings/users/role-update}" method="post">
-      <input type="hidden" name="userId" th:value="${user.userId}" />
-      <select name="role">
-        <option th:value="'admin'" th:selected="${user.role == 'admin'}">admin</option>
-        <option th:value="'user'" th:selected="${user.role == 'user'}">user</option>
-      </select>
-      <button type="button"
-              th:attr="data-username=${user.name}"
+        <!-- ロール変更フォーム -->
+        <td>
+          <form th:action="@{/settings/users/role-update}" method="post">
+            <input type="hidden" name="userId" th:value="${user.userId}" />
+            <select name="role">
+              <option th:value="'admin'" th:selected="${user.role == 'admin'}">admin</option>
+              <option th:value="'user'" th:selected="${user.role == 'user'}">user</option>
+            </select>
+            <button type="button" th:attr="data-username=${user.name}"
               onclick="confirmRoleChange(this.form, this.getAttribute('data-username'))">
-        保存
-      </button>
-    </form>
-  </td>
+              保存
+            </button>
+          </form>
+        </td>
 
-  <!-- 編集ボタン -->
-  <td>
-    <a th:href="@{'/settings/users/edit/' + ${user.userId}}" class="edit-button">編集</a>
-  </td>
-</tr>
-  </tbody>
-</table>
+        <!-- 編集ボタン -->
+        <td>
+          <a th:href="@{'/settings/users/edit/' + ${user.userId}}" class="edit-button">編集</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </body>
+
 </html>

@@ -25,19 +25,20 @@ public class UserService {
     }
 
     // ユーザー名またはメールアドレスのどちらでも認証OK
- public boolean authenticate(String identifier, String rawPassword) {
-    Optional<User> userOpt = userRepository.findByEmailAndIsDeletedFalse(identifier);
-    if (userOpt.isEmpty()) {
-        userOpt = userRepository.findByNameAndIsDeletedFalse(identifier);
+    public boolean authenticate(String identifier, String rawPassword) {
+        Optional<User> userOpt = userRepository.findByEmailAndIsDeletedFalse(identifier);
+        if (userOpt.isEmpty()) {
+            userOpt = userRepository.findByNameAndIsDeletedFalse(identifier);
+        }
+        if (userOpt.isPresent()) {
+            // System.out.println("DBパス: " + userOpt.get().getPassword());
+            // System.out.println("入力PW: " + rawPassword);
+            // System.out.println("判定: " + passwordEncoder.matches(rawPassword,
+            // userOpt.get().getPassword()));
+            return passwordEncoder.matches(rawPassword, userOpt.get().getPassword());
+        }
+        return false;
     }
-    if (userOpt.isPresent()) {
-        // System.out.println("DBパス: " + userOpt.get().getPassword());
-        // System.out.println("入力PW: " + rawPassword);
-        // System.out.println("判定: " + passwordEncoder.matches(rawPassword, userOpt.get().getPassword()));
-        return passwordEncoder.matches(rawPassword, userOpt.get().getPassword());
-    }
-    return false;
-}
 
     public Optional<User> getUserByIdentifier(String identifier) {
         Optional<User> userOpt = userRepository.findByEmailAndIsDeletedFalse(identifier);

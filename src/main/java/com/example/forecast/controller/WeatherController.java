@@ -32,7 +32,7 @@ public class WeatherController {
     public String showUserWeather(Model model) {
         List<WeatherData> weatherList = weatherService.getWeatherWithSales();
         model.addAttribute("weatherList", weatherList);
-        model.addAttribute("source", "user");  // 遷移元識別用
+        model.addAttribute("source", "user"); // 遷移元識別用
         return "user_data_detail";
     }
 
@@ -41,16 +41,16 @@ public class WeatherController {
     public String showAdminWeather(Model model) {
         List<WeatherData> weatherList = weatherService.getWeatherWithSales();
         model.addAttribute("weatherList", weatherList);
-        model.addAttribute("source", "admin");  // 遷移元識別用
+        model.addAttribute("source", "admin"); // 遷移元識別用
         return "admin_data_detail";
     }
 
     // 🔸詳細ページ（共通）
     @GetMapping("/detail")
     public String showDetail(@RequestParam("date") String date,
-                             @RequestParam("source") String source,
-                             Model model,
-                             RedirectAttributes redirectAttributes) {
+            @RequestParam("source") String source,
+            Model model,
+            RedirectAttributes redirectAttributes) {
         try {
             logger.info("📌 詳細ページ遷移処理開始：date={}, source={}", date, source);
 

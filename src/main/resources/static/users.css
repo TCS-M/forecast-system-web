@@ -13,7 +13,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   font-size: 22px;
   font-weight: bold;
   color: #5c3d00;
@@ -64,11 +64,12 @@ table {
   border-collapse: collapse;
   background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-th, td {
+th,
+td {
   padding: 15px;
   text-align: center;
   border-bottom: 1px solid #ddd;
@@ -145,7 +146,8 @@ td button:hover {
     display: block;
   }
 
-  th, td {
+  th,
+  td {
     font-size: 14px;
     padding: 10px;
   }
