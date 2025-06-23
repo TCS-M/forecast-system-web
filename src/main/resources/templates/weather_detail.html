@@ -6,7 +6,6 @@
     <link rel="stylesheet" th:href="@{/weather.css}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </head>
 <body>
 <header>
@@ -23,35 +22,36 @@
     </section>
 
     <!-- 売上グラフ -->
-    <div class="chart-container">
+    <div class="chart-container" th:if="${detail.productSales != null and !detail.productSales.isEmpty()}">
         <canvas id="salesChart"></canvas>
     </div>
+    <p th:if="${detail.productSales == null or detail.productSales.isEmpty()}">📊 販売実績データはありません。</p>
 
     <!-- 在庫情報 -->
     <section class="info-box">
         <h2 th:text="'📦 製品別 在庫状況（' + ${detail.date} + ' 時点）'">在庫状況</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>商品名</th>
-                    <th>在庫数</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="entry : ${detail.productStock.entrySet()}">
-                    <td th:text="${entry.key}">商品名</td>
-                    <td th:text="${entry.value}">在庫数</td>
-                </tr>
-            </tbody>
-        </table>
+        <div th:if="${detail.productStock != null and !detail.productStock.isEmpty()}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>商品名</th>
+                        <th>在庫数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="entry : ${detail.productStock.entrySet()}">
+                        <td th:text="${entry.key}">商品名</td>
+                        <td th:text="${entry.value}">在庫数</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p th:if="${detail.productStock == null or detail.productStock.isEmpty()}">📦 有効な在庫データは存在しません。</p>
     </section>
 
     <!-- 戻るボタン -->
     <div class="back-container">
-         <!-- 管理者の場合 -->
         <a th:if="${source == 'admin'}" th:href="@{/weather/admin-list}" class="back-button">戻る</a>
-
-        <!-- ユーザーの場合 -->
         <a th:if="${source == 'user'}" th:href="@{/weather/user-list}" class="back-button">戻る</a>
     </div>
 </main>
@@ -61,28 +61,30 @@
     const labels = [[${detail.productSales != null ? detail.productSales.keySet() : {}}]];
     const data = [[${detail.productSales != null ? detail.productSales.values() : {}}]];
 
-    const ctx = document.getElementById('salesChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: '販売本数',
-                data: data,
-                backgroundColor: 'rgba(255, 215, 0, 0.7)',
-                borderColor: 'rgba(255, 215, 0, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { stepSize: 1 }
+    const ctx = document.getElementById('salesChart')?.getContext('2d');
+    if (ctx) {
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '販売本数',
+                    data: data,
+                    backgroundColor: 'rgba(255, 215, 0, 0.7)',
+                    borderColor: 'rgba(255, 215, 0, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 }
+                    }
                 }
             }
-        }
-    });
+        });
+    }
 </script>
 </body>
 </html>
