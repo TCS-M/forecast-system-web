@@ -1,4 +1,4 @@
-.admin-badge {
+ /* .admin-badge {
     background-color: #c0392b;
     color: white;
     font-size: 12px;
@@ -14,7 +14,7 @@
 }
 
 /* 通常スタイル（PC・タブレット） */
-.admin-badge {
+/* .admin-badge {
     background-color: #c0392b;
     color: white;
     font-size: 12px;
@@ -30,7 +30,7 @@
 }
 
 /* スマホ画面対応（幅768px以下） */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .admin-badge {
     font-size: 11px;
     padding: 2px 6px;
@@ -41,4 +41,4 @@
     font-size: 12px;
     margin-top: 6px;
   }
-}
+} */ 
