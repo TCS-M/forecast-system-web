@@ -24,7 +24,7 @@ CREATE TABLE users (
     name VARCHAR(100),
     email VARCHAR(100) UNIQUE,
     password VARCHAR(255),
-    role VARCHAR(10) CHECK (role IN ('admin', 'user')),
+    role VARCHAR(10) CHECK (role IN ('admin', 'staff')),
     is_deleted BOOLEAN DEFAULT false
 );
 

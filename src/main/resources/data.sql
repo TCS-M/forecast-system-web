@@ -1,7 +1,7 @@
 -- ✅ テスト用ユーザーの追加（幂等）
 -- テスト用のパスワードはハッシュ化しているがそれぞれ、testpass、admin
 INSERT INTO users (name, email, password, role)
-SELECT 'testuser', 'test@example.com', '$2a$10$6759kTy4FapY760XQrSINOQEImP8Noi05fD0UEQNEiPcRAos1VIVO', 'user'
+SELECT 'testuser', 'test@example.com', '$2a$10$6759kTy4FapY760XQrSINOQEImP8Noi05fD0UEQNEiPcRAos1VIVO', 'staff'
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE user_id = 1);
 
 INSERT INTO users (name, email, password, role)

@@ -19,8 +19,8 @@ public class LoginController {
     @GetMapping("/login")
     public String loginPage() { return "login"; }
 
-    // @GetMapping("/admin_login")
-    // public String adminLoginPage() { return "admin_login"; }
+    @GetMapping("/admin_login")
+    public String adminLoginPage() { return "admin_login"; }
 
     @PostMapping("/login")
     public String login(@RequestParam String identifier,
@@ -36,21 +36,21 @@ public class LoginController {
         return "login";
     }
 
-    // @PostMapping("/admin_login")
-    // public String adminLogin(@RequestParam String identifier,
-    //                          @RequestParam String password,
-    //                          HttpSession session,
-    //                          Model model) {
-    //     if (userService.authenticate(identifier, password)) {
-    //         User user = userService.getUserByIdentifier(identifier).get();
-    //         if ("admin".equals(user.getRole())) {
-    //             session.setAttribute("loggedInUser", user);
-    //             return "redirect:/admin_homepage";
-    //         }
-    //     }
-    //     model.addAttribute("loginError", "ユーザー名/メールアドレスまたはパスワードが正しくありません");
-    //     return "admin_login";
-    // }
+    @PostMapping("/admin_login")
+    public String adminLogin(@RequestParam String identifier,
+                             @RequestParam String password,
+                             HttpSession session,
+                             Model model) {
+        if (userService.authenticate(identifier, password)) {
+            User user = userService.getUserByIdentifier(identifier).get();
+            if ("admin".equals(user.getRole())) {
+                session.setAttribute("loggedInUser", user);
+                return "redirect:/admin_homepage";
+            }
+        }
+        model.addAttribute("loginError", "ユーザー名/メールアドレスまたはパスワードが正しくありません");
+        return "admin_login";
+    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
