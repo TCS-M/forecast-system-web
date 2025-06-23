@@ -11,9 +11,12 @@
 
   <div class="header">
     <span class="header-title">🍺 Hop & Craft ユーザーホーム</span>
-    <a href="/login" class="logout-btn" title="ログアウト">
+    <a href="#" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
       <i class="fas fa-sign-out-alt"></i>
     </a>
+    <form id="logoutForm" th:action="@{/logout}" method="post" style="display:none;"></form>
+
+
   </div>
 
   <div class="container">
