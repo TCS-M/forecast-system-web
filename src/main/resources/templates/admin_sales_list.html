@@ -18,6 +18,34 @@
     .edit-btn:hover {
       color: #a87405;
     }
+  .submit-btn {
+    padding: 8px 20px;
+    font-size: 15px;
+    background-color: #ffb347;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 8px;
+  }
+  .submit-btn:hover {
+    background-color: #e89a1f;
+  }
+
+  .delete-btn {
+    padding: 8px 20px;
+    font-size: 15px;
+    background-color: #e57373;  /* 赤 */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .delete-btn:hover {
+    background-color: #c62828;
+  }
   </style>
 </head>
 <body>
@@ -52,18 +80,37 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="record : ${records}">
-          <td th:text="${record.id}">1</td>
-          <td th:text="${record.saleDate}">2025-01-01</td>
-          <td th:text="${record.product.name}">商品</td>
-          <td th:text="${record.quantity}">12</td>
-          <td th:text="${record.user.name}">販売者</td>
-          <td>
-            <a th:href="@{/admin/sales/edit/{id}(id=${record.id})}" class="edit-btn" title="編集">
-              <i class="fas fa-pen"></i>
-            </a>
-          </td>
-        </tr>
+    <tr th:each="record : ${records}" th:id="'record-' + ${record.id}">
+      <td th:text="${record.id}"></td>
+
+      <!-- ✅ 日付 -->
+      <td>
+        <span th:text="${record.saleDate}" class="display-saleDate"></span>
+        <input type="date" class="edit-saleDate" th:value="${record.saleDate}" style="display: none;" />
+      </td>
+
+      <!-- ✅ 商品名（非編集） -->
+      <td th:text="${record.product.name}"></td>
+
+      <!-- ✅ 本数 -->
+      <td>
+        <span th:text="${record.quantity}" class="display-quantity"></span>
+        <input type="number" class="edit-quantity" th:value="${record.quantity}" min="0" style="display: none;" />
+      </td>
+
+      <!-- ✅ 販売者 -->
+      <td th:text="${record.user.name}"></td>
+
+      <!-- ✅ 編集・更新・削除 -->
+      <td>
+        <a href="#" class="edit-btn" th:attr="data-id=${record.id}" onclick="enableEdit(this)">
+          <i class="fas fa-pen"></i>
+        </a>
+      <button class="submit-btn" style="display: none;" onclick="submitEdit(this)">提出</button>
+      <button class="delete-btn" style="display: none;" onclick="deleteRecord(this)">削除</button>
+      </td>
+    </tr>
+
       </tbody>
     </table>
   </div>
@@ -73,5 +120,6 @@
     document.querySelector('.date-picker').submit();
   }
 </script>
+<script src="/js/admin-sales-edit.js"></script>
 </body>
 </html>

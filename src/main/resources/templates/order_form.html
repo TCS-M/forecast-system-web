@@ -45,6 +45,7 @@
             <th>商品名</th>
             <th>発注数</th>
             <th>JANコード</th>
+            <th>在庫数</th> <!-- ★ 追加 -->
           </tr>
         </thead>
         <tbody>
@@ -55,9 +56,11 @@
               <input type="number" name="quantities" min="0" value="0" />
             </td>
             <td th:text="${product.janCode}">JAN</td>
+            <td th:text="${inventoryMap[product.name]}">0</td> <!-- ★ 追加 -->
           </tr>
         </tbody>
       </table>
+
 
       <!-- 送信ボタン -->
       <div class="form-actions">
