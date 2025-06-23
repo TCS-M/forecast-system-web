@@ -100,17 +100,37 @@ body {
   border-radius: 6px;
 }
 
+/* 提出ボタンのスタイル */
 .submit-btn {
   padding: 8px 20px;
   font-size: 15px;
-  background-color: #ffb347;
+  background-color: #4CAF50;  /* 緑色 */
   border: none;
   border-radius: 8px;
   color: white;
-  cursor: pointer;
   font-weight: bold;
+  cursor: pointer;
+  margin-right: 8px;
 }
 
 .submit-btn:hover {
-  background-color: #e89a1f;
+  background-color: #388E3C;
 }
+
+/* 削除ボタンのスタイル */
+.delete-btn {
+  padding: 8px 20px;
+  font-size: 15px;
+  background-color: #e57373;  /* 赤色 */
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c62828;
+}
+
+
