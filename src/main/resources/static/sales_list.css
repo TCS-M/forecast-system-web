@@ -162,5 +162,51 @@ body {
   }
 
   .sales-table {
-    display: block
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+
+  .sales-table th,
+  .sales-table td {
+    padding: 10px;
+  }
+
+  .user-info {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  .date-picker {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .date-picker label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+
+  .date-picker input[type="date"] {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  .register-btn {
+    width: 100%;
+    display: inline-block;
+    font-size: 15px;
+    padding: 10px;
+    text-align: center;
+  }
+}
 
