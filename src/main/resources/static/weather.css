@@ -13,6 +13,7 @@ header {
     padding: 20px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 h1 {
@@ -105,26 +106,31 @@ tbody tr:hover {
 }
 
 /* 戻るボタン */
-.back-container {
+/* ヘッダー内 戻る(ホーム)ボタン */
+.back-btn {
+    position: absolute;
+    top: 22px;           /* h1の高さに合わせて調整 */
+    right: 32px;
+    background: #ffe28a;
+    color: #5a3e1b;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
     display: flex;
+    align-items: center;
     justify-content: center;
-    margin: 40px 0;
-}
-
-.back-button {
-    padding: 12px 24px;
-    background-color: #ffe28a;
-    color: #000;
+    font-size: 22px;
+    box-shadow: 0 2px 8px rgba(220,180,30,0.12);
     text-decoration: none;
-    font-weight: bold;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    z-index: 2;
 }
-
-.back-button:hover {
-    background-color: #fdd96a;
-    transform: translateY(-2px);
+.back-btn:hover, .back-btn:focus {
+    background: #fdd96a;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(216, 156, 27, 0.15);
 }
 
 /* モバイル対応 */
