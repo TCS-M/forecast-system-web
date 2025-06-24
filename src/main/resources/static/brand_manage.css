@@ -9,7 +9,8 @@ body {
 
 /* ヘッダー */
 .header {
-  position: relative;
+  background-color: #ffe28a;
+  padding: 20px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,31 +21,15 @@ body {
   font-weight: bold;
   color: #5c3d00;
 }
-
 .header-title {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   font-size: 26px;
-  display: flex;
-  align-items: center;
+  flex: 1;
+  text-align: center;
 }
-
-.logout-btn {
-  right: 30px;
-  top: 50%;
-  background-color: #d89c1b;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
+.back-btn {
   text-decoration: none;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
-
-.logout-btn:hover {
-  background-color: #b0780e;
+  color: #5c3d00;
+  font-size: 20px;
 }
 
 /* メインコンテナ */
@@ -137,3 +122,67 @@ body {
 .submit-btn:hover {
   background-color: #c08814;
 }
+@media (max-width: 600px) {
+  .card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .header-title {
+    font-size: 22px;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  .back-btn {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 20px;
+    margin: 30px 10px;
+  }
+
+  .welcome {
+    font-size: 20px;
+  }
+
+  .desc {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  .card {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .card i {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+
+  th, td {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+
