@@ -75,24 +75,47 @@ public class WeatherService {
             LocalDate startDate = targetDate.minusDays(15);
             LocalDate endDate = targetDate.minusDays(1);
 
-            List<Object[]> stockResult = entityManager.createNativeQuery(
+            // ✅ 新しい登録データ（sales_form 由来）
+            List<Object[]> newStock = entityManager.createNativeQuery(
                     "SELECT p.name, SUM(p.stock_quantity), COALESCE(SUM(s.quantity), 0) " +
                     "FROM products p " +
                     "LEFT JOIN sales s ON p.product_id = s.product_id AND s.sale_date BETWEEN :start AND :end " +
-                    "WHERE p.expiration_date >= :targetDate " +
+                    "WHERE p.expiration_date = p.production_date + INTERVAL '15 days' " +
+                    "AND p.expiration_date >= :target " +
                     "GROUP BY p.name"
             )
             .setParameter("start", Date.valueOf(startDate))
             .setParameter("end", Date.valueOf(endDate))
-            .setParameter("targetDate", Date.valueOf(targetDate))
+            .setParameter("target", Date.valueOf(targetDate))
             .getResultList();
 
+            // ✅ 過去データ（それ以外）
+            List<Object[]> oldStock = entityManager.createNativeQuery(
+                    "SELECT p.name, SUM(p.stock_quantity), COALESCE(SUM(s.quantity), 0) " +
+                    "FROM products p " +
+                    "LEFT JOIN sales s ON p.product_id = s.product_id AND s.sale_date BETWEEN :start AND :end " +
+                    "WHERE (p.expiration_date IS NULL OR p.expiration_date != p.production_date + INTERVAL '15 days') " +
+                    "AND p.expiration_date >= :target " +
+                    "GROUP BY p.name"
+            )
+            .setParameter("start", Date.valueOf(startDate))
+            .setParameter("end", Date.valueOf(endDate))
+            .setParameter("target", Date.valueOf(targetDate))
+            .getResultList();
+
+            // マージ処理（同名商品は合算）
             Map<String, Integer> productStock = new LinkedHashMap<>();
-            for (Object[] row : stockResult) {
+            for (Object[] row : oldStock) {
                 String name = (String) row[0];
-                int initialStock = ((Number) row[1]).intValue();
+                int stock = ((Number) row[1]).intValue();
                 int sales = ((Number) row[2]).intValue();
-                productStock.put(name, initialStock - sales);
+                productStock.put(name, stock - sales);
+            }
+            for (Object[] row : newStock) {
+                String name = (String) row[0];
+                int stock = ((Number) row[1]).intValue();
+                int sales = ((Number) row[2]).intValue();
+                productStock.merge(name, stock - sales, Integer::sum);
             }
 
             return new WeatherDetailDTO(
