@@ -41,21 +41,33 @@ body {
   color: white;
 }
 
-/* ===== 新規登録ボタン ===== */
 .create-button {
-  background-color: #10b981;
-  color: white;
-  padding: 8px 16px;
+  background-color: #fbbf24;
+  color: #fff;
+  padding: 10px 22px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
-  margin-left: 10px;
-  transition: background-color 0.2s ease;
+  margin-left: 12px;
+  font-size: 17px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(216, 156, 27, 0.15);
+  letter-spacing: 0.05em;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  vertical-align: middle;
+  display: inline-block;
 }
 
-.create-button:hover {
-  background-color: #059669;
+.create-button:hover,
+.create-button:focus {
+  background-color: #fff;
+  color: #e09900;
+  border: 2px solid #fbbf24;
+  box-shadow: none;
 }
+
+
+
 
 /* ===== テーブルデザイン ===== */
 table {
