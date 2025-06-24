@@ -23,10 +23,11 @@ public class ForecastSystemWebMavenApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("✅ データ内容：");
+        System.out.println("✅ システムの起動が完了しました。以下のURLからログインページにアクセスしてください：\n" + //
+                        "http://20.18.226.176:8080/login");
         List<User> users = userRepository.findAll();
         for (User u : users) {
-            System.out.println(" - " + u.getEmail() + " / " + u.getPassword());
+            //System.out.println(" - " + u.getEmail() + " / " + u.getPassword());
         }
 
     }
