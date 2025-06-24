@@ -9,42 +9,34 @@ body {
 
 /* ヘッダーエリア */
 .header {
-  position: relative;
+  background-color: #ffe28a;
+  padding: 20px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffe08a;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px 30px;
   font-size: 22px;
   font-weight: bold;
   color: #5c3d00;
 }
 
 .header-title {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   font-size: 26px;
-  display: flex;
-  align-items: center;
+  flex: 1;
+  text-align: center;
 }
 
-.logout-btn {
-  right: 30px;
-  top: 50%;
-  background-color: #d89c1b;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
+.back-btn {
   text-decoration: none;
-  font-size: 14px;
+  color: #5c3d00;
+  font-size: 20px;
+  padding: 6px 12px;
+  border-radius: 6px;
   transition: background-color 0.3s;
 }
 
-.logout-btn:hover {
-  background-color: #b0780e;
+.back-btn:hover {
+  background-color: #d89c1b;
 }
 
 /* メインコンテナ */
