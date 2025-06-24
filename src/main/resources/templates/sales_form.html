@@ -76,6 +76,29 @@
   </div>
 
 </body>
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    const rows = document.querySelectorAll('.sales-table tbody tr');
+    let message = '販売内容:\n';
+    let hasSales = false;
+
+    rows.forEach(row => {
+      const productName = row.querySelector('td').innerText;
+      const quantity = parseInt(row.querySelector('input[type="number"]').value);
+      if (quantity > 0) {
+        message += `${productName} を ${quantity} 件販売\n`;
+        hasSales = true;
+      }
+    });
+
+    if (hasSales) {
+      alert(message);
+    } else {
+      alert('販売数が入力されていません。');
+      event.preventDefault(); // 販売数なしなら送信を止める
+    }
+  });
+</script>
 <script src="/js/inventory-update.js"></script>
 
 </html>
