@@ -20,9 +20,8 @@ public class AdminSalesController {
 
     @GetMapping("/admin_sales_list")
     public String showAdminSalesList(
-        @RequestParam(value = "filterDate", required = false)
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate filterDate,
-        Model model) {
+            @RequestParam(value = "filterDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate filterDate,
+            Model model) {
 
         if (filterDate == null) {
             filterDate = LocalDate.now(); // ✅ 今日

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>天気と販売実績</title>
@@ -7,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
+
 <body>
     <header>
         <h1>🌤️ 天気と販売実績</h1>
@@ -42,20 +44,22 @@
                     <td th:text="${record.weatherInfo}"></td>
                     <td th:text="${record.totalSales}"></td>
                     <td>
-                        <a th:href="@{'/weather/detail?date=' + ${#dates.format(record.weatherDate, 'yyyy-MM-dd')} + '&source=user'}" class="detail-btn">
+                        <a th:href="@{'/weather/detail?date=' + ${#dates.format(record.weatherDate, 'yyyy-MM-dd')} + '&source=user'}"
+                            class="detail-btn">
                             詳細
                         </a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        
+
     </main>
     <script th:if="${errorMessage != null}" th:inline="javascript">
         /*<![CDATA[*/
-        alert([[${errorMessage}]]);
+        alert([[${ errorMessage }]]);
         /*]]>*/
     </script>
 
 </body>
+
 </html>

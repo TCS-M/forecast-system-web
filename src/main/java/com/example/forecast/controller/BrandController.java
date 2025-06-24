@@ -37,8 +37,8 @@ public class BrandController {
     // 価格の更新処理
     @PostMapping("/update")
     public String updatePrice(@RequestParam("productId") Integer productId,
-                              @RequestParam("price") Integer price,
-                              RedirectAttributes redirectAttributes) {
+            @RequestParam("price") Integer price,
+            RedirectAttributes redirectAttributes) {
 
         Product p = productService.findById(productId);
         if (p != null) {
@@ -56,10 +56,10 @@ public class BrandController {
     // 新規銘柄の追加処理
     @PostMapping("/add")
     public String addBrand(@RequestParam("name") String name,
-                        @RequestParam("price") Integer price,
-                        @RequestParam("janCode") String janCode,
-                        @RequestParam("stockQuantity") Integer stockQuantity,
-                        RedirectAttributes redirectAttributes) {
+            @RequestParam("price") Integer price,
+            @RequestParam("janCode") String janCode,
+            @RequestParam("stockQuantity") Integer stockQuantity,
+            RedirectAttributes redirectAttributes) {
 
         int newId = productService.getNextProductId();
 
@@ -78,7 +78,7 @@ public class BrandController {
 
         productService.save(newProduct);
         redirectAttributes.addFlashAttribute("successMessage",
-            "新しい銘柄「" + name + "」を追加しました（在庫：" + stockQuantity + "）");
+                "新しい銘柄「" + name + "」を追加しました（在庫：" + stockQuantity + "）");
 
         return "redirect:/brand";
     }

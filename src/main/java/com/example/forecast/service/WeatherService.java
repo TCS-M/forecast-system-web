@@ -125,8 +125,7 @@ public class WeatherService {
                     water,
                     wind,
                     temperature,
-                    productStock
-            );
+                    productStock);
 
         } catch (Exception e) {
             e.printStackTrace();

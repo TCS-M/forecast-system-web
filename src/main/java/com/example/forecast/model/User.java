@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // 自動採番
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自動採番
     private Integer userId;
 
     private String name;
@@ -18,9 +18,8 @@ public class User {
     private String password;
 
     private String role;
-    
-    private Boolean isDeleted = false;
 
+    private Boolean isDeleted = false;
 
     // ✅ 补上 Getter 和 Setter
 
@@ -63,6 +62,7 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
     public Boolean getIsDeleted() {
         return isDeleted;
     }

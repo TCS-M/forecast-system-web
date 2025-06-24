@@ -30,37 +30,35 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            //.csrf().disable() // ✅  CSRF閉じる 
-            .userDetailsService(userDetailsService)
-            .authorizeHttpRequests(authz -> authz
-                // ✅ 管理者専用ページ
-                .requestMatchers("/admin_homepage",
-                    "/users_list", "/user_edit", "/user_form", 
-                    "/admin_data_detail", "/admin_forecast_list", "/admin_sales_list",
-                    "/brand", "/brand_manage",
-                    "/admin/sales/**"  // ✅ ここで編集・削除エンドポイントも許可
-                ).hasRole("ADMIN")
+                // .csrf().disable() // ✅ CSRF閉じる
+                .userDetailsService(userDetailsService)
+                .authorizeHttpRequests(authz -> authz
+                        // ✅ 管理者専用ページ
+                        .requestMatchers("/admin_homepage",
+                                "/users_list", "/user_edit", "/user_form",
+                                "/admin_data_detail", "/admin_forecast_list", "/admin_sales_list",
+                                "/brand", "/brand_manage",
+                                "/admin/sales/**" // ✅ ここで編集・削除エンドポイントも許可
+                        ).hasRole("ADMIN")
 
-                // ✅ 一般ユーザー用ページ
-                .requestMatchers(
-                    "/user_data_detail", "/user_forecast_list", "/user_homepage"
-                ).hasRole("USER")
+                        // ✅ 一般ユーザー用ページ
+                        .requestMatchers(
+                                "/user_data_detail", "/user_forecast_list", "/user_homepage")
+                        .hasRole("USER")
 
-                // ✅ 誰でもアクセス可
-                .requestMatchers("/", "/login", "/login.css", "/css/**", "/js/**").permitAll()
+                        // ✅ 誰でもアクセス可
+                        .requestMatchers("/", "/login", "/login.css", "/css/**", "/js/**").permitAll()
 
-                // その他のリクエストは認証が必要
-                .anyRequest().authenticated()
-            )
+                        // その他のリクエストは認証が必要
+                        .anyRequest().authenticated())
 
-            .formLogin(form -> form
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .successHandler(customLoginSuccessHandler())
-                .failureUrl("/login?error") 
-                .permitAll()
-            )
-            .logout(logout -> logout.permitAll());
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .successHandler(customLoginSuccessHandler())
+                        .failureUrl("/login?error")
+                        .permitAll())
+                .logout(logout -> logout.permitAll());
 
         return http.build();
     }

@@ -1,6 +1,7 @@
 <!-- ビール銘柄管理画面 -->
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>銘柄管理 | Hop & Craft</title>
@@ -9,11 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
   <script src="/js/brand_manage.js"></script>
 </head>
+
 <body>
-<div id="successMessageHolder"
-     th:if="${successMessage}"
-     th:attr="data-message=${successMessage}"
-     style="display:none;"></div>
+  <div id="successMessageHolder" th:if="${successMessage}" th:attr="data-message=${successMessage}"
+    style="display:none;"></div>
   <!-- ヘッダー -->
   <div class="header">
     <span class="header-title">Hop & Craft - 銘柄管理</span>
@@ -24,7 +24,7 @@
 
   <!-- メインエリア -->
   <div class="container">
-     <div class="welcome" th:text="'ようこそ、' + ${username} + ' さん！ビールの銘柄の管理を行ってください！'"></div>
+    <div class="welcome" th:text="'ようこそ、' + ${username} + ' さん！ビールの銘柄の管理を行ってください！'"></div>
 
     <!-- 既存銘柄リスト -->
     <table class="sales-table">
@@ -51,16 +51,17 @@
 
     <!-- 新規追加 -->
     <div class="date-picker">
-    <form th:action="@{/brand/add}" method="post" class="new-brand-form">
-    <input type="text" name="name" placeholder="銘柄名" required />
-    <input type="number" name="price" placeholder="価格（円）" min="0" required />
-    <input type="text" name="janCode" placeholder="JANコード" required />
-    <!-- ✅ 新增：初期在庫数 -->
-    <input type="number" name="stockQuantity" placeholder="初期在庫数" min="0" required />
-    <button type="submit">追加</button>
-    </form>
+      <form th:action="@{/brand/add}" method="post" class="new-brand-form">
+        <input type="text" name="name" placeholder="銘柄名" required />
+        <input type="number" name="price" placeholder="価格（円）" min="0" required />
+        <input type="text" name="janCode" placeholder="JANコード" required />
+        <!-- ✅ 新增：初期在庫数 -->
+        <input type="number" name="stockQuantity" placeholder="初期在庫数" min="0" required />
+        <button type="submit">追加</button>
+      </form>
     </div>
   </div>
 
 </body>
+
 </html>
