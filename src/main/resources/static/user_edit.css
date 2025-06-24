@@ -63,15 +63,9 @@ button:hover {
 }
 
 a.back-button {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  color: #d89c1b;
   text-decoration: none;
-  font-weight: bold;
-  background-color: #fff2d9;
-  padding: 8px;
-  border-radius: 5px;
+  color: #5c3d00;
+  font-size: 20px;
 }
 
 a.back-button:hover {
