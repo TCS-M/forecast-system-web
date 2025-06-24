@@ -37,6 +37,35 @@ INSERT INTO products (product_id, name, price, jan_code, production_date, expira
 SELECT 7, 'IPA', 1100, '4922222222221', DATE '2025-06-08', DATE '2025-06-08' + INTERVAL '15 days', 60
 WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 7);
 
+-- 8: ホワイトビール（6.20 版）
+INSERT INTO products (product_id, name, price, jan_code, production_date, expiration_date, stock_quantity)
+SELECT 8, 'ホワイトビール', 900, '4901234567895', DATE '2025-06-20', DATE '2025-06-20' + INTERVAL '15 days', 20
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 8);
+
+-- 9: ラガー
+INSERT INTO products (product_id, name, price, jan_code, production_date, expiration_date, stock_quantity)
+SELECT 9, 'ラガー', 800, '4512345678908', DATE '2025-06-20', DATE '2025-06-20' + INTERVAL '15 days', 20
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 9);
+
+-- 10: ペールエール
+INSERT INTO products (product_id, name, price, jan_code, production_date, expiration_date, stock_quantity)
+SELECT 10, 'ペールエール', 1000, '4987654321098', DATE '2025-06-20', DATE '2025-06-20' + INTERVAL '15 days', 20
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 10);
+
+-- 11: フルーツビール
+INSERT INTO products (product_id, name, price, jan_code, production_date, expiration_date, stock_quantity)
+SELECT 11, 'フルーツビール', 1000, '4545678901235', DATE '2025-06-20', DATE '2025-06-20' + INTERVAL '15 days', 20
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 11);
+
+-- 12: 黒ビール
+INSERT INTO products (product_id, name, price, jan_code, production_date, expiration_date, stock_quantity)
+SELECT 12, '黒ビール', 1200, '4999999999998', DATE '2025-06-20', DATE '2025-06-20' + INTERVAL '15 days', 20
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 12);
+
+-- 13: IPA
+INSERT INTO products (product_id, name, price, jan_code, production_date, expiration_date, stock_quantity)
+SELECT 13, 'IPA', 1100, '4922222222222', DATE '2025-06-20', DATE '2025-06-20' + INTERVAL '15 days', 20
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 13);
 
 
 
@@ -1883,7 +1912,15 @@ INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (1, 1, '2025
 INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (5, 1, '2025-04-01', 1);
 INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (4, 1, '2025-04-01', 1);
 
-
+-- 2025年6月の販売実績（
+INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (1, 10, '2025-06-20', 1);
+INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (3, 12, '2025-06-20', 1);
+INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (2, 8, '2025-06-21', 1);
+INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (5, 14, '2025-06-21', 1);
+INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (4, 6, '2025-06-22', 1);
+INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (6, 12, '2025-06-23', 1);
+INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (8, 8, '2025-06-24', 1);
+INSERT INTO sales (product_id, quantity, sale_date, user_id) VALUES (9, 10, '2025-06-24', 1);
 
 -- 予測データ（月曜・木曜のみ）
 INSERT INTO forecast (forecast_id, forecast_date, predicted_sale_quantity, predicted_order_quantity, product_id)
