@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,15 +25,16 @@ public class BrandController {
 
     // 銘柄管理ページの表示処理
     @GetMapping("")
-    public String showBrandPage(HttpSession session, Model model) {
-        Object userObj = session.getAttribute("loggedInUser");
-        if (userObj != null) {
-            model.addAttribute("username", "管理者");
-        }
+    public String showBrandPage(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String identifier = auth.getName(); // ← ここで「admin@example.com」など
 
-        List<Product> list = productService.getUniqueProductsByName(); // 同名銘柄をまとめる
+        // とりあえず今回はシンプルに
+        model.addAttribute("username", identifier); // or userName
+
+        List<Product> list = productService.getUniqueProductsByName();
         model.addAttribute("uniqueProductList", list);
-        return "brand_manage"; // brand_manage.html に遷移
+        return "brand_manage";
     }
 
     // 価格の更新処理
