@@ -48,10 +48,12 @@ public class Forecast {
     public void setPredictedOrderQuantity(Integer predictedOrderQuantity) {
         this.predictedOrderQuantity = predictedOrderQuantity;
     }
+
     // Forecast.java の末尾などに追加
     public Integer getProductId() {
         return product != null ? product.getProductId() : null;
     }
+
     public Product getProduct() {
         return product;
     }

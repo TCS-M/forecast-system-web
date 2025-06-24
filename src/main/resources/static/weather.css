@@ -39,7 +39,8 @@ table {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
 }
 
-th, td {
+th,
+td {
     padding: 16px;
     text-align: center;
 }
@@ -86,7 +87,8 @@ tbody tr:hover {
     text-align: center;
 }
 
-.info-box p, .info-box h2 {
+.info-box p,
+.info-box h2 {
     margin: 10px 0;
     font-size: 1.1rem;
     color: #333;
@@ -127,7 +129,13 @@ tbody tr:hover {
 
 /* モバイル対応 */
 @media screen and (max-width: 768px) {
-    table, thead, tbody, th, td, tr {
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
         display: block;
     }
 

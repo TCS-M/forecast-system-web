@@ -28,30 +28,75 @@ public class ForecastDto {
     private Double paleAle;
 
     // --- Getter / Setter ---
-    public String getDate() { return date; }
-    public void setDate(String date) { this.date = date; }
+    public String getDate() {
+        return date;
+    }
 
-    public String getWeekday() { return weekday; }
-    public void setWeekday(String weekday) { this.weekday = weekday; }
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-    public WeatherDto getWeather() { return weather; }
-    public void setWeather(WeatherDto weather) { this.weather = weather; }
+    public String getWeekday() {
+        return weekday;
+    }
 
-    public Double getWhiteBeer() { return whiteBeer; }
-    public void setWhiteBeer(Double whiteBeer) { this.whiteBeer = whiteBeer; }
+    public void setWeekday(String weekday) {
+        this.weekday = weekday;
+    }
 
-    public Double getIpa() { return ipa; }
-    public void setIpa(Double ipa) { this.ipa = ipa; }
+    public WeatherDto getWeather() {
+        return weather;
+    }
 
-    public Double getBlackBeer() { return blackBeer; }
-    public void setBlackBeer(Double blackBeer) { this.blackBeer = blackBeer; }
+    public void setWeather(WeatherDto weather) {
+        this.weather = weather;
+    }
 
-    public Double getLager() { return lager; }
-    public void setLager(Double lager) { this.lager = lager; }
+    public Double getWhiteBeer() {
+        return whiteBeer;
+    }
 
-    public Double getFruitBeer() { return fruitBeer; }
-    public void setFruitBeer(Double fruitBeer) { this.fruitBeer = fruitBeer; }
+    public void setWhiteBeer(Double whiteBeer) {
+        this.whiteBeer = whiteBeer;
+    }
 
-    public Double getPaleAle() { return paleAle; }
-    public void setPaleAle(Double paleAle) { this.paleAle = paleAle; }
+    public Double getIpa() {
+        return ipa;
+    }
+
+    public void setIpa(Double ipa) {
+        this.ipa = ipa;
+    }
+
+    public Double getBlackBeer() {
+        return blackBeer;
+    }
+
+    public void setBlackBeer(Double blackBeer) {
+        this.blackBeer = blackBeer;
+    }
+
+    public Double getLager() {
+        return lager;
+    }
+
+    public void setLager(Double lager) {
+        this.lager = lager;
+    }
+
+    public Double getFruitBeer() {
+        return fruitBeer;
+    }
+
+    public void setFruitBeer(Double fruitBeer) {
+        this.fruitBeer = fruitBeer;
+    }
+
+    public Double getPaleAle() {
+        return paleAle;
+    }
+
+    public void setPaleAle(Double paleAle) {
+        this.paleAle = paleAle;
+    }
 }

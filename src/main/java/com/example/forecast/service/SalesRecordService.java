@@ -19,8 +19,8 @@ public class SalesRecordService {
     private final WeatherDataRepository weatherDataRepository;
 
     public SalesRecordService(SalesRecordRepository repository,
-                              ProductService productService,
-                              WeatherDataRepository weatherDataRepository) {
+            ProductService productService,
+            WeatherDataRepository weatherDataRepository) {
         this.repository = repository;
         this.productService = productService;
         this.weatherDataRepository = weatherDataRepository;
@@ -45,7 +45,7 @@ public class SalesRecordService {
         return repository.findBySaleDateWithUserAndProduct(date);
     }
 
-    //================== 実績編集 =======================
+    // ================== 実績編集 =======================
     @Transactional
     public boolean updateSaleRecord(int saleId, LocalDate newDate, int newQty) {
         SalesRecord record = repository.findById((long) saleId).orElseThrow();
@@ -56,7 +56,8 @@ public class SalesRecordService {
 
         // ✅ ① 新在庫の確認
         int available = productService.getTotalAvailableStockByName(name, newDate);
-        if (newQty > available) return false;
+        if (newQty > available)
+            return false;
 
         // ✅ ② 旧在庫を復元（新販売日の在庫と重ならないように期限設定）
         Product recovery = new Product();
@@ -97,7 +98,7 @@ public class SalesRecordService {
         restored.setJanCode(product.getJanCode());
         restored.setPrice(product.getPrice());
         restored.setProductionDate(oldDate.minusDays(15));
-        restored.setExpirationDate(oldDate.minusDays(1));  // ← 削除後の将来販売日と重ならないように
+        restored.setExpirationDate(oldDate.minusDays(1)); // ← 削除後の将来販売日と重ならないように
         restored.setStockQuantity(qty);
         productService.save(restored);
 
@@ -116,4 +117,3 @@ public class SalesRecordService {
         });
     }
 }
-

@@ -27,7 +27,8 @@ public class Product {
     @Column(name = "stock_quantity")
     private Integer stockQuantity;
 
-    public Product() {}
+    public Product() {
+    }
 
     public Product(Integer productId, String name, Integer price, String janCode) {
         this.productId = productId;
@@ -38,24 +39,59 @@ public class Product {
 
     // Getters & Setters
 
-    public Integer getProductId() { return productId; }
-    public void setProductId(Integer productId) { this.productId = productId; }
+    public Integer getProductId() {
+        return productId;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
-    public Integer getPrice() { return price; }
-    public void setPrice(Integer price) { this.price = price; }
+    public String getName() {
+        return name;
+    }
 
-    public String getJanCode() { return janCode; }
-    public void setJanCode(String janCode) { this.janCode = janCode; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public LocalDate getProductionDate() { return productionDate; }
-    public void setProductionDate(LocalDate productionDate) { this.productionDate = productionDate; }
+    public Integer getPrice() {
+        return price;
+    }
 
-    public LocalDate getExpirationDate() { return expirationDate; }
-    public void setExpirationDate(LocalDate expirationDate) { this.expirationDate = expirationDate; }
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 
-    public Integer getStockQuantity() { return stockQuantity; }
-    public void setStockQuantity(Integer stockQuantity) { this.stockQuantity = stockQuantity; }
+    public String getJanCode() {
+        return janCode;
+    }
+
+    public void setJanCode(String janCode) {
+        this.janCode = janCode;
+    }
+
+    public LocalDate getProductionDate() {
+        return productionDate;
+    }
+
+    public void setProductionDate(LocalDate productionDate) {
+        this.productionDate = productionDate;
+    }
+
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public Integer getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
+    }
 }

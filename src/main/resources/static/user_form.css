@@ -90,7 +90,8 @@ button[type="submit"]:hover {
     font-size: 14px;
   }
 
-  th, td {
+  th,
+  td {
     display: block;
     width: 100%;
   }
