@@ -6,13 +6,21 @@
     <title>天気と販売詳細</title>
     <link rel="stylesheet" th:href="@{/weather.css}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
     <header>
         <h1 th:text="'📅 ' + ${detail.date} + ' の天気と売上詳細'">天気と売上詳細</h1>
+
+    <a th:href="${source == 'admin'} ? @{/weather/admin-list} : @{/weather/user-list}"
+       class="back-btn" title="ホームに戻る">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
     </header>
+
 
     <main>
         <!-- 天気情報 -->
@@ -51,11 +59,7 @@
             <p th:if="${detail.productStock == null or detail.productStock.isEmpty()}">📦 有効な在庫データは存在しません。</p>
         </section>
 
-        <!-- 戻るボタン -->
-        <div class="back-container">
-            <a th:if="${source == 'admin'}" th:href="@{/weather/admin-list}" class="back-button">戻る</a>
-            <a th:if="${source == 'user'}" th:href="@{/weather/user-list}" class="back-button">戻る</a>
-        </div>
+        
     </main>
 
     <!-- 売上グラフスクリプト -->
